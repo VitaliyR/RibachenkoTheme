@@ -1,5 +1,12 @@
-@import "header";
+@import "_mixin";
+
+html, body, .site-wrapper {
+  height: 100%;
+}
 
 body {
   font: 12pt "Bookman", Georgia, "Times New Roman", serif;
 }
+
+
+@import "pages/cover";

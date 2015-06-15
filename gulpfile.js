@@ -41,6 +41,6 @@ gulp.task('CSS', function () {
 gulp.task('default', ['CSS', 'vendorCSS', 'font-awesome']);
 
 gulp.task('watch', function () {
-  gulp.watch(stylesSource + '*', ['CSS']);
+  gulp.watch(stylesSource + '**/*', ['CSS']);
   gulp.watch(additionalStyles, ['vendorCSS']);
 });

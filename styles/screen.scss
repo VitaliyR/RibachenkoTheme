@@ -1,11 +1,19 @@
 @import "_mixin";
 
+
 html, body, .site-wrapper {
   height: 100%;
 }
 
 body {
-  font: 12pt "Bookman", Georgia, "Times New Roman", serif;
+  font-family: 'Museo Sans', Candara, 'Helvetica Neue', 'Trebuchet MS', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+}
+
+footer.site-footer {
+  font-size: 13px;
 }
 
 

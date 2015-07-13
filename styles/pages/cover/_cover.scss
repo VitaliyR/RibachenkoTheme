@@ -95,11 +95,6 @@
     padding: 20px;
   }
 
-  // Blog post
-  h2 {
-    margin-top: 0;
-  }
-
 }
 
 footer.site-footer {
@@ -107,3 +102,5 @@ footer.site-footer {
   top: -3em;
   text-align: center;
 }
+
+@import "posts";

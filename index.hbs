@@ -27,16 +27,14 @@
             <div class="blog-stories">
                 <div class="blog-stories-wrapper">
                     <h2>Stories</h2>
+                    {{pagination}}
                     <main id="content" class="content" role="main">
                         {{#foreach posts}}
                             <article class="{{post_class}}">
                                 <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time>
-                                <h2 class="post-title"><a href="{{url}}">{{{title}}}</a></h2>
+                                <h3 class="post-title"><a href="{{url}}">{{{title}}}</a></h3>
                             </article>
                         {{/foreach}}
-
-                        {{! Previous/next page links - displayed on every page }}
-                        {{pagination}}
                     </main>
                 </div>
             </div>

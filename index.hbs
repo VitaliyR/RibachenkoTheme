@@ -6,14 +6,14 @@
             {{#if @blog.logo}}<img class="author-thumb" src="{{@blog.logo}}" alt="Author image" nopin="nopin" />{{/if}}
             <h1 class="blog-title">{{@blog.title}}</h1>
         </header>
-        <nav>
+        <nav class="social">
             <ul>
-                <li><a class="fa fa-twitter" href="" target="_blank"></a></li>
-                <li><a class="fa fa-facebook" href="" target="_blank"></a></li>
-                <li><a class="fa fa-vk" href="" target="_blank"></a></li>
-                <li><a class="fa fa-github" href="" target="_blank"></a></li>
-                <li><a class="fa fa-linkedin" href="" target="_blank"></a></li>
-                <li><a class="fa fa-envelope-o" href="" target="_blank"></a></li>
+                <li><a class="fa fa-twitter" href="https://twitter.com/sa1en" target="_blank"></a></li>
+                <li><a class="fa fa-facebook" href="https://www.facebook.com/vitaliy.ribachenko" target="_blank"></a></li>
+                <li><a class="fa fa-vk" href="http://vk.com/sa1en" target="_blank"></a></li>
+                <li><a class="fa fa-github" href="https://github.com/vitaliyr" target="_blank"></a></li>
+                <li><a class="fa fa-linkedin" href="https://www.linkedin.com/profile/view?id=174430365" target="_blank"></a></li>
+                <li><a class="fa fa-envelope-o" href="mailto:vit@ribachenko.com"></a></li>
             </ul>
         </nav>
     </div>
@@ -31,8 +31,7 @@
                     <main id="content" class="content" role="main">
                         {{#foreach posts}}
                             <article class="{{post_class}}">
-                                <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time>
-                                <h3 class="post-title"><a href="{{url}}">{{{title}}}</a></h3>
+                                <h3 class="post-title"><span class="date">{{date format="DD MMM YY"}}</span> - <a href="{{url}}">{{{title}}}</a></h3>
                             </article>
                         {{/foreach}}
                     </main>

@@ -1,6 +1,12 @@
 .blog-stories {
   h2 {
-    margin-top: 0;
+    margin: 0;
+    display: inline-block;
+  }
+
+  nav {
+    display: inline-block;
+    float: right;
   }
 
   h3, time {
@@ -9,6 +15,10 @@
 
   time {
 
+  }
+
+  .date {
+    color: rgba(255, 255, 255, 0.75);
   }
 }
 

@@ -1,9 +1,21 @@
+@include keyframes(wrapper) {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .cover {
   display: table;
   flex-direction: column;
   width: 100%;
   height: 100%;
   color: #ffffff;
+  opacity: 0;
+  @include animation(wrapper 1s forwards);
 
   &.no-cover {
     background: #375764;
@@ -44,6 +56,7 @@
       width: 70px;
       height: 90px;
       line-height: 80px;
+      @include animation(false, 3s);
     }
 
     a {

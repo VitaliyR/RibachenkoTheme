@@ -11,3 +11,36 @@
   -o-transition: $params;
   transition: $params;
 }
+
+@mixin animation($params, $delay:false) {
+  @if $params {
+    -webkit-animation: $params;
+    -moz-animation: $params;
+    -ms-animation: $params;
+    -o-animation: $params;
+    animation: $params;
+  }
+
+  @if $delay {
+    -webkit-animation-delay: $delay;
+    -moz-animation-delay: $delay;
+    -ms-animation-delay: $delay;
+    -o-animation-delay: $delay;
+    animation-delay: $delay;
+  }
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}

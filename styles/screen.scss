@@ -1,6 +1,7 @@
 @import "_mixin";
 @import "_animations";
 
+$post-width: 980px;
 
 html, body, .site-wrapper {
   height: 100%;
@@ -28,5 +29,6 @@ footer.site-footer {
   font-size: 13px;
 }
 
-
+@import "pages/common";
 @import "pages/cover/cover";
+@import "pages/post/post";

@@ -1,9 +1,9 @@
 <nav class="pagination" role="navigation">
-    {{#unless prev}}
+    {{#if prev}}
         <a class="newer-posts" href="{{page_url prev}}">&larr;</a>
-    {{/unless}}
+    {{/if}}
     <span class="page-number">{{page}} of {{pages}}</span>
-    {{#unless next}}
+    {{#if next}}
         <a class="older-posts" href="{{page_url next}}">&rarr;</a>
-    {{/unless}}
+    {{/if}}
 </nav>

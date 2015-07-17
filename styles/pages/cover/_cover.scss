@@ -19,12 +19,6 @@
     position: relative;
     top: 35%;
     @include animation(header 1s forwards, nth($delays, length($delays)) - 1);
-
-    img {
-      width: 150px;
-      height: 150px;
-      @include border-radius(100px);
-    }
   }
 
   // Header part

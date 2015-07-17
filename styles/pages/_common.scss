@@ -1,0 +1,5 @@
+header img {
+  width: 150px;
+  height: 150px;
+  @include border-radius(100px);
+}

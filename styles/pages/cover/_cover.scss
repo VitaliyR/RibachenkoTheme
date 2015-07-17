@@ -1,15 +1,3 @@
-$delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 2.25s);
-
-@include keyframes(wrapper) {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
 .cover {
   display: table;
   flex-direction: column;
@@ -17,7 +5,7 @@ $delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 2.25s);
   height: 100%;
   color: #ffffff;
   opacity: 0;
-  @include animation(wrapper 1s forwards);
+  @include animation(appear 1s forwards);
 
   &.no-cover {
     background: #375764;
@@ -28,6 +16,9 @@ $delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 2.25s);
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+    position: relative;
+    top: 35%;
+    @include animation(header 1s forwards, nth($delays, length($delays)) - 1);
 
     img {
       width: 150px;
@@ -60,7 +51,7 @@ $delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 2.25s);
         height: 90px;
         line-height: 80px;
         opacity: 0;
-        @include animation(wrapper 1s forwards, nth($delays, $i));
+        @include animation(appear 1s forwards, nth($delays, $i));
       }
     }
 
@@ -94,7 +85,9 @@ $delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 2.25s);
 
   // Blog description && posts
   .container {
+    visibility: hidden;
     display: table-row;
+    @include animation( content 1s forwards, nth($delays, length($delays)) );
   }
 
   .container-wrapper {
@@ -114,7 +107,7 @@ $delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 2.25s);
     width: 50%;
     height: 100%;
     opacity: 0;
-    @include animation( wrapper 1s forwards, nth($delays, length($delays)) );
+    @include animation( appear 1s forwards, nth($delays, length($delays)) );
   }
 
   .blog-description {
@@ -142,7 +135,7 @@ footer.site-footer {
   top: -3.5em;
   text-align: center;
   opacity: 0;
-  @include animation( wrapper 1s forwards, nth($delays, length($delays)) );
+  @include animation( appear 1s forwards, nth($delays, length($delays)) );
 }
 
 @import "posts";

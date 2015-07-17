@@ -1,0 +1,37 @@
+//        twitt, f, vk    , git , link , @ ,top, content
+$delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s);
+
+
+@include keyframes(appear) {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@include keyframes(header) {
+  0% {
+    top: 35%;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+
+@include keyframes(content) {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}

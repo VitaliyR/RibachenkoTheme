@@ -121,15 +121,15 @@
     padding: 20px;
   }
 
-}
+  + .site-footer {
+    color: #FFFFFF;
+    position: relative;
+    top: -3.5em;
+    text-align: center;
+    opacity: 0;
+    @include animation( appear 1s forwards, nth($delays, length($delays)) );
+  }
 
-footer.site-footer {
-  color: #FFFFFF;
-  position: relative;
-  top: -3.5em;
-  text-align: center;
-  opacity: 0;
-  @include animation( appear 1s forwards, nth($delays, length($delays)) );
 }
 
 @import "posts";

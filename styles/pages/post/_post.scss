@@ -1,4 +1,81 @@
 .post-page {
-  width: $post-width;
-  margin: 0 auto;
+
+  a {
+    color: #000000;
+  }
+
+  .post-head {
+    text-align: center;
+    margin: 70px 0;
+  }
+
+  .blog-logo {
+    border-top: 1px solid #EBF2F6;
+    position: relative;
+    margin: 6rem 0 0 0;
+    padding: 6rem 0 0 0;
+
+    & img {
+      position: absolute;
+      left: 50%;
+      margin-left: -75px;
+      top: -75px;
+    }
+  }
+
+  .blog-title {
+    text-transform: uppercase;
+    margin: 0;
+    color: #000000;
+  }
+
+  .content {
+    width: $post-width;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
+
+  .post-footer {
+    border-top: 1px solid #EBF2F6;
+    position: relative;
+    margin: $share-font-size*1.25 0 0 0;
+    padding: $share-font-size*0.75 0 0 0;
+  }
+
+  .share {
+    position: absolute;
+    left: 50%;
+    margin-left: (-1*($share-font-size * $share-count)/2) - ($share-margin * ($share-count - 1));
+    background: #ffffff;
+    top: -($share-font-size/2);
+
+    a {
+      color: #000000;
+      border: 0;
+      opacity: 0.5;
+      font-size: 40px;
+      margin: 0 $share-margin;
+      @include transition(all 0.5s ease-in-out);
+
+      &:hover{
+        opacity: 1;
+      }
+    }
+  }
+
+  + .site-footer {
+    text-align: center;
+    margin: 15px 0;
+    line-height: 1rem;
+
+    a {
+      color: #000000;
+    }
+  }
+}
+
+@media (max-width: $post-width) {
+  .post-page {
+    width: auto;
+  }
 }

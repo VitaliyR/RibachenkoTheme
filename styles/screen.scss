@@ -2,6 +2,9 @@
 @import "_animations";
 
 $post-width: 980px;
+$share-count: 3;
+$share-font-size: 40px;
+$share-margin: 5px;
 
 html, body, .site-wrapper {
   height: 100%;
@@ -11,7 +14,12 @@ body {
   font-family: 'Museo Sans', Candara, 'Helvetica Neue', 'Trebuchet MS', sans-serif;
   font-weight: 300;
   font-size: 18px;
+  line-height: 1.75rem;
   -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  -webkit-font-feature-settings: 'kern' 1;
+  -moz-font-feature-settings: 'kern' 1;
+  -o-font-feature-settings: 'kern' 1;
 }
 
 a {
@@ -29,6 +37,12 @@ footer.site-footer {
   font-size: 13px;
 }
 
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
+@import "elements";
 @import "pages/common";
 @import "pages/cover/cover";
 @import "pages/post/post";

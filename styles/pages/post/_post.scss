@@ -15,7 +15,7 @@
     margin: 6rem 0 0 0;
     padding: 6rem 0 0 0;
 
-    & img {
+    img {
       position: absolute;
       left: 50%;
       margin-left: -75px;
@@ -27,6 +27,11 @@
     text-transform: uppercase;
     margin: 0;
     color: #000000;
+  }
+
+  .blog-title,
+  .post-title {
+    line-height: 2rem;
   }
 
   .content {
@@ -76,6 +81,29 @@
 
 @media (max-width: $post-width) {
   .post-page {
-    width: auto;
+
+    .content {
+      width: auto;
+
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-width) {
+  .post-page {
+
+    .blog-logo {
+      img {
+        $size: 100px;
+        width: $size;
+        height: $size;
+        margin-left: -1 * ($size / 2);
+        top: -1 * ($size / 2);
+      }
+    }
+
   }
 }

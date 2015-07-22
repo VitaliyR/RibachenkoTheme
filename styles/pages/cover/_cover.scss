@@ -1,6 +1,5 @@
 .cover {
   display: table;
-  flex-direction: column;
   width: 100%;
   height: 100%;
   color: #ffffff;
@@ -19,6 +18,12 @@
     position: relative;
     top: 35%;
     @include animation(header 1s forwards, nth($delays, length($delays)) - 1);
+
+    img {
+      width: 150px;
+      height: 150px;
+      @include border-radius(100px);
+    }
   }
 
   // Header part
@@ -128,6 +133,46 @@
     text-align: center;
     opacity: 0;
     @include animation( appear 1s forwards, nth($delays, length($delays)) );
+  }
+
+}
+
+@media (max-width: $cover-mobile-width) {
+
+  .cover {
+    height: auto;
+    min-height: 100%;
+
+    .header {
+      height: auto;
+      padding: 5px 0 0 0;
+
+      img {
+        width: $header-mobile-size;
+        height: $header-mobile-size;
+      }
+    }
+
+    .social {
+      height: auto;
+
+      @for $i from 1 through length($delays) {
+        li:nth-child(#{$i}) {
+          width: 60px;
+          height: 60px;
+          line-height: 60px;
+          margin: 0;
+        }
+      }
+
+      a {
+        font-size: 10px;
+
+        &:hover {
+          font-size: 12px;
+        }
+      }
+    }
   }
 
 }

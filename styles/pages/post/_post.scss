@@ -20,6 +20,9 @@
       left: 50%;
       margin-left: -75px;
       top: -75px;
+      width: 150px;
+      height: 150px;
+      @include border-radius(100px);
     }
   }
 
@@ -92,16 +95,15 @@
   }
 }
 
-@media (max-width: $mobile-width) {
+@media (max-width: $post-mobile-width) {
   .post-page {
 
     .blog-logo {
       img {
-        $size: 100px;
-        width: $size;
-        height: $size;
-        margin-left: -1 * ($size / 2);
-        top: -1 * ($size / 2);
+        width: $header-mobile-size;
+        height: $header-mobile-size;
+        margin-left: -1 * ($header-mobile-size / 2);
+        top: -1 * ($header-mobile-size / 2);
       }
     }
 

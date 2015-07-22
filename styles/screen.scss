@@ -2,11 +2,14 @@
 @import "_animations";
 
 $post-width: 980px;
-$mobile-width: 400px;
+$post-mobile-width: 400px;
+$cover-mobile-width: 555px;
 
 $share-count: 3;
 $share-font-size: 40px;
 $share-margin: 5px;
+
+$header-mobile-size: 100px;
 
 
 html, body, .site-wrapper {
@@ -38,6 +41,7 @@ a {
 
 footer.site-footer {
   font-size: 13px;
+  line-height: 1rem;
 }
 
 .hidden {
@@ -46,6 +50,5 @@ footer.site-footer {
 }
 
 @import "elements";
-@import "pages/common";
 @import "pages/cover/cover";
 @import "pages/post/post";

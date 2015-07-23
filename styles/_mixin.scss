@@ -12,6 +12,29 @@
   transition: $params;
 }
 
+@mixin transform($params) {
+  -webkit-transform: $params;
+  -moz-transform: $params;
+  -ms-transform: $params;
+  -o-transform: $params;
+  transform: $params;
+}
+
+@mixin animation-delay($params){
+  -webkit-animation-delay: $params;
+  -moz-animation-delay: $params;
+  -ms-animation-delay: $params;
+  -o-animation-delay: $params;
+  animation-delay: $params;
+}
+
+@mixin animation-duration($params){
+  -webkit-animation-duration: $params;
+  -moz-animation-duration: $params;
+  -o-animation-duration: $params;
+  animation-duration: $params;
+}
+
 @mixin animation($params, $delay:false) {
   @if $params {
     -webkit-animation: $params;
@@ -22,11 +45,7 @@
   }
 
   @if $delay {
-    -webkit-animation-delay: $delay;
-    -moz-animation-delay: $delay;
-    -ms-animation-delay: $delay;
-    -o-animation-delay: $delay;
-    animation-delay: $delay;
+    @include animation-delay($delay);
   }
 }
 

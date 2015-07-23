@@ -12,14 +12,62 @@ $delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s);
   }
 }
 
+@include keyframes(appear-footer) {
+  0% {
+    opacity: 0;
+  }
+
+  1% {
+    padding: 10px 0;
+  }
+
+  100% {
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+    padding: 10px 0;
+  }
+}
+
+@include keyframes(appear-cover) {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: $cover-mobile-width) {
+
+  @include keyframes(appear-cover) {
+    0% {
+      opacity: 0;
+    }
+
+    99% {
+      height: 100%;
+    }
+
+    100% {
+      height: auto;
+      opacity: 1;
+    }
+  }
+
+}
+
 
 @include keyframes(header) {
   0% {
-    top: 35%;
+    top: 50%;
+    @include transform(translateY(-50%));
   }
 
   100% {
     top: 0;
+    @include transform(translateY(0));
   }
 }
 

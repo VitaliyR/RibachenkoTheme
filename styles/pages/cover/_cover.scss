@@ -1,13 +1,15 @@
+$cover-color: #375764;
+
 .cover {
   display: table;
   width: 100%;
   height: 100%;
   color: #ffffff;
   opacity: 0;
-  @include animation(appear 1s forwards);
+  @include animation(appear-cover 1s forwards);
 
   &.no-cover {
-    background: #375764;
+    background: $cover-color;
   }
 
   .header {
@@ -16,8 +18,7 @@
     vertical-align: middle;
     text-align: center;
     position: relative;
-    top: 35%;
-    @include animation(header 1s forwards, nth($delays, length($delays)) - 1);
+    @include animation(header 1s both, nth($delays, length($delays)) - 1);
 
     img {
       width: 150px;
@@ -129,28 +130,51 @@
   + .site-footer {
     color: #FFFFFF;
     position: relative;
-    top: -3.5em;
+    top: -4em;
     text-align: center;
     opacity: 0;
-    @include animation( appear 1s forwards, nth($delays, length($delays)) );
+    @include animation( appear-footer 1s both, nth($delays, length($delays)) );
   }
 
 }
 
 @media (max-width: $cover-mobile-width) {
 
+  body.home-template {
+    background: $cover-color;
+  }
+
   .cover {
-    height: auto;
-    min-height: 100%;
+    display: block;
+    @include animation-duration(nth($delays, length($delays) ));
 
     .header {
       height: auto;
       padding: 5px 0 0 0;
+      display: block;
 
       img {
         width: $header-mobile-size;
         height: $header-mobile-size;
       }
+    }
+
+    .container,
+    .container-wrapper,
+    .blog-description,
+    .blog-stories {
+      display: block;
+    }
+
+    .blog-description {
+      padding: 0;
+      margin: 10px 0;
+      width: 100%;
+    }
+
+    .blog-stories {
+      padding: 0;
+      width: 100%;
     }
 
     .social {
@@ -172,6 +196,12 @@
           font-size: 12px;
         }
       }
+    }
+
+    + .site-footer {
+      top: 0;
+      height: 0;
+      overflow: hidden;
     }
   }
 

@@ -24,6 +24,7 @@ $cover-color: #375764;
       width: 150px;
       height: 150px;
       @include border-radius(100px);
+      margin-top: 10px;
     }
   }
 

@@ -8,10 +8,16 @@ var args = require('yargs').argv;
 
 var stylesSource = 'styles/';
 var stylesResult = 'assets/css/';
+var jsSource = 'js/';
+var jsResult = 'assets/js/';
 var additionalStyles = [
   'node_modules/normalize.css/normalize.css',
   'node_modules/font-awesome/css/font-awesome.min.css'
 ];
+var additionalJS = [
+  'node_modules/image-fullscreen/dist/image-fullscreen.js'
+];
+
 
 function vendorCSS() {
   return gulp.src(additionalStyles, { base: 'node_modules/' })
@@ -39,11 +45,22 @@ function fontAwesome() {
     .pipe(gulp.dest('assets/fonts'));
 }
 
+function vendorJS() {
+  return gulp.src(additionalJS, { base: 'node_modules/' })
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest(jsResult));
+}
+
+function JS() {
+
+}
+
 function defaultTask() {
   return Q.all([
-    vendorCSS(), CSS(), fontAwesome()
+    vendorCSS(), CSS(), fontAwesome(), vendorJS(), JS()
   ]);
 }
+
 
 gulp.task('vendorCSS', vendorCSS);
 gulp.task('font-awesome', fontAwesome);
@@ -55,5 +72,7 @@ gulp.task('watch', function () {
   defaultTask().then(function(){
     gulp.watch(stylesSource + '**/*', ['CSS']);
     gulp.watch(additionalStyles, ['vendorCSS']);
+    gulp.watch(jsSource, ['JS']);
+    gulp.watch(additionalJS, ['vendorJS']);
   });
 });

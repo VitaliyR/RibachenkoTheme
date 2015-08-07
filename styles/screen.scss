@@ -1,5 +1,6 @@
 $cover-color: #375764;
 
+$post-padding: 0 20px;
 $post-width: 980px;
 $post-mobile-width: 400px;
 $cover-mobile-width: 555px;
@@ -8,7 +9,7 @@ $share-count: 3;
 $share-font-size: 40px;
 $share-margin: 5px;
 
-$read-next-min-height: 200px;
+$read-next-height: 250px;
 
 $header-mobile-size: 100px;
 
@@ -16,7 +17,7 @@ $header-mobile-size: 100px;
 @import "_mixin";
 @import "_animations";
 
-html, body, .site-wrapper {
+html, .site-wrapper {
   height: 100%;
 }
 

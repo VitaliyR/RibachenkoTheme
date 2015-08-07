@@ -53,28 +53,27 @@
         </main>
 
         <aside class="read-next">
-            <h2>Some other stories</h2>
             <div class="read-next-container">
-                {{#next_post}}
-                    <a class="read-next-story next" href="{{url}}">
-                        <section class="post {{#if image}}" style="background-image: url({{image}}){{else}}no-cover{{/if}}">
-                            <div class="post-wrapper">
-                                <h2>{{title}}</h2>
-                                <p>{{excerpt words="19"}}&hellip;</p>
-                            </div>
-                        </section>
-                    </a>
-                {{/next_post}}
                 {{#prev_post}}
-                    <a class="read-next-story prev" href="{{url}}">
-                        <section class="post {{#if image}}" style="background-image: url({{image}}){{else}}no-cover{{/if}}">
-                            <div class="post-wrapper">
-                                <h2>{{title}}</h2>
-                                <p>{{excerpt words="19"}}&hellip;</p>
-                            </div>
-                        </section>
+                    <a href="{{url}}" class="read-next-story prev {{#if image}}" style="background-image: url({{image}}){{else}}no-cover{{/if}}">
+                        <div class="post-wrapper">
+                            <span class="notice">Previous</span>
+                            <h2>{{title}}</h2>
+                            <p>{{excerpt words="19"}}&hellip;</p>
+                            <span class="date">{{date format="DD MMM YY"}}</span>
+                        </div>
                     </a>
                 {{/prev_post}}
+                {{#next_post}}
+                    <a href="{{url}}" class="read-next-story next {{#if image}}" style="background-image: url({{image}}){{else}}no-cover{{/if}}">
+                        <div class="post-wrapper">
+                            <span class="notice">Next</span>
+                            <h2>{{title}}</h2>
+                            <p>{{excerpt words="19"}}&hellip;</p>
+                            <span class="date">{{date format="DD MMM YY"}}</span>
+                        </div>
+                    </a>
+                {{/next_post}}
             </div>
         </aside>
     </div>

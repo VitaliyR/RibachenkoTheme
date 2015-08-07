@@ -1,3 +1,7 @@
+body.home-template {
+  height: 100%;
+}
+
 .cover-container {
   height: 100%;
   background-size: cover;
@@ -10,7 +14,7 @@
   + .site-footer {
     color: #FFFFFF;
     position: relative;
-    top: -4em;
+    top: -3.3rem;
     text-align: center;
     opacity: 0;
     @include animation( appear-footer 1s both, nth($delays, length($delays)) );

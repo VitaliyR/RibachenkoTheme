@@ -12,7 +12,8 @@ var jsSource = 'js/';
 var jsResult = 'assets/js/';
 var additionalStyles = [
   'node_modules/normalize.css/normalize.css',
-  'node_modules/font-awesome/css/font-awesome.min.css'
+  'node_modules/font-awesome/css/font-awesome.min.css',
+  'node_modules/image-fullscreen/dist/image-fullscreen.css'
 ];
 var additionalJS = [
   'node_modules/image-fullscreen/dist/image-fullscreen.js'
@@ -63,11 +64,11 @@ function defaultTask() {
 
 
 gulp.task('vendorCSS', vendorCSS);
+gulp.task('vendorJS', vendorJS);
 gulp.task('font-awesome', fontAwesome);
 gulp.task('CSS', CSS);
 
 gulp.task('default', defaultTask);
-
 gulp.task('watch', function () {
   defaultTask().then(function(){
     gulp.watch(stylesSource + '**/*', ['CSS']);

@@ -39,7 +39,7 @@
 
   .content {
     width: $post-width;
-    padding: 0 20px;
+    padding: $post-padding;
     margin: 0 auto;
     box-sizing: border-box;
   }
@@ -84,72 +84,80 @@
 
 }
 
+// READ NEXT BLOCK
+
 .read-next {
-  display: none;
+  margin: 20px auto;
+  width: $post-width;
+  padding: $post-padding;
 
   h2,
   p {
     text-align: center;
+    position: relative;
   }
 
   .read-next-container {
     display: table;
-    width: 100%;
-    height: 100%;
-    min-height: $read-next-min-height;
+    min-width: 50%;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 25px 0;
   }
 
   .read-next-story {
-    display: table-cell;
+    border: 1px solid #DDDDDD;
+    height: $read-next-height;
     width: 50%;
-    border: 0;
-    vertical-align: top;
-
-  }
-
-  section {
-    height: 100%;
-    width: 100%;
-    display: table;
-    padding: 0 20px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-sizing: border-box;
-    color: #ffffff;
-    transition: all 0.5s ease;
+    margin: 10px auto;
     position: relative;
+    display: table-cell;
+    box-sizing: border-box;
+    vertical-align: middle;
 
+    @include border-radius(5px);
 
-    &.no-cover {
-      color: #000000;
-
-      &:before {
-        display: none;
-      }
-    }
-
-    &:before {
-      content: "";
+    &:before{
       display: block;
+      content: ' ';
+      background-color: rgba(255, 255, 255, 0.5);
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
       left: 0;
-      background: rgba(0,0,0,0.7);
+      right: 0;
+      top: 0;
+      bottom: 0;
       transition: all 0.5s ease;
     }
 
-    &:hover:before {
-      background: rgba(0,0,0,0.8);
+    &:hover:before{
+      background-color: rgba(255, 255, 255, 0.65);
     }
-
   }
 
   .post-wrapper {
-    display: table-cell;
-    vertical-align: middle;
-    position: relative;
+    padding: 30px 20px;
+  }
+
+  .notice,
+  .date {
+    position: absolute;
+    color: #373737;
+  }
+
+  .notice {
+    left: 20px;
+    top: 10px;
+  }
+
+  .date {
+    bottom: 10px;
+    left: 20px;
+  }
+
+  .next .notice,
+  .next .date {
+    left: initial;
+    right: 20px;
   }
 
 }
@@ -167,8 +175,15 @@
   }
 
   .read-next {
+    width: auto;
+
+    .read-next-container {
+      display: block;
+    }
+
     .read-next-story {
-      padding: 0 10px;
+      display: block;
+      width: 80%;
     }
   }
 }
@@ -185,5 +200,11 @@
       }
     }
 
+  }
+
+  .read-next {
+    .read-next-story {
+      width: 100%;
+    }
   }
 }

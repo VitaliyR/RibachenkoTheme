@@ -42,11 +42,24 @@ a {
   &:hover {
     border-color: transparent;
   }
+
+  @media print {
+    &:after {
+      content: '\000A0 (' attr(href) ')';
+      display: inline-block;
+    }
+  }
 }
 
 footer.site-footer {
   font-size: 13px;
   line-height: 1rem;
+
+  @media print {
+    a:after {
+      content: '';
+    }
+  }
 }
 
 .hidden {

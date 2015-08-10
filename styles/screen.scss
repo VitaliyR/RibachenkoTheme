@@ -42,29 +42,35 @@ a {
   &:hover {
     border-color: transparent;
   }
-
-  @media print {
-    &:after {
-      content: '\000A0 (' attr(href) ')';
-      display: inline-block;
-    }
-  }
 }
 
 footer.site-footer {
   font-size: 13px;
   line-height: 1rem;
-
-  @media print {
-    a:after {
-      content: '';
-    }
-  }
 }
 
 .hidden {
   visibility: hidden;
   display: none;
+}
+
+@media print {
+  @page {
+    margin: 20px 35px;
+  }
+
+  html, body {
+    height: auto;
+  }
+
+  a:after {
+    content: '\000A0 (' attr(href) ')';
+    display: inline-block;
+  }
+
+  footer.site-footer a:after {
+    content: '';
+  }
 }
 
 @import "elements";

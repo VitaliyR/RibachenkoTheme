@@ -15,5 +15,8 @@
   "dependencies": {
     "font-awesome": "^4.3.0",
     "normalize.css": "^3.0.3"
+  },
+  "scripts": {
+    "postinstall": "gulp"
   }
 }

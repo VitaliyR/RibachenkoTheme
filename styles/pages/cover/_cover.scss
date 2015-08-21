@@ -1,5 +1,10 @@
 body.home-template {
   height: 100%;
+
+  > .site-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
 }
 
 .cover-container {
@@ -149,13 +154,20 @@ body.home-template {
 
 @media (max-width: $cover-mobile-width) {
 
+  body.home-template > .site-wrapper {
+    @include animation(appear-wrapper 1s forwards, nth($delays, length($delays) - 1) );
+  }
+
   .cover-container {
     background-position: 0 0;
 
     + .site-footer {
-      top: 0;
-      height: 0;
       overflow: hidden;
+      position: absolute;
+      top: initial;
+      bottom: 0.5rem;
+      left: 0;
+      width: 100%;
     }
   }
 
@@ -179,6 +191,10 @@ body.home-template {
     .blog-description,
     .blog-stories {
       display: block;
+    }
+
+    .container {
+      padding-bottom: 3.3rem;
     }
 
     .blog-description {

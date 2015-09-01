@@ -1,5 +1,5 @@
 //        twitt, f, vk    , git , link , @ ,top, content
-$delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s);
+$delays: (.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s);
 
 
 @include keyframes(appear) {
@@ -22,8 +22,8 @@ $delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s);
   }
 
   100% {
-    opacity: 1;
     height: auto;
+    opacity: 1;
     overflow: visible;
     padding: 10px 0;
   }
@@ -55,32 +55,15 @@ $delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s);
     }
   }
 
-  @include keyframes(appear-cover) {
-    0% {
-      opacity: 0;
-    }
-
-    99% {
-      height: 100%;
-    }
-
-    100% {
-      height: auto;
-      opacity: 1;
-    }
-  }
-
 }
 
 
 @include keyframes(header) {
   0% {
-    top: 50%;
-    @include transform(translateY(-50%));
+    @include transform(translateY(50%));
   }
 
   100% {
-    top: 0;
     @include transform(translateY(0));
   }
 }
@@ -88,12 +71,12 @@ $delays: (0.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s);
 
 @include keyframes(content) {
   0% {
-    visibility: hidden;
     opacity: 0;
+    visibility: hidden;
   }
 
   100% {
-    visibility: visible;
     opacity: 1;
+    visibility: visible;
   }
 }

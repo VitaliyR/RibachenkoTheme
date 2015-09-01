@@ -2,6 +2,7 @@ body.home-template {
   height: 100%;
 
   > .site-wrapper {
+    height: 100%;
     position: relative;
     overflow: hidden;
   }
@@ -27,11 +28,11 @@ body.home-template {
 }
 
 .cover {
+  color: #fff;
   display: table;
   width: 100%;
   height: 100%;
-  color: #ffffff;
-  opacity: 0;
+
   @include animation(appear-cover 1s forwards);
 
   .header {
@@ -40,6 +41,7 @@ body.home-template {
     vertical-align: middle;
     text-align: center;
     position: relative;
+
     @include animation(header 1s both, nth($delays, length($delays)) - 1);
 
     img {
@@ -154,8 +156,8 @@ body.home-template {
 
 @media (max-width: $cover-mobile-width) {
 
-  body.home-template > .site-wrapper {
-    @include animation(appear-wrapper 0.1s forwards, nth($delays, length($delays)) );
+  body.home-template {
+      height: auto;
   }
 
   .cover-container {
@@ -176,13 +178,13 @@ body.home-template {
     @include animation-duration(nth($delays, length($delays) ));
 
     .header {
-      height: auto;
-      padding: 5px 0 0 0;
       display: block;
+      height: auto;
+      padding: 5px 0 0;
 
       img {
-        width: $header-mobile-size;
         height: $header-mobile-size;
+        width: $header-mobile-size;
       }
     }
 

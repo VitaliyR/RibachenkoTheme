@@ -155,7 +155,7 @@ body.home-template {
 @media (max-width: $cover-mobile-width) {
 
   body.home-template > .site-wrapper {
-    @include animation(appear-wrapper 1s forwards, nth($delays, length($delays) - 1) );
+    @include animation(appear-wrapper 0.1s forwards, nth($delays, length($delays)) );
   }
 
   .cover-container {

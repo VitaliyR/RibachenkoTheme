@@ -5,7 +5,6 @@ My theme for own blog running on [Ghost](http://ghost.org)
 ## Build
 ```
 npm install
-gulp
 ```
 
 ## License

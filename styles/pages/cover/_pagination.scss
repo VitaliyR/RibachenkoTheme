@@ -1,9 +1,12 @@
+$pagination-color: #fff;
+
 .pagination {
   a {
+    border: 1px solid $pagination-color;
     display: inline-block;
     text-align: center;
     width: 22px;
-    border: 1px solid #FFFFFF;
+    line-height: 22px;
     @include border-radius(100px);
 
     &:hover {

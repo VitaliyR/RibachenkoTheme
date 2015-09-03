@@ -54,9 +54,16 @@ function vendorJS() {
 }
 
 function JS() {
-  return gulp.src(jsSource)
-    .pipe(uglify())
-    .pipe(gulp.dest(jsResult));
+  var task =
+    gulp
+        .src(jsSource)
+        .pipe(concat('app.js'));
+
+  if (args.production){
+      task.pipe(uglify());
+  }
+
+  return task.pipe(gulp.dest(jsResult));
 }
 
 function defaultTask() {

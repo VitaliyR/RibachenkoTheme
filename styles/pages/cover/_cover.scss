@@ -153,6 +153,10 @@ body.home-template {
     padding: 20px;
   }
 
+  .content {
+    overflow: auto;
+  }
+
 }
 
 @media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {

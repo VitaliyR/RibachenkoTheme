@@ -1,4 +1,9 @@
 .blog-stories {
+
+  article {
+    margin: 1rem 0;
+  }
+
   h2 {
     margin: 0;
     display: inline-block;
@@ -11,6 +16,7 @@
 
   h3, time {
     font-size: 16px;
+    margin: 0;
   }
 
   time {
@@ -21,5 +27,3 @@
     color: rgba(255, 255, 255, 0.75);
   }
 }
-
-

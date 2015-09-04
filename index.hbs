@@ -27,15 +27,17 @@
                 </div>
                 <div class="blog-stories">
                     <div class="blog-stories-wrapper">
+                      <div class="blog-stories-header">
                         <h2>Stories</h2>
                         {{pagination}}
-                        <main id="content" class="content" role="main">
-                            {{#foreach posts}}
-                                <article class="{{post_class}}">
-                                    <h3 class="post-title"><span class="date">{{date format="DD MMM YY"}}</span> - <a href="{{url}}">{{{title}}}</a></h3>
-                                </article>
-                            {{/foreach}}
-                        </main>
+                      </div>
+                      <main id="content" class="content" role="main">
+                          {{#foreach posts}}
+                              <article class="{{post_class}}">
+                                  <h3 class="post-title"><span class="date">{{date format="DD MMM YY"}}</span> - <a href="{{url}}">{{{title}}}</a></h3>
+                              </article>
+                          {{/foreach}}
+                      </main>
                     </div>
                 </div>
             </div>

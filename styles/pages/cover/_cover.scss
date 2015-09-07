@@ -118,6 +118,7 @@ body.home-template {
 
   .container-wrapper {
     display: table;
+    table-layout: fixed;
     height: 90%;
     width: 100%;
     max-width: 1000px;

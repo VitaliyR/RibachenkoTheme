@@ -80,6 +80,9 @@ window.Paginator = (function() {
             this.page = parseInt(pages[0], 10);
             this.pagesAll = parseInt(pages[1], 10);
 
+            var olderPostsButtonWidth = this.buttons.olderPosts.getBoundingClientRect().width;
+            this.pageCountSpan.style.marginRight = this.page === this.pagesAll ? olderPostsButtonWidth + 'px' : 0;
+
             this.buttons.newerPosts.style.display = this.page === 1 ? 'none' : 'inline-block';
             this.buttons.olderPosts.style.display = this.page === this.pagesAll ? 'none' : 'inline-block';
         }

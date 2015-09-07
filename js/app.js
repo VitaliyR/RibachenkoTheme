@@ -32,19 +32,26 @@
       document.body.style.height = containerIsSmall ? '100%' : 'auto';
 
       // check for main.content with articles - if its content fits the design column
-      var articlesContainerHeight = parseInt(
-        window.getComputedStyle(
-          document.querySelector('.blog-stories-wrapper')
-        ).height,
-        10);
-      var articlesHeader = document.querySelector('.blog-stories-header').getBoundingClientRect().height;
+      var articlesColumnStyles = getComputedStyle(document.querySelector('.blog-stories'));
       var articles = document.querySelector('main');
       var firstArticle = articles.children[0];
 
-      if (firstArticle) {
-        var firstArticleStyle = window.getComputedStyle(firstArticle);
+      if (firstArticle && articlesColumnStyles.display !== 'block') {
+        articles.style.display = 'none';
+
+        var articlesContainerHeight = parseInt(
+          window.getComputedStyle(
+            document.querySelector('.blog-stories-wrapper')
+          ).height,
+          10);
+        var articlesHeader = document.querySelector('.blog-stories-header').getBoundingClientRect().height;
+
         var articlesHeight = articlesContainerHeight - articlesHeader;
         articles.style.maxHeight = articlesHeight + 'px';
+
+        articles.style.display = 'block';
+      } else {
+        articles.style.maxHeight = 'initial';
       }
     }
   };

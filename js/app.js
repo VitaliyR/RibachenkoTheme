@@ -15,6 +15,7 @@
 
     if (coverContainer) {
         new Paginator();
+        window.scrollTo(0, 0);
     }
 
     onResize();
@@ -28,6 +29,7 @@
   var onResize = function () {
     if (coverContainer && coverContainer.style.backgroundImage) { // if we are on cover
       // check cover container height to be either 100% of body (if not too much content or auto
+      document.body.style.height = 'auto';
       var containerIsSmall = parseInt(coverContainer.getBoundingClientRect().height, 10) <= window.innerHeight;
       document.body.style.height = containerIsSmall ? '100%' : 'auto';
 

@@ -17,7 +17,9 @@ var additionalStyles = [
   'node_modules/image-fullscreen/dist/image-fullscreen.css'
 ];
 var additionalJS = [
-  'node_modules/image-fullscreen/dist/image-fullscreen.js'
+  'node_modules/image-fullscreen/dist/image-fullscreen.js',
+  'vendor/jquery.mousewheel.js',
+  'vendor/jquery.jscrollpane.min.js'
 ];
 
 

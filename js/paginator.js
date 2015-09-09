@@ -60,11 +60,14 @@ window.Paginator = (function() {
                     self.pageCountSpan.innerHTML = pageCountSpan.innerHTML;
                     self.parsePage();
 
-                    document.getElementsByTagName('main')[0].innerHTML = articlesNode.innerHTML;
+                    var container = document.querySelector('main .jspPane') || document.querySelector('main');
+                    container.innerHTML = articlesNode.innerHTML;
 
                     if (history){
                         history.pushState({}, '', '/page/' + page);
                     }
+
+                    $('body').triggerHandler('articlesUpdated');
                 }
             }).fail(function(err){
                 console.error(err);

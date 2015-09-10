@@ -24,17 +24,22 @@
       // if (! isMobile() && ! isMac()){
       setTimeout(function(){
         var barsSelector = '.jspHorizontalBar, .jspVerticalBar';
+        var tm;
 
         $content.bind('jsp-initialised', function (event, isScrollable) {
           $(this).find(barsSelector).hide();
         }).jScrollPane({
           contentWidth: '0px'
-        }).hover(
+        }).scroll(
           function () {
-            $(this).find(barsSelector).stop().fadeTo('fast', 0.9);
-          },
-          function () {
-            $(this).find(barsSelector).stop().fadeTo('fast', 0);
+            var $self = $(this);
+
+            clearTimeout(tm);
+            $self.find(barsSelector).stop().css('opacity', 0.9);
+
+            tm = setTimeout(function() {
+              $self.find(barsSelector).stop().fadeTo('fast', 0);
+            }, 1000);
           }
         );
 

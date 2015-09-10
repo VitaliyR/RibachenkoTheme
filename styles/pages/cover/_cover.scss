@@ -158,6 +158,12 @@ body.home-template {
     padding: 0 0 0 2.5%;
   }
 
+  .description {
+    margin: 2rem 0 0;
+    overflow: auto;
+    position: relative;
+  }
+
   .blog-description-wrapper,
   .blog-stories-wrapper {
     border: 1px dashed #ffffff;
@@ -168,8 +174,15 @@ body.home-template {
 
   .content {
     position: relative;
+    overflow: auto;
   }
 
+}
+
+@media (max-height: $cover-mobile-height-posts) {
+  .cover .container-wrapper {
+    padding-bottom: 20px;
+  }
 }
 
 @media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {

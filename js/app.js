@@ -2,7 +2,7 @@
   'use strict';
 
   var coverContainer;
-  var $content;
+  var $scrollContent;
 
   /**
    * Listener for onReady event. Creates ImageFullscreenController
@@ -15,39 +15,43 @@
     coverContainer = document.querySelector('.cover-container');
 
     if (coverContainer) {
-      $content = $('.content');
+      $scrollContent = $('.content, .description');
 
       window.scrollTo(0, 0);
       new Paginator();
 
       // enable jscrolpane (for custom os x like scrollbars) on non mobile && non macs devices
-      // if (! isMobile() && ! isMac()){
-      setTimeout(function(){
-        var barsSelector = '.jspHorizontalBar, .jspVerticalBar';
-        var tm;
+      if (! isMobile() && ! isMac()){
+        setTimeout(function(){
+          var barsSelector = '.jspHorizontalBar, .jspVerticalBar';
+          var tm = {};
 
-        $content.bind('jsp-initialised', function (event, isScrollable) {
-          $(this).find(barsSelector).hide();
-        }).jScrollPane({
-          contentWidth: '0px'
-        }).scroll(
-          function () {
-            var $self = $(this);
+          $scrollContent.css('overflow', 'initial');
 
-            clearTimeout(tm);
-            $self.find(barsSelector).stop().css('opacity', 0.9);
+          $scrollContent.bind('jsp-initialised', function (event, isScrollable) {
+            $(this).find(barsSelector).hide();
+          }).jScrollPane({
+            contentWidth: '0px'
+          }).scroll(
+            function () {
+              var $self = $(this);
 
-            tm = setTimeout(function() {
-              $self.find(barsSelector).stop().fadeTo('fast', 0);
-            }, 1000);
-          }
-        );
+              clearTimeout(tm[this]);
+              $self.find(barsSelector).stop().show().css('opacity', 0.9);
 
-        $('body').on('articlesUpdated', function(){
-          $content.data('jsp').reinitialise();
-        });
-      }, 1);
-      // }
+              tm[this] = setTimeout(function() {
+                $self.find(barsSelector).stop().fadeTo('fast', 0);
+              }, 1000);
+            }
+          );
+
+          $('body').on('articlesUpdated', function(){
+            $scrollContent.each(function(){
+              $(this).data('jsp').reinitialise();
+            })
+          });
+        }, 1);
+      }
     }
 
     onResize();
@@ -63,10 +67,11 @@
       // check for main.content with articles - if its content fits the design column
       var articlesColumnStyles = getComputedStyle(document.querySelector('.blog-stories'));
       var articles = document.querySelector('main');
+      var description = document.querySelector('.description');
       var firstArticle = articles.children[0];
 
       if (firstArticle && articlesColumnStyles.display !== 'block') {
-        articles.style.display = 'none';
+        articles.style.display = description.style.display = 'none';
 
         var articlesContainerHeight = parseInt(
           window.getComputedStyle(
@@ -76,11 +81,11 @@
         var articlesHeader = document.querySelector('.blog-stories-header').getBoundingClientRect().height;
 
         var articlesHeight = articlesContainerHeight - articlesHeader;
-        articles.style.maxHeight = articlesHeight + 'px';
+        articles.style.height = description.style.height = articlesHeight + 'px';
 
-        articles.style.display = 'block';
+        articles.style.display = description.style.display = 'block';
       } else {
-        articles.style.maxHeight = 'initial';
+        articles.style.height = description.style.height = 'auto';
       }
 
       // check cover container height to be either 100% of body (if not too much content or auto
@@ -88,9 +93,11 @@
       var containerIsSmall = parseInt(coverContainer.getBoundingClientRect().height, 10) <= window.innerHeight;
       document.body.style.height = containerIsSmall ? '100%' : 'auto';
 
-      if ($content) {
-        var jsp = $content.data('jsp');
-        jsp && jsp.reinitialise();
+      if ($scrollContent) {
+        $scrollContent.each(function(){
+          var jsp = $(this).data('jsp');
+          jsp && jsp.reinitialise();
+        });
       }
     }
   };

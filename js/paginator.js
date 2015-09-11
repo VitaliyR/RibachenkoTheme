@@ -24,7 +24,8 @@ window.Paginator = (function() {
 
         document.querySelector('nav.pagination').addEventListener('click', function(event) {
             event.preventDefault();
-            var direction = parseInt(event.target.getAttribute('data-direction'), 10);
+            var target = event.target.tagName.toLowerCase() === 'span' ? event.target.parentElement : event.target;
+            var direction = parseInt(target.getAttribute('data-direction'), 10);
 
             if (! isNaN(direction)) {
                 self.getPage(self.page + direction || 1);

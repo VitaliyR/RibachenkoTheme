@@ -73,14 +73,17 @@
       if (firstArticle && articlesColumnStyles.display !== 'block') {
         articles.style.display = description.style.display = 'none';
 
-        var articlesContainerHeight = parseInt(
-          window.getComputedStyle(
-            document.querySelector('.blog-stories-wrapper')
-          ).height,
-          10);
+        var container = document.querySelector('.container-wrapper');
+        var containerStyles = window.getComputedStyle( container );
+        var containerHeight = parseInt(containerStyles.height, 10) - parseInt(containerStyles.paddingTop, 10) - parseInt(containerStyles.paddingBottom, 10);
+
+        var wrapper = container.querySelector('.blog-stories-wrapper');
+        var wrapperStyles = window.getComputedStyle( wrapper );
+        var wrapperPadding = parseInt(wrapperStyles.paddingTop, 10) + parseInt(wrapperStyles.paddingBottom, 10);
+
         var articlesHeader = document.querySelector('.blog-stories-header').getBoundingClientRect().height;
 
-        var articlesHeight = articlesContainerHeight - articlesHeader;
+        var articlesHeight = containerHeight - articlesHeader - wrapperPadding;
         articles.style.height = description.style.height = articlesHeight + 'px';
 
         articles.style.display = description.style.display = 'block';

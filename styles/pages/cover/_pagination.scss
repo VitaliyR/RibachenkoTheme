@@ -1,27 +1,28 @@
+$pagination-arrow-size: 22px;
+
 .pagination {
   a {
     @include border-radius(100px);
 
     border: 1px solid $pagination-color;
     display: inline-block;
+    height: $pagination-arrow-size;
+    line-height: 100%;
     text-align: center;
-    width: 22px;
-    height: 22px;
+    width: $pagination-arrow-size;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.175);}
+      background-color: rgba(255, 255, 255, .175);
     }
 
-    & .older-posts span,
-    & .newer-posts span {
-      display: block;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      line-height: 21px;
-    }
-
-    span {
-      padding: $paginator-span-margin;
+    // fff
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+      line-height: $pagination-arrow-size;
     }
   }
+
+  span {
+    padding: $paginator-span-margin;
+  }
+
+}

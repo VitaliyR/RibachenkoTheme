@@ -122,7 +122,7 @@ body.archive-template {
     table-layout: fixed;
     height: 90%;
     width: 100%;
-    max-width: 1000px;
+    max-width: $container-max-width;
     margin: 0 auto;
     box-sizing: border-box;
     padding: 0 5% 10px 5%;
@@ -138,29 +138,11 @@ body.archive-template {
     @include animation( appear 1s forwards, nth($delays, length($delays)) );
   }
 
-  .blog-description {
-    @include border-radius(5px);
-
-    border: 1px dashed #ffffff;
-    box-sizing: border-box;
-    padding: 20px 2.5% 20px 20px;
-    position: relative;
-    text-align: left;
-    vertical-align: middle;
-  }
-
-  .blog-description-header {
-    position: absolute;
-    top: 0;
-    left: 20px;
-  }
-
   .blog-stories {
     padding: 0 0 0 2.5%;
   }
 
   .description {
-    margin: 2rem 0 0;
     overflow: auto;
     position: relative;
   }

@@ -223,6 +223,7 @@ $header-margin-padding-mobile: 30px 0;
 
     .read-next-story {
       display: block;
+      height: auto;
       width: 80%;
     }
   }
@@ -237,8 +238,8 @@ $header-margin-padding-mobile: 30px 0;
 
     .blog-logo {
       img {
-        width: $header-mobile-size;
         height: $header-mobile-size;
+        width: $header-mobile-size;
       }
     }
 
@@ -246,9 +247,10 @@ $header-margin-padding-mobile: 30px 0;
 
   .read-next {
     .read-next-story {
+      height: auto;
       width: 100%;
     }
   }
 }
 
-@import "print";
+@import 'print';

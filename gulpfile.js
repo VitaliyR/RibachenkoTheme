@@ -3,7 +3,7 @@ var minifyCss = require('gulp-minify-css');
 var sass = require('gulp-ruby-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
-var uglify = require('gulp-uglifyjs');
+var uglify = require('gulp-uglify');
 var Q = require('q');
 var args = require('yargs').argv;
 
@@ -50,9 +50,16 @@ function fontAwesome() {
 }
 
 function vendorJS() {
-  return gulp.src(additionalJS, { base: 'node_modules/' })
-    .pipe(concat('vendor.js'))
-    .pipe(gulp.dest(jsResult));
+  var task =
+    gulp
+      .src(additionalJS, { base: 'node_modules/' })
+      .pipe(concat('vendor.js'));
+
+  if (args.production){
+      task.pipe(uglify());
+  }
+      
+  return task.pipe(gulp.dest(jsResult));
 }
 
 function JS() {

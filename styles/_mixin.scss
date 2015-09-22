@@ -69,3 +69,14 @@
     @content;
   }
 }
+
+// Disables scroll behaviour for element on iOS
+@mixin ios-overflow-hidden($height:false) {
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+
+  @if $height {
+    height: 100%;
+  }
+}

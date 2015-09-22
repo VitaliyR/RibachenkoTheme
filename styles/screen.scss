@@ -1,6 +1,7 @@
 $container-max-width: 1280px;
 
 $cover-color: #375764;
+$cover-background: #21417f;
 
 $post-padding: 0 20px;
 $post-width: 980px;
@@ -60,6 +61,10 @@ footer.site-footer {
 .hidden {
   visibility: hidden;
   display: none;
+}
+
+.no-scroll {
+  @include ios-overflow-hidden();
 }
 
 @media print {

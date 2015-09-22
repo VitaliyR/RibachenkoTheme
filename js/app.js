@@ -3,6 +3,7 @@
 
   var coverContainer;
   var $scrollContent;
+  var animationAvailable;
 
   /**
    * Listener for onReady event. Creates ImageFullscreenController
@@ -10,6 +11,25 @@
   var onReady = function () {
     new ImageFullscreen({
       selector: '.post-content img'
+    });
+
+    /**
+     * Just a handler which checks if CSS3 animation is available
+     */
+    document.body.addEventListener('animationstart', function() {
+      if (! animationAvailable) {
+        animationAvailable = true;
+        document.body.classList.add('no-scroll');
+      }
+    });
+
+    /**
+     * Handler for removing no-scroll class from body for unpreventing scroll on mobiles
+     */
+    document.addEventListener('animationend', function(event) {
+      if (event.target === document.getElementsByTagName('footer')[0]) {
+        document.body.classList.remove('no-scroll');
+      }
     });
 
     coverContainer = document.querySelector('.cover-container');
@@ -35,10 +55,9 @@
           }).scroll(
             function () {
               var $self = $(this);
-
-              clearTimeout(tm[this]);
               $self.find(barsSelector).stop().show().css('opacity', 0.9);
 
+              clearTimeout(tm[this]);
               tm[this] = setTimeout(function() {
                 $self.find(barsSelector).stop().fadeTo('fast', 0);
               }, 1000);

@@ -19,6 +19,6 @@
     "normalize.css": "^3.0.3"
   },
   "scripts": {
-    "postinstall": "gulp"
+    "postinstall": "gulp --production"
   }
 }

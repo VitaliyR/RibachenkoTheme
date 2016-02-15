@@ -14,12 +14,14 @@ var jsResult = 'assets/js/';
 var additionalStyles = [
   'node_modules/normalize.css/normalize.css',
   'node_modules/font-awesome/css/font-awesome.min.css',
-  'node_modules/image-fullscreen/dist/image-fullscreen.css'
+  'node_modules/image-fullscreen/dist/image-fullscreen.css',
+  'vendor/prism.css'
 ];
 var additionalJS = [
   'node_modules/image-fullscreen/dist/image-fullscreen.js',
   'vendor/jquery.mousewheel.js',
-  'vendor/jquery.jscrollpane.min.js'
+  'vendor/jquery.jscrollpane.min.js',
+  'vendor/prism.js'
 ];
 
 

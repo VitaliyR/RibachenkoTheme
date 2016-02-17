@@ -1,6 +1,16 @@
 .blog-stories,
 .blog-description {
 
+  .blog-stories-header {
+    position: relative;
+
+    h3 {
+      position: absolute;
+      bottom: -15px;
+      left: 5px;
+    }
+  }
+
   article {
     margin: 1rem 0;
   }

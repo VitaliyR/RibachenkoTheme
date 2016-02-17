@@ -26,7 +26,7 @@
   transform: $params;
 }
 
-@mixin animation-delay($params){
+@mixin animation-delay($params) {
   -webkit-animation-delay: $params;
   -moz-animation-delay: $params;
   -ms-animation-delay: $params;
@@ -34,7 +34,7 @@
   animation-delay: $params;
 }
 
-@mixin animation-duration($params){
+@mixin animation-duration($params) {
   -webkit-animation-duration: $params;
   -moz-animation-duration: $params;
   -o-animation-duration: $params;
@@ -52,6 +52,12 @@
 
   @if $delay {
     @include animation-delay($delay);
+  }
+
+  // disable animations at all for tag-template
+  body.tag-template & {
+    animation-duration: 0s;
+    animation-delay: 0s;
   }
 }
 

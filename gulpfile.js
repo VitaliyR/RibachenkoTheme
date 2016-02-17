@@ -1,13 +1,13 @@
 var gulp = require('gulp');
 var minifyCss = require('gulp-minify-css');
-var sass = require('gulp-ruby-sass');
+var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var Q = require('q');
 var args = require('yargs').argv;
 
-var stylesSource = 'styles/';
+var stylesSource = 'styles/**/*.scss';
 var stylesResult = 'assets/css/';
 var jsSource = 'js/*.js';
 var jsResult = 'assets/js/';
@@ -41,7 +41,9 @@ function CSS() {
     style: 'compressed'
   };
 
-  return sass(stylesSource, sassOpts)
+  return gulp.src(stylesSource)
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOpts))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(stylesResult));
 }

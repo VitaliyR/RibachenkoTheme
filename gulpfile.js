@@ -1,4 +1,13 @@
+/* eslint-env node */
+
 var gulp = require('gulp');
+
+// JS
+var eslint = require('gulp-eslint');
+
+// CSS
+var postcss = require('gulp-postcss');
+var scss = require('postcss-scss');
 var minifyCss = require('gulp-minify-css');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
@@ -6,6 +15,8 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var Q = require('q');
 var args = require('yargs').argv;
+
+// PATHS
 
 var stylesSource = 'styles/**/*.scss';
 var stylesResult = 'assets/css/';
@@ -24,27 +35,34 @@ var additionalJS = [
   'vendor/prism.js'
 ];
 
+// TASKS
 
-function vendorCSS() {
+var vendorCSS = function() {
   return gulp.src(additionalStyles, { base: 'node_modules/' })
     .pipe(sourcemaps.init())
     .pipe(minifyCss())
     .pipe(sourcemaps.write())
     .pipe(concat('vendor.css'))
     .pipe(gulp.dest(stylesResult));
-}
+};
 
 function CSS() {
-  var sassOpts = {
-    sourcemap: !args.production,
-    noCache: args.production,
-    style: 'compressed'
+  // var sassOpts = {
+  //   sourcemap: !args.production,
+  //   noCache: args.production,
+  //   style: 'compressed'
+  // };
+
+  var processors = [];
+  var opts = {
+    syntax: scss
   };
 
   return gulp.src(stylesSource)
-    .pipe(sourcemaps.init())
-    .pipe(sass(sassOpts))
-    .pipe(sourcemaps.write())
+    .pipe(postcss(processors, opts))
+    // .pipe(sourcemaps.init())
+    // .pipe(sass(sassOpts))
+    // .pipe(sourcemaps.write())
     .pipe(gulp.dest(stylesResult));
 }
 
@@ -53,37 +71,39 @@ function fontAwesome() {
     .pipe(gulp.dest('assets/fonts'));
 }
 
-function vendorJS() {
+var vendorJS = function() {
   var task =
     gulp
       .src(additionalJS, { base: 'node_modules/' })
       .pipe(concat('vendor.js'));
 
-  if (args.production){
-      task.pipe(uglify());
+  if (args.production) {
+    task.pipe(uglify());
   }
-      
+
   return task.pipe(gulp.dest(jsResult));
 }
 
-function JS() {
+var JS = function() {
   var task =
     gulp
-        .src(jsSource)
-        .pipe(concat('app.js'));
+      .src(jsSource)
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(concat('app.js'));
 
-  if (args.production){
-      task.pipe(uglify());
+  if (args.production) {
+    task.pipe(uglify());
   }
 
   return task.pipe(gulp.dest(jsResult));
-}
+};
 
-function defaultTask() {
+var defaultTask = function() {
   return Q.all([
     vendorCSS(), CSS(), fontAwesome(), vendorJS(), JS()
   ]);
-}
+};
 
 
 gulp.task('vendorCSS', vendorCSS);
@@ -93,8 +113,8 @@ gulp.task('CSS', CSS);
 gulp.task('JS', JS);
 
 gulp.task('default', defaultTask);
-gulp.task('watch', function () {
-  defaultTask().then(function(){
+gulp.task('watch', function() {
+  defaultTask().then(function() {
     gulp.watch(stylesSource, ['CSS']);
     gulp.watch(additionalStyles, ['vendorCSS']);
     gulp.watch(jsSource, ['JS']);

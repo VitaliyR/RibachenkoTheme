@@ -1,10 +1,10 @@
-window.Paginator = (function () {
+window.Paginator = (function() {
 
   /**
    * Serves the paginator ajax functionality
    * @constructor
    */
-  var Paginator = function () {
+  var Paginator = function() {
     /**
      * @var {Number} page
      */
@@ -24,7 +24,7 @@ window.Paginator = (function () {
 
     this.buttons.olderPosts.style.opacity = 1;
 
-    document.querySelector('nav.pagination').addEventListener('click', function (event) {
+    document.querySelector('nav.pagination').addEventListener('click', function(event) {
       event.preventDefault();
       var target = event.target.tagName.toLowerCase() === 'span' ? event.target.parentElement : event.target;
       var direction = parseInt(target.getAttribute('data-direction'), 10);
@@ -46,14 +46,14 @@ window.Paginator = (function () {
      * paginator data and articles
      * @param  {number} page
      */
-    getPage: function (page) {
+    getPage: function(page) {
       var self = this;
 
       if (!page || this.page === page) {
         return;
       }
 
-      $.ajax('/page/' + page).done(function (html) {
+      $.ajax('/page/' + page).done(function(html) {
         var dom = document.createElement('html');
         dom.innerHTML = html;
 
@@ -72,7 +72,7 @@ window.Paginator = (function () {
 
           $('body').triggerHandler('articlesUpdated');
         }
-      }).fail(function (err) {
+      }).fail(function(err) {
         console.error(err);
       });
     },
@@ -81,7 +81,7 @@ window.Paginator = (function () {
      * Parses current page and all pages count from <span>.
      * Toggles next/prev article buttons
      */
-    parsePage: function () {
+    parsePage: function() {
       var pages = this.pageCountSpan.textContent.split(' of '); // ha-ha-ha;
       this.page = parseInt(pages[0], 10);
       this.pagesAll = parseInt(pages[1], 10);

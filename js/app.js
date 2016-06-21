@@ -6,13 +6,9 @@
   var animationAvailable;
 
   /**
-   * Listener for onReady event. Creates ImageFullscreenController
+   * Listener for onReady event
    */
   var onReady = function () {
-    new ImageFullscreen({
-      selector: '.post-content img'
-    });
-
     /**
      * Just a handler which checks if CSS3 animation is available
      */

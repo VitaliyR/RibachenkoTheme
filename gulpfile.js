@@ -95,7 +95,7 @@ gulp.task('JS', JS);
 gulp.task('default', defaultTask);
 gulp.task('watch', function () {
   defaultTask().then(function(){
-    gulp.watch(stylesSource + '**/*', ['CSS']);
+    gulp.watch(stylesSource, ['CSS']);
     gulp.watch(additionalStyles, ['vendorCSS']);
     gulp.watch(jsSource, ['JS']);
     gulp.watch(additionalJS, ['vendorJS']);

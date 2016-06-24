@@ -1,0 +1,70 @@
+& {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 1rem;
+}
+
+section {
+  flex: 1 50%;
+  padding: 1rem;
+  max-width: $container-max-width / 2;
+
+  > article {
+    border: 1px dashed #ffffff;
+    border-radius: 5px;
+    height: 100%;
+    padding: 0 1.5rem 1.5rem;
+  }
+}
+
+header {
+  position: relative;
+}
+
+.description p:first-child {
+  margin-top: 0;
+}
+
+h2 {
+  display: inline-block;
+}
+
+nav {
+  display: inline-block;
+  float: right;
+  margin-top: 1.5rem;
+}
+
+h3, h4, time {
+  font-size: 16px;
+  margin: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+h3 {
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+}
+
+.date {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+@media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
+
+  & {
+    display: block;
+    padding: .5rem;
+  }
+
+  section {
+    padding: .5rem;
+  }
+
+}
+
+@import "pagination";

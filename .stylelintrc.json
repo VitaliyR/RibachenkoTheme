@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "stylelint-config-standard"
+  ],
+  "rules": {
+    "selector-pseudo-element-colon-notation": "single",
+    "number-leading-zero": "never",
+    "max-empty-lines": 2
+  }
+}

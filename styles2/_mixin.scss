@@ -1,0 +1,27 @@
+@mixin animation($params, $delay:false) {
+  @if $params {
+    animation: $params;
+  }
+
+  @if $delay {
+    animation-delay: $delay;
+    @include animation-delay($delay);
+  }
+
+  // disable animations at all for tag-template
+  body.tag-template & {
+    animation-duration: 0.01s;
+    animation-delay: 0s;
+  }
+}
+
+// Disables scroll behaviour for element on iOS
+@mixin ios-overflow-hidden($height:false) {
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+
+  @if $height {
+    height: 100%;
+  }
+}

@@ -1,0 +1,108 @@
+$delays: (.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s); // move out
+
+& {
+  text-align: center;
+  padding-top: 1.5rem;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  margin-top: 10px;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.social {
+  text-align: center;
+  height: 100px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  @for $i from 1 through length($delays) {
+    li:nth-child(#{$i}) {
+      display: inline-block;
+      margin: 0 0.5em;
+      width: 70px;
+      height: 90px;
+      line-height: 80px;
+      //opacity: 0;
+      //animation: appear 1s forwards, nth($delays, $i);
+    }
+  }
+
+  a {
+    text-decoration: none;
+    border-bottom: 0;
+    color: #ffffff;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      font-size: 16px;
+
+      &:before {
+        background-color: rgba(255, 255, 255, 0.175);
+      }
+    }
+  }
+
+  a:before {
+    border: 1px solid #ffffff;
+    border-radius: 100%;
+    display: block;
+    width: 2.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+    font-size: 1.75em;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
+
+  & {
+    padding-top: 0;
+  }
+
+  img {
+    height: $header-mobile-size;
+    width: $header-mobile-size;
+  }
+
+  h1 {
+    padding: 0 .5rem;
+    line-height: 2rem;
+  }
+
+  .social {
+    height: auto;
+
+    @for $i from 1 through length($delays) {
+      li:nth-child(#{$i}) {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        margin: 0;
+      }
+    }
+
+    a {
+      font-size: 10px;
+
+      &:hover {
+        font-size: 12px;
+      }
+    }
+  }
+
+}

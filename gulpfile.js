@@ -7,7 +7,11 @@ var eslint = require('gulp-eslint');
 
 // CSS
 var postcss = require('gulp-postcss');
+var stylelint = require('stylelint');
 var scss = require('postcss-scss');
+var autoprefixer = require('autoprefixer');
+var csswring = require('csswring');
+
 var minifyCss = require('gulp-minify-css');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
@@ -19,6 +23,7 @@ var args = require('yargs').argv;
 // PATHS
 
 var stylesSource = 'styles/**/*.scss';
+var stylesSource2 = 'styles2/**/*.scss';
 var stylesResult = 'assets/css/';
 var jsSource = 'js/*.js';
 var jsResult = 'assets/js/';
@@ -40,36 +45,36 @@ var additionalJS = [
 var vendorCSS = function() {
   return gulp.src(additionalStyles, { base: 'node_modules/' })
     .pipe(sourcemaps.init())
-    .pipe(minifyCss())
+    .pipe(minifyCss()) // todo use csswring
     .pipe(sourcemaps.write())
     .pipe(concat('vendor.css'))
     .pipe(gulp.dest(stylesResult));
 };
 
-function CSS() {
-  // var sassOpts = {
-  //   sourcemap: !args.production,
-  //   noCache: args.production,
-  //   style: 'compressed'
-  // };
-
-  var processors = [];
-  var opts = {
-    syntax: scss
+var CSS = function() {
+  var sassOpts = {
+    sourcemap: !args.production,
+    noCache: args.production,
+    style: 'compressed'
   };
+  var processors = [
+    autoprefixer({ browsers: 'last 1 version' }),
+    csswring()
+  ];
 
-  return gulp.src(stylesSource)
-    .pipe(postcss(processors, opts))
-    // .pipe(sourcemaps.init())
-    // .pipe(sass(sassOpts))
-    // .pipe(sourcemaps.write())
+  return gulp.src(stylesSource2)
+    .pipe(postcss([stylelint()], { syntax: scss }))
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOpts))
+    .pipe(sourcemaps.write())
+    .pipe(postcss(processors))
     .pipe(gulp.dest(stylesResult));
-}
+};
 
-function fontAwesome() {
+var fontAwesome = function() {
   return gulp.src('node_modules/font-awesome/fonts/**.*')
     .pipe(gulp.dest('assets/fonts'));
-}
+};
 
 var vendorJS = function() {
   var task =
@@ -82,7 +87,7 @@ var vendorJS = function() {
   }
 
   return task.pipe(gulp.dest(jsResult));
-}
+};
 
 var JS = function() {
   var task =
@@ -105,7 +110,6 @@ var defaultTask = function() {
   ]);
 };
 
-
 gulp.task('vendorCSS', vendorCSS);
 gulp.task('vendorJS', vendorJS);
 gulp.task('font-awesome', fontAwesome);
@@ -115,7 +119,7 @@ gulp.task('JS', JS);
 gulp.task('default', defaultTask);
 gulp.task('watch', function() {
   defaultTask().then(function() {
-    gulp.watch(stylesSource, ['CSS']);
+    gulp.watch(stylesSource2, ['CSS']);
     gulp.watch(additionalStyles, ['vendorCSS']);
     gulp.watch(jsSource, ['JS']);
     gulp.watch(additionalJS, ['vendorJS']);

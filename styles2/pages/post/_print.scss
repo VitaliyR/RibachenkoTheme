@@ -1,0 +1,24 @@
+@media print {
+
+  .post-page {
+    .post-head {
+      margin-top: 40px;
+
+      a:after{
+        content: '';
+      }
+    }
+
+    .blog-logo,
+    .post-footer {
+      display: none;
+    }
+  }
+
+  .read-next {
+    display: none;
+  }
+
+}
+
+

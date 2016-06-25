@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 section {
@@ -24,6 +24,13 @@ header {
 
 .description p:first-child {
   margin-top: 0;
+}
+
+.description,
+main {
+  padding-right: 10px;
+  max-height: calc(100% - 5rem);
+  overflow: scroll;
 }
 
 h2 {

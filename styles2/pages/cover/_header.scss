@@ -2,7 +2,7 @@ $delays: (.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s); // move out
 
 & {
   text-align: center;
-  padding-top: 1.5rem;
+  padding-top: .5rem;
 }
 
 img {
@@ -20,11 +20,12 @@ h1 {
 
 .social {
   text-align: center;
-  height: 100px;
+  height: 5.3rem;
 
   ul {
     list-style: none;
     padding: 0;
+    margin-top: 1rem;
   }
 
   @for $i from 1 through length($delays) {

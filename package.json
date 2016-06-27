@@ -29,6 +29,7 @@
     "normalize.css": "^3.0.3"
   },
   "scripts": {
-    "postinstall": "gulp --production"
+    "postinstall": "gulp --production",
+    "firstinstall": "ln -s $(pwd)/helpers/last_checkin.js ../../../last_checkin.js;\necho 'require(\"./last_checkin\")();\\n' \"$(cat ../../../config.js)\" > ../../../config.js;"
   }
 }

@@ -3,6 +3,7 @@
   flex-flow: row wrap;
   justify-content: center;
   padding: 0 1rem;
+  min-height: 0; /* firefox */
 }
 
 section {
@@ -20,6 +21,7 @@ section {
     border-radius: 5px;
     height: 100%;
     padding: 0 1.5rem 1.5rem;
+    min-height: 0; /* firefox */
   }
 }
 
@@ -30,7 +32,6 @@ header {
 main {
   flex: 1;
   padding-right: 10px;
-  //max-height: calc(100% - 5rem);
   overflow-y: auto;
 }
 

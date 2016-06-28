@@ -1,4 +1,69 @@
+(function () {
+  'use strict';
+
+  var settings = {
+    mobile_width: 555,
+    mobile_height: 500
+  };
+
+  var App = function (container) {
+    this.elements = {
+      sections: container.querySelectorAll('.section-container > section')
+    };
+    this.container = container;
+
+    this.bindEvents();
+  };
+
+  App.prototype = {
+
+    bindEvents: function() {
+      window.addEventListener('resize', this.handleResize.bind(this));
+
+      this.handleResize();
+    },
+
+    handleResize: function () {
+      if (navigator.appVersion.match(/MSIE/)) {
+        this.matchSectionsHeight();
+      }
+    },
+
+    matchSectionsHeight: function () {
+      if (innerWidth < settings.mobile_width || innerHeight < settings.mobile_height) {
+        return this.clearSectionsHeight();
+      }
+      
+      var maxHeight = Array.prototype.reduce.apply(this.elements.sections, [
+        function (max, section) {
+          var height = section.getBoundingClientRect().height;
+          return height > max ? height : max;
+        },
+        0
+      ]);
+
+      for (var i = 0; i < this.elements.sections.length; i++) {
+        var section = this.elements.sections[i];
+        section.style.height = maxHeight + 'px';
+      }
+    },
+
+    clearSectionsHeight: function () {
+      for (var i = 0; i < this.elements.sections.length; i++){
+        var section = this.elements.sections[i];
+        section.style.height = '';
+      }
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    new App(document.body);
+  });
+
+})();
+
 (function() {
+  return; // todo
   'use strict';
 
   var coverContainer;

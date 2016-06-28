@@ -1,29 +1,6 @@
-$container-max-width: 1280px;
-
-$cover-color: #375764;
-$cover-background: #21417f;
-
-$post-padding: 0 20px;
-$post-width: 980px;
-$post-mobile-width: 400px;
-$cover-mobile-width: 555px;
-$cover-mobile-height: 500px;
-$cover-mobile-height-posts: 640px;
-
-$pagination-color: #fff;
-$paginator-span-margin: 0 5px;
-
-$share-count: 3;
-$share-font-size: 40px;
-$share-margin: 5px;
-
-$read-next-height: 250px;
-
-$header-mobile-size: 100px;
-
-
+@import "variables";
 @import "mixin";
-@import "_animations";
+@import "animations";
 
 @import "base";
 

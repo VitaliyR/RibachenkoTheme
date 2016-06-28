@@ -1,0 +1,54 @@
+@import "variables";
+
+.cover-container {
+  display: block;
+  height: auto;
+  min-height: 100%;
+
+  > .section-container {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+
+    section {
+      //display: block;
+      //width: 50%;
+      height: 100%;
+      display: table-cell;
+      width: 50%;
+
+      &:first-child {
+        //float: left;
+      }
+
+      &:last-child {
+        //float: right;
+      }
+
+      > article {
+        display: block;
+      }
+    }
+
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+  }
+}
+
+@media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
+  .cover-container {
+    > .section-container {
+      section:first-child,
+      section:last-child {
+        display: block;
+        float: none;
+        width: 100%;
+      }
+    }
+  }
+}

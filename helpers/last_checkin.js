@@ -27,7 +27,13 @@ module.exports = function() {
         try {
           data = JSON.parse(data);
         } catch (e) {
-          data = { token: token, checkin: { executed: 0 } };
+          data = { token: token };
+        }
+
+        if (!data.checkin) {
+          data.checkin = {
+            executed: 0
+          };
         }
 
         var now = Date.now();

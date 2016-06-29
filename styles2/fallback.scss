@@ -40,6 +40,32 @@
   }
 }
 
+.icon {
+  &.icon-twitter {
+    background-image: url(../res/twitter.png);
+  }
+
+  &.icon-facebook {
+    background-image: url(../res/facebook.png);
+  }
+
+  &.icon-vk {
+    background-image: url(../res/vk.png);
+  }
+
+  &.icon-github {
+    background-image: url(../res/github.png);
+  }
+
+  &.icon-linkedin {
+    background-image: url(../res/linkedin.png);
+  }
+
+  &.icon-email {
+    background-image: url(../res/email.png);
+  }
+}
+
 @media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
   .cover-container {
     > .section-container {

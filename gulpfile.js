@@ -12,7 +12,6 @@ var scss = require('postcss-scss');
 var autoprefixer = require('autoprefixer');
 var csswring = require('csswring');
 
-var minifyCss = require('gulp-minify-css');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
@@ -22,6 +21,7 @@ var args = require('yargs').argv;
 
 // PATHS
 
+var iconsSource = 'res/**/*.svg';
 var stylesSource = 'styles/**/*.scss';
 var stylesSource2 = 'styles2/**/*.scss';
 var stylesResult = 'assets/css/';
@@ -29,8 +29,6 @@ var jsSource = 'js/*.js';
 var jsResult = 'assets/js/';
 var additionalStyles = [
   'node_modules/normalize.css/normalize.css',
-  'node_modules/font-awesome/css/font-awesome.min.css',
-  'node_modules/image-fullscreen/dist/image-fullscreen.css',
   'vendor/prism.css'
 ];
 var additionalJS = [
@@ -45,7 +43,7 @@ var additionalJS = [
 var vendorCSS = function() {
   return gulp.src(additionalStyles, { base: 'node_modules/' })
     .pipe(sourcemaps.init())
-    .pipe(minifyCss()) // todo use csswring
+    .pipe(postcss([csswring]))
     .pipe(sourcemaps.write())
     .pipe(concat('vendor.css'))
     .pipe(gulp.dest(stylesResult));
@@ -59,6 +57,8 @@ var CSS = function() {
   };
   var processors = [
     autoprefixer({ browsers: 'last 1 version' }),
+    require('postcss-inline-svg')({ path: './' }),
+    require('postcss-svgo')(),
     csswring()
   ];
 
@@ -69,11 +69,6 @@ var CSS = function() {
     .pipe(sourcemaps.write())
     .pipe(postcss(processors))
     .pipe(gulp.dest(stylesResult));
-};
-
-var fontAwesome = function() {
-  return gulp.src('node_modules/font-awesome/fonts/**.*')
-    .pipe(gulp.dest('assets/fonts'));
 };
 
 var vendorJS = function() {
@@ -104,17 +99,29 @@ var JS = function() {
   return task.pipe(gulp.dest(jsResult));
 };
 
+var fallbackIcons = function() {
+  return gulp.src(iconsSource)
+    .pipe(require('gulp-svg2png')())
+    .pipe(gulp.dest('assets/res'));
+};
+
+/**
+ * Default task
+ */
 var defaultTask = function() {
   return Q.all([
-    vendorCSS(), CSS(), fontAwesome(), vendorJS(), JS()
+    vendorCSS(), CSS(), vendorJS(), JS(), fallbackIcons()
   ]);
 };
 
+/**
+ * Exports tasks & watch
+ */
 gulp.task('vendorCSS', vendorCSS);
 gulp.task('vendorJS', vendorJS);
-gulp.task('font-awesome', fontAwesome);
 gulp.task('CSS', CSS);
 gulp.task('JS', JS);
+gulp.task('fallbackIcons', fallbackIcons);
 
 gulp.task('default', defaultTask);
 gulp.task('watch', function() {
@@ -123,5 +130,6 @@ gulp.task('watch', function() {
     gulp.watch(additionalStyles, ['vendorCSS']);
     gulp.watch(jsSource, ['JS']);
     gulp.watch(additionalJS, ['vendorJS']);
+    gulp.watch(iconsSource, ['fallbackIcons']);
   });
 });

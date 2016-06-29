@@ -1,0 +1,26 @@
+.icon {
+  &.icon-twitter {
+    background-image: svg-load('res/twitter.svg');
+  }
+
+  &.icon-facebook {
+    background-image: svg-load('res/facebook.svg');
+  }
+
+  &.icon-vk {
+    background-image: svg-load('res/vk.svg');
+  }
+
+  &.icon-github {
+    background-image: svg-load('res/github.svg');
+  }
+
+  &.icon-linkedin {
+    background-image: svg-load('res/linkedin.svg');
+  }
+
+  &.icon-email {
+    background-image: svg-load('res/email.svg');
+  }
+}
+

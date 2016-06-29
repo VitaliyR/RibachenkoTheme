@@ -21,21 +21,14 @@ h1 {
 .social {
   text-align: center;
   height: 5.3rem;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 1rem;
-  }
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 
   @for $i from 1 through length($delays) {
-    li:nth-child(#{$i}) {
-      display: inline-block;
-      margin: 0 0.5em;
-      width: 70px;
-      height: 90px;
-      line-height: 80px;
-      //opacity: 0;
+    a:nth-child(#{$i}) {
       //animation: appear 1s forwards, nth($delays, $i);
     }
   }
@@ -43,14 +36,17 @@ h1 {
   a {
     text-decoration: none;
     border-bottom: 0;
-    color: #ffffff;
-    font-size: 14px;
-    transition: all 0.2s ease-in-out;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-position: 50%;
+    display: inline-block;
+    margin: 10px;
 
     &:hover {
-      font-size: 16px;
 
       &:before {
+        width: $icon-social-size-hover;
+        height: $icon-social-size-hover;
         background-color: rgba(255, 255, 255, 0.175);
       }
     }
@@ -60,11 +56,10 @@ h1 {
     border: 1px solid #ffffff;
     border-radius: 100%;
     display: block;
-    width: 2.5em;
-    height: 2.5em;
-    line-height: 2.5em;
-    font-size: 1.75em;
-    text-align: center;
+    width: $icon-social-size;
+    height: $icon-social-size;
+    content: '';
+    transition: all .2s ease-in-out;
   }
 }
 
@@ -87,23 +82,6 @@ h1 {
 
   .social {
     height: auto;
-
-    @for $i from 1 through length($delays) {
-      li:nth-child(#{$i}) {
-        width: 60px;
-        height: 60px;
-        line-height: 60px;
-        margin: 0;
-      }
-    }
-
-    a {
-      font-size: 10px;
-
-      &:hover {
-        font-size: 12px;
-      }
-    }
   }
 
 }

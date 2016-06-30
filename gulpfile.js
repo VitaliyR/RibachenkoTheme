@@ -117,7 +117,9 @@ var getBundler = function() {
     bundler = watchify(browserify({
       entries: config.entryJS,
       extensions: ['.js'],
-      debug: !args.production
+      debug: !args.production,
+      cache: {},
+      packageCache: {}
     }));
   }
   return bundler;
@@ -134,7 +136,7 @@ var buildJS = function() {
   return getBundler()
     .transform(babelify, {presets: ['es2015']})
     .bundle()
-    .on('error', function(err) { console.log('Error: ' + err.message); })
+    .on('error', function(err) { console.log('Error: ' + err.message); this.emit('end'); })
     .pipe(source(config.outputJS))
     .pipe(buffer())
     .pipe(gulpif(!args.production, sourcemaps.init({loadMaps: true})))

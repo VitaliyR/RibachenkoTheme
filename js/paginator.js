@@ -1,102 +1,97 @@
-window.Paginator = (function() {
+import Page from './page';
 
-  /**
-   * Serves the paginator ajax functionality
-   * @constructor
-   */
-  var Paginator = function() {
-    /**
-     * @var {Number} page
-     */
-    var self = this;
+/**
+ * Serves the paginator ajax functionality
+ */
+class Paginator extends Page {
 
-    /**
-     * Span element (@page of @pages)
-     * @type {Element}
-     */
-    this.pageCountSpan = document.querySelector('span.page-number');
-
-    // butons prev page and next page
-    this.buttons = {
-      newerPosts: document.querySelector('a.newer-posts'),
-      olderPosts: document.querySelector('a.older-posts')
+  get selectors() {
+    return {
+      pageCountSpan: 'span.page-number',
+      newerPostsButton: 'a.newer-posts',
+      olderPostsButton: 'a.older-posts',
+      paginationNav: 'nav.pagination'
     };
+  }
+
+  get events() {
+    return {
+      'click paginationNav': this.handleNavigationClick
+    };
+  }
+
+  constructor(...args) {
+    super(...args);
 
     this.buttons.olderPosts.style.opacity = 1;
 
-    document.querySelector('nav.pagination').addEventListener('click', function(event) {
-      event.preventDefault();
-      var target = event.target.tagName.toLowerCase() === 'span' ? event.target.parentElement : event.target;
-      var direction = parseInt(target.getAttribute('data-direction'), 10);
-
-      if (!isNaN(direction)) {
-        self.getPage(self.page + direction || 1);
-      }
-    });
-
     this.parsePage();
-  };
+  }
+
+  handleNavigationClick(event) {
+    event.preventDefault();
+    var target = event.target.tagName.toLowerCase() === 'span' ? event.target.parentElement : event.target;
+    var direction = parseInt(target.getAttribute('data-direction'), 10);
+
+    if (!isNaN(direction)) {
+      this.getPage(this.page + direction || 1);
+    }
+  }
 
   /**
-   * @lends Paginator
+   * Gets provided page html via ajax and parse using shadow DOM for new
+   * paginator data and articles
+   * @param  {number} page
+   * @todo rewrite to native
    */
-  Paginator.prototype = {
-    /**
-     * Gets provided page html via ajax and parse using shadow DOM for new
-     * paginator data and articles
-     * @param  {number} page
-     */
-    getPage: function(page) {
-      var self = this;
-
-      if (!page || this.page === page) {
-        return;
-      }
-
-      $.ajax('/page/' + page).done(function(html) {
-        var dom = document.createElement('html');
-        dom.innerHTML = html;
-
-        var pageCountSpan = dom.querySelector('span.page-number');
-        var articlesNode = dom.getElementsByTagName('main')[0];
-        if (articlesNode) {
-          self.pageCountSpan.innerHTML = pageCountSpan.innerHTML;
-          self.parsePage();
-
-          var container = document.querySelector('main .jspPane') || document.querySelector('main');
-          container.innerHTML = articlesNode.innerHTML;
-
-          if (history) {
-            history.pushState({}, '', '/page/' + page);
-          }
-
-          $('body').triggerHandler('articlesUpdated');
-        }
-      }).fail(function(err) {
-        console.error(err);
-      });
-    },
-
-    /**
-     * Parses current page and all pages count from <span>.
-     * Toggles next/prev article buttons
-     */
-    parsePage: function() {
-      var pages = this.pageCountSpan.textContent.split(' of '); // ha-ha-ha;
-      this.page = parseInt(pages[0], 10);
-      this.pagesAll = parseInt(pages[1], 10);
-
-      var olderPostsButtonWidth = this.buttons.olderPosts.getBoundingClientRect().width;
-      this.pageCountSpan.style.marginRight = this.page === this.pagesAll ? olderPostsButtonWidth + 'px' : 0;
-
-      var newerPostsBtnVisible = this.page === 1;
-      var olderPostsBtnVisible = this.page === this.pagesAll;
-
-      this.buttons.newerPosts.style.display = newerPostsBtnVisible ? 'none' : 'inline-block';
-      this.buttons.olderPosts.style.display = olderPostsBtnVisible ? 'none' : 'inline-block';
+  getPage(page) {
+    if (!page || this.page === page) {
+      return;
     }
-  };
 
-  return Paginator;
+    $.ajax('/page/' + page).done((html) => {
+      var dom = document.createElement('html');
+      dom.innerHTML = html;
 
-})();
+      var pageCountSpan = dom.querySelector('span.page-number');
+      var articlesNode = dom.getElementsByTagName('main')[0];
+      if (articlesNode) {
+        this.pageCountSpan.innerHTML = pageCountSpan.innerHTML;
+        this.parsePage();
+
+        var container = document.querySelector('main .jspPane') || document.querySelector('main');
+        container.innerHTML = articlesNode.innerHTML;
+
+        if (history) {
+          history.pushState({}, '', '/page/' + page);
+        }
+
+        $('body').triggerHandler('articlesUpdated');
+      }
+    }).fail(function(err) {
+      console.error(err);
+    });
+  }
+
+  /**
+   * Parses current page and all pages count from <span>.
+   * Toggles next/prev article buttons
+   */
+  parsePage() {
+    const pages = this.element.pageCountSpan.textContent.split(' of '); // ha-ha-ha;
+
+    this.page = parseInt(pages[0], 10);
+    this.pagesAll = parseInt(pages[1], 10);
+
+    const olderPostsButtonWidth = this.elements.olderPostsButton.getBoundingClientRect().width;
+    this.element.pageCountSpan.style.marginRight = this.page === this.pagesAll ? olderPostsButtonWidth + 'px' : 0;
+
+    const newerPostsBtnVisible = this.page === 1;
+    const olderPostsBtnVisible = this.page === this.pagesAll;
+
+    this.elements.newerPostsButton.style.display = newerPostsBtnVisible ? 'none' : 'inline-block';
+    this.elements.olderPostsButton.style.display = olderPostsBtnVisible ? 'none' : 'inline-block';
+  }
+}
+
+export default Paginator;

@@ -5,25 +5,35 @@
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
     "csswring": "^5.0.0",
+    "del": "^2.2.1",
     "eslint": "^2.13.1",
     "eslint-config-standard": "^5.3.1",
     "eslint-plugin-promise": "^1.3.2",
     "eslint-plugin-standard": "^1.3.2",
     "gulp": "^3.8.11",
+    "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.5.2",
     "gulp-eslint": "^2.0.0",
+    "gulp-if": "^2.0.1",
     "gulp-postcss": "^6.1.1",
     "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-svg2png": "^2.0.0",
     "gulp-uglify": "^1.4.1",
+    "lodash": "^4.13.1",
     "postcss-inline-svg": "^2.0.1",
     "postcss-scss": "^0.1.8",
     "postcss-svgo": "^2.1.3",
-    "q": "^1.4.1",
+    "run-sequence": "^1.2.2",
     "stylelint": "^6.7.0",
     "stylelint-config-standard": "^9.0.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0",
     "yargs": "^3.9.1"
   },
   "dependencies": {
@@ -32,5 +42,6 @@
   "scripts": {
     "postinstall": "gulp --production",
     "firstinstall": "ln -s $(pwd)/helpers/last_checkin.js ../../../last_checkin.js;\necho 'require(\"./last_checkin\")();\\n' \"$(cat ../../../config.js)\" > ../../../config.js;"
-  }
+  },
+  "private": true
 }

@@ -12,7 +12,7 @@ module.exports = function() {
    */
   (function() {
     var dataFile = fs.readFileSync(customDataFile, { encoding: 'utf-8' });
-    var token = JSON.parse(dataFile).token;
+    var token = JSON.parse(dataFile).tokens.foursquare;
 
     var apiURL = 'https://api.foursquare.com/v2/users/self/checkins?limit=1&v=20160211&oauth_token=' + token;
     var userID = '14010500';
@@ -23,12 +23,8 @@ module.exports = function() {
         if (err) {
           throw err;
         }
-        
-        try {
-          data = JSON.parse(data);
-        } catch (e) {
-          data = { token: token };
-        }
+
+        data = JSON.parse(data);
 
         if (!data.checkin) {
           data.checkin = {
@@ -36,23 +32,29 @@ module.exports = function() {
           };
         }
 
+        var replyToHelper = function(checkinData) {
+          helperCB(o.fn(checkinData));
+        };
+
         var now = Date.now();
         if ((now - cacheTime) > data.checkin.executed) {
           request(apiURL, function(_, res, resData) {
-            resData = JSON.parse(resData);
+            if (!res) {
+              return replyToHelper(data.checkin.data);
+            }
 
-            console.log(resData);
+            resData = JSON.parse(resData);
 
             data.checkin.data = resData.response.checkins.items[0];
             data.checkin.data.userId = userID;
             data.checkin.executed = now;
 
             fs.writeFile(customDataFile, JSON.stringify(data), function() {
-              helperCB(o.fn(data.checkin.data));
+              replyToHelper(data.checkin.data);
             });
           });
         } else {
-          helperCB(o.fn(data.checkin.data));
+          replyToHelper(data.checkin.data);
         }
       });
     });

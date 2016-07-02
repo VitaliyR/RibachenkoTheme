@@ -23,7 +23,7 @@ class Paginator extends Page {
   constructor(...args) {
     super(...args);
 
-    this.buttons.olderPosts.style.opacity = 1;
+    this.elements.olderPostsButton.style.opacity = 1;
 
     this.parsePage();
   }
@@ -78,13 +78,13 @@ class Paginator extends Page {
    * Toggles next/prev article buttons
    */
   parsePage() {
-    const pages = this.element.pageCountSpan.textContent.split(' of '); // ha-ha-ha;
+    const pages = this.elements.pageCountSpan.textContent.split(' of '); // ha-ha-ha;
 
     this.page = parseInt(pages[0], 10);
     this.pagesAll = parseInt(pages[1], 10);
 
     const olderPostsButtonWidth = this.elements.olderPostsButton.getBoundingClientRect().width;
-    this.element.pageCountSpan.style.marginRight = this.page === this.pagesAll ? olderPostsButtonWidth + 'px' : 0;
+    this.elements.pageCountSpan.style.marginRight = this.page === this.pagesAll ? olderPostsButtonWidth + 'px' : 0;
 
     const newerPostsBtnVisible = this.page === 1;
     const olderPostsBtnVisible = this.page === this.pagesAll;

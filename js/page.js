@@ -4,7 +4,8 @@ class Page {
     this.elements = {};
 
     for (let selectorName in this.selectors) {
-      this.elements[selectorName] = this.container.querySelectorAll(this.selectors[selectorName]);
+      let elements = this.container.querySelectorAll(this.selectors[selectorName]);
+      this.elements[selectorName] = elements.length === 1 ? elements[0] : elements;
     }
 
     for (let eventDesc in this.events) {
@@ -19,7 +20,10 @@ class Page {
         eventObj = window[eventObj] || this.elements[eventObj];
 
         if (eventObj) {
-          eventObj.addEventListener(eventName, eventHandler.bind(this));
+          if (typeof eventObj === 'object' && !eventObj.length) {
+            eventObj = [eventObj];
+          }
+          eventObj.forEach((obj) => obj.addEventListener(eventName, eventHandler.bind(this)));
         }
       }
     }

@@ -14,8 +14,7 @@ class CoverController extends Page {
     super(...args);
 
     scrollTo(0, 0);
-    // paginator pls new todo
-    this.paginator = new Paginator();
+    this.paginator = new Paginator(this.container);
 
     if (!utils.isMobile() && !utils.isMac()) {
       this.enableScrolls();

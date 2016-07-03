@@ -28,9 +28,8 @@
 .jspHorizontalBar * {
   margin: 0;
   padding: 0;
-  /* fix IE 7,8 to work with jQuery fadeIn/Out */
-  opacity:inherit;
-  filter:inherit;
+  opacity: inherit; /* fix IE 7,8 to work with jQuery fadeIn/Out */
+  filter: inherit;
 }
 
 .jspDrag {

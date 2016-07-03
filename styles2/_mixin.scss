@@ -10,7 +10,7 @@
 
   // disable animations at all for tag-template
   body.tag-template & {
-    animation-duration: 0.01s;
+    animation-duration: .01s;
     animation-delay: 0s;
   }
 }

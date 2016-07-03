@@ -8,6 +8,7 @@ class Page {
       this.elements[selectorName] = elements.length === 1 ? elements[0] : elements;
     }
 
+    this._handlers = {};
     for (let eventDesc in this.events) {
       const event = eventDesc.split(' ');
       const eventName = event[0];
@@ -23,10 +24,18 @@ class Page {
           if (typeof eventObj === 'object' && !eventObj.length) {
             eventObj = [eventObj];
           }
-          eventObj.forEach((obj) => obj.addEventListener(eventName, eventHandler.bind(this)));
+          const eventDecl = eventHandler.bind(this);
+          eventObj.forEach((obj) => obj.addEventListener(eventName, eventDecl));
         }
       }
     }
+  }
+
+  /**
+   * Unbinds previously binded handlers
+   */
+  unbind() {
+    
   }
 }
 

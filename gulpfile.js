@@ -45,8 +45,8 @@ _.extend(config,
     outputJS: 'app.js',
     outputJSDir: config.outputDir + 'js',
     vendorJS: [
-      'vendor/jquery.mousewheel.js',
-      'vendor/jquery.jscrollpane.min.js',
+      // 'vendor/jquery.mousewheel.js',
+      // 'vendor/jquery.jscrollpane.min.js',
       'vendor/prism.js'
     ],
     outputVendorJS: 'vendor.js'
@@ -140,7 +140,7 @@ var buildJS = function() {
     .pipe(source(config.outputJS))
     .pipe(buffer())
     .pipe(gulpif(!args.production, sourcemaps.init({loadMaps: true})))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulpif(!args.production, sourcemaps.write()))
     .pipe(gulp.dest(config.outputJSDir));
 };

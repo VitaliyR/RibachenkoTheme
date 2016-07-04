@@ -10,7 +10,8 @@ class Paginator extends Page {
       pageCountSpan: 'span.page-number',
       newerPostsButton: 'a.newer-posts',
       olderPostsButton: 'a.older-posts',
-      paginationNav: 'nav.pagination'
+      paginationNav: 'nav.pagination',
+      contentNode: 'main#content'
     };
   }
 
@@ -54,13 +55,13 @@ class Paginator extends Page {
       dom.innerHTML = html;
 
       var pageCountSpan = dom.querySelector('span.page-number');
-      var articlesNode = dom.getElementsByTagName('main')[0];
-      if (articlesNode) {
-        this.pageCountSpan.innerHTML = pageCountSpan.innerHTML;
-        this.parsePage();
+      var articlesNode = dom.getElementsByTagName('main')[1];
 
-        var container = document.querySelector('main .jspPane') || document.querySelector('main');
-        container.innerHTML = articlesNode.innerHTML;
+      if (articlesNode) {
+        this.elements.pageCountSpan.innerHTML = pageCountSpan.innerHTML;
+        this.elements.contentNode.innerHTML = articlesNode.innerHTML;
+
+        this.parsePage();
 
         if (history) {
           history.pushState({}, '', '/page/' + page);

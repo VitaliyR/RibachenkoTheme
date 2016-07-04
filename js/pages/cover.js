@@ -8,6 +8,7 @@ class CoverController extends Page {
 
   get selectors() {
     return {
+      container: '.cover-container',
       scrollContent: '.content, .description',
       sections: '.section-container > section'
     };
@@ -39,6 +40,12 @@ class CoverController extends Page {
     if (navigator.appVersion.match(/MSIE/)) {
       this.matchSectionsHeight();
     }
+
+    const container = this.elements.container;
+    const containerHeight = container.getBoundingClientRect().height;
+
+    // todo
+    // container.style.height = window.innerHeight > containerHeight ? (window.innerHeight + 'px') : 'auto';
   }
 
   matchSectionsHeight() {

@@ -16,7 +16,7 @@ class Page {
       let eventObj = event[1];
 
       if (eventName === 'init') {
-        eventHandler();
+        eventHandler.apply(this);
       } else {
         eventObj = window[eventObj] || this.elements[eventObj];
 
@@ -35,7 +35,7 @@ class Page {
    * Unbinds previously binded handlers
    */
   unbind() {
-    
+
   }
 }
 

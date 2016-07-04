@@ -31,8 +31,9 @@ class Paginator extends Page {
 
   handleNavigationClick(event) {
     event.preventDefault();
-    var target = event.target.tagName.toLowerCase() === 'span' ? event.target.parentElement : event.target;
-    var direction = parseInt(target.getAttribute('data-direction'), 10);
+
+    const target = event.target.tagName.toLowerCase() === 'span' ? event.target.parentElement : event.target;
+    const direction = parseInt(target.getAttribute('data-direction'), 10);
 
     if (!isNaN(direction)) {
       this.getPage(this.page + direction || 1);

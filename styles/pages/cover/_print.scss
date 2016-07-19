@@ -6,7 +6,7 @@
 
   .cover {
     height: auto;
-    color: #000000;
+    color: #000;
 
     header {
       display: inline-block;
@@ -48,7 +48,7 @@
         line-height: inherit !important;
       }
       a {
-        color: #000000;
+        color: #000;
 
         &:before {
           display: inline;
@@ -86,26 +86,26 @@
 
     .blog-stories {
       .date {
-        color: #000000;
+        color: #000;
       }
 
       a {
-        color: #000000;
+        color: #000;
       }
     }
 
   }
 
-  .cover-container  {
+  .cover-container {
     height: auto;
     background-image: none !important;
 
     & + .site-footer {
-      color: #000000;
+      color: #000;
       margin: 30px 0;
 
       a {
-        color: #000000;
+        color: #000;
       }
     }
   }

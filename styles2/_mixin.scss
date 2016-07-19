@@ -5,6 +5,7 @@
 
   @if $delay {
     animation-delay: $delay;
+
     @include animation-delay($delay);
   }
 

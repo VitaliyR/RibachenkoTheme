@@ -47,13 +47,13 @@ h1 {
       &:before {
         width: $icon-social-size-hover;
         height: $icon-social-size-hover;
-        background-color: rgba(255, 255, 255, 0.175);
+        background-color: rgba(255, 255, 255, .175);
       }
     }
   }
 
   a:before {
-    border: 1px solid #ffffff;
+    border: 1px solid #fff;
     border-radius: 100%;
     display: block;
     width: $icon-social-size;

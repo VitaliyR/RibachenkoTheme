@@ -17,7 +17,7 @@ section {
     flex: 1;
     display: flex;
     flex-flow: column nowrap;
-    border: 1px dashed #ffffff;
+    border: 1px dashed #fff;
     border-radius: 5px;
     height: 100%;
     padding: 0 1.5rem 1.5rem;
@@ -44,12 +44,13 @@ h2 {
 }
 
 nav {
-  display: inline-block;
   float: right;
   margin-top: 1.5rem;
 }
 
-h3, h4, time {
+h3,
+h4,
+time {
   font-size: 1rem;
   margin: 0;
   text-overflow: ellipsis;
@@ -63,7 +64,7 @@ h3 {
 }
 
 .date {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, .75);
 }
 
 

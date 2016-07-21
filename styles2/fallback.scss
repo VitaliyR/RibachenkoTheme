@@ -40,6 +40,29 @@
   }
 }
 
+.read-next {
+  display: table;
+  table-layout: fixed;
+  border-spacing: 15px 0;
+  width: $post-width/2;
+
+  &.prev.next {
+    width: $post-width;
+  }
+
+  .read-next-story {
+    display: table-cell;
+    width: 50%;
+    max-width: 50%;
+    vertical-align: middle;
+
+    &:before {
+      vertical-align: top;
+      height: $read-next-height - 1;
+    }
+  }
+}
+
 .icon {
   &.icon-twitter {
     background-image: url(../res/twitter.png);
@@ -75,6 +98,42 @@
         float: none;
         width: 100%;
       }
+    }
+  }
+}
+
+@media (max-width: $post-width) {
+  .read-next {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+
+    .read-next-story {
+      max-width: none;
+      display: table;
+      table-layout: fixed;
+      margin: 1rem auto;
+      width: 75%;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      h2 {
+        margin-top: 3rem;
+      }
+    }
+  }
+}
+
+@media (max-width: $post-mobile-width) {
+  .read-next {
+    .read-next-story {
+      width: 100%;
     }
   }
 }

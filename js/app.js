@@ -42,10 +42,12 @@ class App extends Page {
       }
     ];
 
-    this.currentController = this.controller;
-    new this.currentController(this.container);
+    const Controller = this.controller;
+
+    if (Controller) {
+      this.currentController = new Controller(this.container);
+    }
   }
-  
 }
 
 /**

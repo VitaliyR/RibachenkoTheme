@@ -1,26 +1,16 @@
 .icon {
-  &.icon-twitter {
-    background-image: svg-load('res/twitter.svg');
-  }
+  background-repeat: no-repeat;
+  $icons: ('twitter', 'facebook', 'vk', 'github', 'linkedin', 'email');
 
-  &.icon-facebook {
-    background-image: svg-load('res/facebook.svg');
-  }
+  @for $i from 1 through length($icons) {
+    $icon: nth($icons, $i);
 
-  &.icon-vk {
-    background-image: svg-load('res/vk.svg');
-  }
+    &.icon-#{$icon} {
+      background-image: svg-load('res/#{$icon}.svg', fill=#fff, stroke=#fff);
 
-  &.icon-github {
-    background-image: svg-load('res/github.svg');
-  }
-
-  &.icon-linkedin {
-    background-image: svg-load('res/linkedin.svg');
-  }
-
-  &.icon-email {
-    background-image: svg-load('res/email.svg');
+      &.icon-black {
+        background-image: svg-load('res/#{$icon}.svg', fill=#000, stroke=#000);
+      }
+    }
   }
 }
-

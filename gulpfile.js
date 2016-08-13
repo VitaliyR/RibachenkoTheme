@@ -30,7 +30,11 @@ var args = require('yargs').argv;
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
+var clone = require('gulp-clone');
+var cheerio = require('gulp-cheerio');
+var rename = require('gulp-rename');
 var del = require('del');
+var es = require('event-stream');
 var _ = require('lodash');
 
 // PATHS
@@ -61,8 +65,9 @@ _.extend(config,
     outputVendorCSS: 'vendor.css'
   },
   {
-    filesIcons: 'res/**/*.svg',
-    outputIconsDir: config.outputDir + 'res'
+    filesIcons: 'res/*.svg',
+    outputIconsDir: config.outputDir + 'res',
+    iconColors: [['white', '#ffffff'], ['black', '#000000']]
   }
 );
 
@@ -146,9 +151,24 @@ var buildJS = function() {
 };
 
 var fallbackIcons = function() {
-  return gulp.src(config.filesIcons)
-    .pipe(svg2png())
-    .pipe(gulp.dest(config.outputIconsDir));
+  var files = gulp.src(config.filesIcons);
+
+  var streams = config.iconColors.map(colors => {
+    const colorName = colors[0];
+    const colorValue = colors[1];
+
+    return files
+      .pipe(clone())
+      .pipe(cheerio(($) => {
+        const svg = $('svg');
+        const svgStyle = svg.attr('style');
+        svg.attr('style', `${svgStyle} fill: ${colorValue};`);
+      }))
+      .pipe(svg2png())
+      .pipe(rename({ suffix: `-${colorName}` }));
+  });
+
+  return es.merge.apply(this, streams).pipe(gulp.dest(config.outputIconsDir));
 };
 
 var clean = function() {

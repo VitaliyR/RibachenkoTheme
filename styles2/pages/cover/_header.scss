@@ -19,6 +19,8 @@ h1 {
 }
 
 .social {
+  $transition: all .2s ease-in-out;
+
   text-align: center;
   height: 5.3rem;
   display: flex;
@@ -40,8 +42,10 @@ h1 {
     background-position: 50%;
     display: inline-block;
     margin: 10px;
+    transition: $transition;
 
     &:hover {
+      background-size: $icon-social-font-size-hover;
 
       &:before {
         width: $icon-social-size-hover;
@@ -58,7 +62,7 @@ h1 {
     width: $icon-social-size;
     height: $icon-social-size;
     content: '';
-    transition: all .2s ease-in-out;
+    transition: $transition;
   }
 }
 

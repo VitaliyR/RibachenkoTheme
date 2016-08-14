@@ -40,9 +40,13 @@ h1 {
     border-bottom: 0;
     background-size: $icon-social-font-size;
     background-position: 50%;
-    display: inline-block;
     margin: 10px;
     transition: $transition;
+    width: $icon-social-size-hover;
+    height: $icon-social-size-hover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       background-size: $icon-social-font-size-hover;

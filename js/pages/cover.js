@@ -1,28 +1,25 @@
-import config from '../config';
+var config = require('../config');
 
-import Page from '../page';
-import Paginator from '../paginator';
-import utils from '../utils';
+var Page = require('../core/page');
+var Paginator = require('./paginator');
+var utils = require('../lib/utils');
 
-class CoverController extends Page {
+module.exports = Page.extend({
 
-  get selectors() {
-    return {
-      container: '.cover-container',
-      scrollContent: '.content, .description',
-      sections: '.section-container > section'
-    };
-  }
-  
-  get events() {
-    return {
-      'init': this.handleResize,
-      'resize window': this.handleResize
-    };
-  }
+  selectors: {
+    container: '.cover-container',
+    scrollContent: '.content, .description',
+    sections: '.section-container > section'
+  },
 
-  constructor(...args) {
-    super(...args);
+  events: {
+    'init': 'handleResize',
+    'resize window': 'handleResize',
+    'articles:update window': 'articlesUpdate'
+  },
+
+  constructor: function() {
+    this.constructor.__super__.constructor.apply(this, arguments);
 
     scrollTo(0, 0);
 
@@ -31,24 +28,24 @@ class CoverController extends Page {
     if (!utils.isMobile() && !utils.isMac()) {
       this.enableScrolls();
     }
-  }
+  },
 
   /**
    * Resize handler, called on window resize
    */
-  handleResize() {
+  handleResize: function() {
     if (navigator.appVersion.match(/MSIE/)) {
       this.matchSectionsHeight();
     }
 
-    const container = this.elements.container;
-    const containerHeight = container.getBoundingClientRect().height;
+    var container = this.elements.container;
+    var containerHeight = container.getBoundingClientRect().height;
 
     // todo
     // container.style.height = window.innerHeight > containerHeight ? (window.innerHeight + 'px') : 'auto';
-  }
+  },
 
-  matchSectionsHeight() {
+  matchSectionsHeight: function() {
     if (innerWidth < config.mobile_width || innerHeight < config.mobile_height) {
       return this.clearSectionsHeight();
     }
@@ -65,19 +62,19 @@ class CoverController extends Page {
       var section = this.elements.sections[i];
       section.style.height = maxHeight + 'px';
     }
-  }
+  },
 
-  clearSectionsHeight() {
+  clearSectionsHeight: function() {
     for (var i = 0; i < this.elements.sections.length; i++) {
       var section = this.elements.sections[i];
       section.style.height = '';
     }
-  }
+  },
 
   /**
    * @uses jQuery
    */
-  enableScrolls() {
+  enableScrolls: function() {
     var barsSelector = '.jspHorizontalBar, .jspVerticalBar';
     var $scrollContent = $(this.elements.scrollContent);
 
@@ -92,7 +89,7 @@ class CoverController extends Page {
         contentWidth: '0px'
       })
       .scroll(
-        function () {
+        function() {
           var $self = $(this);
           $self.find(barsSelector).stop().show().css('opacity', 0.9);
 
@@ -104,17 +101,15 @@ class CoverController extends Page {
         }
       );
 
-    $('body').on('articlesUpdated', function () {
-      $scrollContent.each(function () {
-        $(this).data('jsp').reinitialise();
-      });
-    });
-
-    $scrollContent.each(function () {
+    $scrollContent.each(function() {
       var jsp = $(this).data('jsp');
       jsp && jsp.reinitialise();
     });
-  }
-}
+  },
 
-export default CoverController;
+  articlesUpdate: function() {
+    // $scrollContent.each(function() {
+    //     $(this).data('jsp').reinitialise();
+    //   });
+  }
+});

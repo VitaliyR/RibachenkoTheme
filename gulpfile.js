@@ -33,7 +33,10 @@ var sourcemaps = require('gulp-sourcemaps');
 var clone = require('gulp-clone');
 var cheerio = require('gulp-cheerio');
 var rename = require('gulp-rename');
+var globby = require('globby');
+var gutil = require('gulp-util');
 var del = require('del');
+var through = require('through2');
 var es = require('event-stream');
 var _ = require('lodash');
 
@@ -138,16 +141,37 @@ var lintJS = function() {
 };
 
 var buildJS = function() {
-  return getBundler()
-    .transform(babelify, {presets: ['es2015']})
-    .bundle()
-    .on('error', function(err) { console.log('Error: ' + err.message); this.emit('end'); })
+  var bundledStream = through();
+  var log = function(err) {
+    gutil.log(
+      gutil.colors.red('Browserify compile error:'),
+      err.message,
+      gutil.colors.cyan('Line number:'),
+      err.lineNumber
+    );
+  };
+
+  bundledStream
     .pipe(source(config.outputJS))
     .pipe(buffer())
-    .pipe(gulpif(!args.production, sourcemaps.init({loadMaps: true})))
-    // .pipe(uglify())
-    .pipe(gulpif(!args.production, sourcemaps.write()))
+    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(uglify())
+    .on('error', log)
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.outputJSDir));
+
+  globby([config.entryJS]).then(function(entries) {
+    var b = browserify({
+      entries: entries,
+      debug: !args.production
+    });
+
+    b.bundle().pipe(bundledStream);
+  }).catch(function(err) {
+    bundledStream.emit('error', err);
+  });
+
+  return bundledStream;
 };
 
 var fallbackIcons = function() {

@@ -1,5 +1,5 @@
-export default {
-  isMobile() {
+module.exports = {
+  isMobile: function() {
     var isMobile = false;
     // device detection
     if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) ||
@@ -11,7 +11,41 @@ export default {
    * Detects if UA contains Mac OS X
    * @return {boolean}
    */
-  isMac() {
+  isMac: function() {
     return /Mac/.test(navigator.platform);
+  },
+
+  /**
+   * Make ajax request
+   * @param {Object} opts
+   *  @param {Object} [opts.ctx=this]
+   *  @param {string} [opts.method=GET]
+   *  @param {string} opts.url
+   *  @param {Function} [opts.success=Function.prototype]
+   *  @param {Function} [opts.error=Function.prototype]
+   */
+  request: function(opts) {
+    var request = new XMLHttpRequest();
+    var method = opts.method || 'GET';
+    var ctx = opts.ctx;
+
+    request.open(method, opts.url, true);
+
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+        var json;
+        try {
+          json = JSON.parse(request.responseText);
+        } catch (e) {}
+
+        opts.success && opts.success.apply(ctx || this, [json || request.responseText, request]);
+      } else {
+        opts.error && opts.error.apply(ctx || this, [request]);
+      }
+    };
+
+    request.onerror = opts.error || Function.prototype;
+
+    request.send();
   }
 };

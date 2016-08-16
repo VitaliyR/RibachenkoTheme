@@ -1,20 +1,45 @@
-import Page from './page';
+var Page = require('./core/page');
+var Cover = require('./pages/cover');
 
-import Cover from './pages/cover';
+var App = Page.extend({
+  controllers: [
+    {
+      controller: Cover,
+      classList: [
+        'home-template',
+        'tag-template',
+        'archive-template'
+      ]
+    }
+  ],
 
-class App extends Page {
+  /**
+   * @constructor
+   * @override
+   */
+  constructor: function() {
+    this.constructor.__super__.constructor.apply(this, arguments);
+
+    var Controller = this.getController();
+
+    if (Controller) {
+      this.currentController = new Controller(this.container);
+    }
+  },
 
   /**
    * Returns controller for the current page of application
-   * @returns {*}
    */
-  get controller() {
-    const documentClassList = Array.from(document.body.classList);
+  getController: function() {
+    var documentClassList = Array.prototype.slice.call(document.body.classList);
+    var controller;
 
-    let controller;
+    for (var controllerIndex in this.controllers) {
+      var cont = this.controllers[controllerIndex];
+      var thisController = documentClassList.some(function(v) {
+        return cont.classList.indexOf(v) !== -1;
+      }, this);
 
-    for (let cont of this.controllers) {
-      let thisController = documentClassList.some((v) => cont.classList.indexOf(v) !== -1);
       if (thisController) {
         controller = cont.controller;
         break;
@@ -23,36 +48,13 @@ class App extends Page {
 
     return controller;
   }
+});
 
-  /**
-   * @constructor
-   * @override
-   */
-  constructor(...args) {
-    super(...args);
-
-    this.controllers = [
-      {
-        controller: Cover,
-        classList: [
-          'home-template',
-          'tag-template',
-          'archive-template'
-        ]
-      }
-    ];
-
-    const Controller = this.controller;
-
-    if (Controller) {
-      this.currentController = new Controller(this.container);
-    }
-  }
-}
+document.addEventListener('DOMContentLoaded', function() {
+  new App(document.body);
+});
 
 /**
  * Exports
  */
-document.addEventListener('DOMContentLoaded', function () {
-  new App(document.body);
-});
+module.exports = App;

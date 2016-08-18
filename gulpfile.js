@@ -59,7 +59,7 @@ _.extend(config,
     outputVendorJS: 'vendor.js'
   },
   {
-    filesCSS: 'styles2/**/*.scss',
+    filesCSS: 'styles/**/*.scss',
     outputCSSDir: config.outputDir + 'css',
     vendorCSS: [
       'node_modules/normalize.css/normalize.css',

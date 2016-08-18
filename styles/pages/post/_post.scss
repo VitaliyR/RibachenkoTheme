@@ -4,7 +4,7 @@ $header-margin-padding-mobile: 30px 0;
 .post-page {
 
   a {
-    color: #000000;
+    color: #000;
   }
 
   .post-head {
@@ -12,21 +12,27 @@ $header-margin-padding-mobile: 30px 0;
     padding: $header-margin-padding;
     position: relative;
     background-size: cover;
+    background-position: 50% 0;
+    margin-bottom: 2.5rem;
 
-    &:before{
+    &:before {
       display: block;
       content: ' ';
-      background-color: rgba(255, 255, 255, 0.65);
+      background-color: rgba(255, 255, 255, .65);
       position: absolute;
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
-      transition: all 0.5s ease;
+      transition: all .5s ease;
     }
 
-    &.no-cover:before {
-      content: '';
+    &.no-cover {
+      margin-bottom: 0;
+
+      &:before {
+        content: '';
+      }
     }
 
     a {
@@ -49,7 +55,7 @@ $header-margin-padding-mobile: 30px 0;
       width: 100%;
       height: 50%;
       top: 0;
-      border-bottom: 1px solid #EBF2F6;
+      border-bottom: 1px solid #ebf2f6;
       z-index: 1;
     }
 
@@ -58,14 +64,14 @@ $header-margin-padding-mobile: 30px 0;
       height: 150px;
       position: relative;
       z-index: 2;
-      @include border-radius(100px);
+      border-radius: 100%;
     }
   }
 
   .blog-title {
     text-transform: uppercase;
     margin: 0;
-    color: #000000;
+    color: #000;
     position: relative;
     margin-top: 1rem;
   }
@@ -84,122 +90,49 @@ $header-margin-padding-mobile: 30px 0;
   }
 
   .post-footer {
-    border-top: 1px solid #EBF2F6;
+    border-top: 1px solid #ebf2f6;
     position: relative;
-    margin: $share-font-size*1.25 0 0 0;
-    padding: $share-font-size*0.75 0 0 0;
+    margin: $share-icon-size * 1.25 0 0 0;
+    padding: $share-icon-size * .75 0 0 0;
   }
 
   .share {
     position: absolute;
     left: 50%;
-    margin-left: (-1*($share-font-size * $share-count)/2) - ($share-margin * ($share-count - 1));
-    background: #ffffff;
-    top: -($share-font-size/2);
+    margin-left: (-1*($share-icon-size * $share-count)/2) - ($share-margin * ($share-count - 1));
+    background: #fff;
+    top: -($share-icon-size/2);
 
     a {
-      color: #000000;
+      color: #000;
       border: 0;
-      opacity: 0.5;
-      font-size: 40px;
-      margin: 0 $share-margin;
-      @include transition(all 0.5s ease-in-out);
+      opacity: .5;
+      background-size: $share-icon-size;
+      width: $share-icon-size;
+      height: $share-icon-size;
+      transition: all .5s ease-in-out;
+      display: inline-block;
 
-      &:hover{
+      &:hover {
         opacity: 1;
       }
     }
   }
 
   + .site-footer {
+    margin: 1rem 0;
     text-align: center;
-    margin: 15px 0;
-    line-height: 1rem;
+    line-height: 1.2rem;
+    font-size: .75rem;
 
     a {
-      color: #000000;
+      color: #000;
     }
   }
 
 }
 
-// READ NEXT BLOCK
-
-.read-next {
-  margin: 20px auto;
-  width: $post-width;
-  padding: $post-padding;
-
-  h2,
-  p {
-    text-align: center;
-    position: relative;
-  }
-
-  .read-next-container {
-    display: table;
-    min-width: 50%;
-    margin: 0 auto;
-    border-collapse: separate;
-    border-spacing: 25px 0;
-  }
-
-  .read-next-story {
-    border: 1px solid #DDDDDD;
-    height: $read-next-height;
-    width: 50%;
-    margin: 10px auto;
-    position: relative;
-    display: table-cell;
-    box-sizing: border-box;
-    vertical-align: middle;
-
-    @include border-radius(5px);
-
-    &:before{
-      display: block;
-      content: ' ';
-      background-color: rgba(255, 255, 255, 0.5);
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      transition: all 0.5s ease;
-    }
-
-    &:hover:before{
-      background-color: rgba(255, 255, 255, 0.65);
-    }
-  }
-
-  .post-wrapper {
-    padding: 30px 20px;
-  }
-
-  .notice,
-  .date {
-    position: absolute;
-    color: #373737;
-  }
-
-  .notice {
-    left: 20px;
-    top: 10px;
-  }
-
-  .date {
-    bottom: 10px;
-    left: 20px;
-  }
-
-  .next .notice,
-  .next .date {
-    left: initial;
-    right: 20px;
-  }
-
-}
+@import "read-next";
 
 @media (max-width: $post-width) {
   .post-page {
@@ -210,20 +143,6 @@ $header-margin-padding-mobile: 30px 0;
       img {
         max-width: 100%;
       }
-    }
-  }
-
-  .read-next {
-    width: auto;
-
-    .read-next-container {
-      display: block;
-    }
-
-    .read-next-story {
-      display: block;
-      height: auto;
-      width: 80%;
     }
   }
 }
@@ -243,13 +162,6 @@ $header-margin-padding-mobile: 30px 0;
     }
 
   }
-
-  .read-next {
-    .read-next-story {
-      height: auto;
-      width: 100%;
-    }
-  }
 }
 
-@import 'print';
+@import "print";

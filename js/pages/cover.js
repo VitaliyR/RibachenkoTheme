@@ -38,8 +38,8 @@ module.exports = Page.extend({
       this.matchSectionsHeight();
     }
 
-    var container = this.elements.container;
-    var containerHeight = container.getBoundingClientRect().height;
+    // var container = this.elements.container;
+    // var containerHeight = container.getBoundingClientRect().height;
 
     // todo
     // container.style.height = window.innerHeight > containerHeight ? (window.innerHeight + 'px') : 'auto';
@@ -73,6 +73,7 @@ module.exports = Page.extend({
 
   /**
    * @uses jQuery
+   * @todo remove?
    */
   enableScrolls: function() {
     var barsSelector = '.jspHorizontalBar, .jspVerticalBar';

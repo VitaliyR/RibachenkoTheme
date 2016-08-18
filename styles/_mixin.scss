@@ -1,78 +1,18 @@
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  border-radius: $radius;
-}
-
-@mixin box-shadow($params) {
-  -webkit-box-shadow: $params;
-  -moz-box-shadow: $params;
-  box-shadow: $params;
-}
-
-@mixin transition($params) {
-  -webkit-transition: $params;
-  -moz-transition: $params;
-  -ms-transition: $params;
-  -o-transition: $params;
-  transition: $params;
-}
-
-@mixin transform($params) {
-  -webkit-transform: $params;
-  -moz-transform: $params;
-  -ms-transform: $params;
-  -o-transform: $params;
-  transform: $params;
-}
-
-@mixin animation-delay($params) {
-  -webkit-animation-delay: $params;
-  -moz-animation-delay: $params;
-  -ms-animation-delay: $params;
-  -o-animation-delay: $params;
-  animation-delay: $params;
-}
-
-@mixin animation-duration($params) {
-  -webkit-animation-duration: $params;
-  -moz-animation-duration: $params;
-  -o-animation-duration: $params;
-  animation-duration: $params;
-}
-
 @mixin animation($params, $delay:false) {
   @if $params {
-    -webkit-animation: $params;
-    -moz-animation: $params;
-    -ms-animation: $params;
-    -o-animation: $params;
     animation: $params;
   }
 
   @if $delay {
+    animation-delay: $delay;
+
     @include animation-delay($delay);
   }
 
   // disable animations at all for tag-template
   body.tag-template & {
-    animation-duration: 0.01s;
+    animation-duration: .01s;
     animation-delay: 0s;
-  }
-}
-
-@mixin keyframes($name) {
-  @-webkit-keyframes #{$name} {
-    @content;
-  }
-  @-moz-keyframes #{$name} {
-    @content;
-  }
-  @-ms-keyframes #{$name} {
-    @content;
-  }
-  @keyframes #{$name} {
-    @content;
   }
 }
 

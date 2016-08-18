@@ -12,8 +12,11 @@ module.exports = Page.extend({
   },
 
   events: {
-    'click paginationNav': 'handleNavigationClick'
+    'click paginationNav': 'handleNavigationClick',
+    'popstate window': 'handleHistory'
   },
+
+  pageRegexp: /page\/(\d+)/,
 
   constructor: function() {
     this.constructor.__super__.constructor.apply(this, arguments);
@@ -44,7 +47,7 @@ module.exports = Page.extend({
       return;
     }
 
-    var url = page === 1 ? '/' : '/page/' + page;
+    var url = this.getPageUrl(page);
     utils.request({
       ctx: this,
       url: url,
@@ -61,7 +64,7 @@ module.exports = Page.extend({
 
           this.parsePage();
 
-          if (history) {
+          if (history && url !== this.getPageUrl()) {
             history.pushState({}, '', url);
           }
 
@@ -69,6 +72,19 @@ module.exports = Page.extend({
         }
       }
     });
+  },
+
+  /**
+   * Returns page url
+   * @param {number} [page=]
+   * @returns {string}
+   */
+  getPageUrl: function(page) {
+    if (page) {
+      return page === 1 ? '/' : ('/page/' + page);
+    } else {
+      return location.pathname;
+    }
   },
 
   /**
@@ -89,5 +105,14 @@ module.exports = Page.extend({
 
     this.elements.newerPostsButton.style.display = newerPostsBtnVisible ? 'none' : 'inline-block';
     this.elements.olderPostsButton.style.display = olderPostsBtnVisible ? 'none' : 'inline-block';
+  },
+
+  /**
+   * Handles HTML5 history
+   */
+  handleHistory: function() {
+    var pageLocation = location.pathname;
+    var page = this.pageRegexp.exec(pageLocation);
+    this.getPage(page && page.length ? page[1] : 1);
   }
 });

@@ -1,8 +1,4 @@
-//        twitt, f, vk    , git , link , @ ,top, content
-$delays: (.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s);
-
-
-@include keyframes(appear) {
+@keyframes appear {
   0% {
     opacity: 0;
   }
@@ -12,52 +8,22 @@ $delays: (.75s, 1s, 1.25s, 1.5s, 1.75s, 2s, 3s, 3.5s);
   }
 }
 
-@include keyframes(appear-footer) {
+@keyframes cover {
   0% {
-    opacity: 0;
-  }
-
-  1% {
-    padding: 10px 0;
+    justify-content: center;
   }
 
   100% {
-    height: auto;
-    opacity: 1;
-    overflow: visible;
-    padding: 10px 0;
+    justify-content: flex-start;
   }
 }
 
-@include keyframes(appear-cover) {
+@keyframes cover-support {
   0% {
-    opacity: 0;
+    display: none;
   }
 
   100% {
-    opacity: 1;
-  }
-}
-
-@include keyframes(header) {
-  0% {
-    @include transform(translateY(50%));
-  }
-
-  100% {
-    @include transform(translateY(0));
-  }
-}
-
-
-@include keyframes(content) {
-  0% {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  100% {
-    opacity: 1;
-    visibility: visible;
+    display: block;
   }
 }

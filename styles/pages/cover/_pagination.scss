@@ -2,7 +2,7 @@ $pagination-arrow-size: 22px;
 
 .pagination {
   a {
-    @include border-radius(100px);
+    border-radius: 100%;
 
     border: 1px solid $pagination-color;
     display: inline-block;
@@ -15,8 +15,7 @@ $pagination-arrow-size: 22px;
       background-color: rgba(255, 255, 255, .175);
     }
 
-    // fff
-    @media screen and (-webkit-min-device-pixel-ratio:0) {
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
       line-height: $pagination-arrow-size;
     }
   }

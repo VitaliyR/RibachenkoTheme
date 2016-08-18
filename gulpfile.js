@@ -177,19 +177,19 @@ var buildJS = function() {
 var fallbackIcons = function() {
   var files = gulp.src(config.filesIcons);
 
-  var streams = config.iconColors.map(colors => {
-    const colorName = colors[0];
-    const colorValue = colors[1];
+  var streams = config.iconColors.map(function(colors) {
+    var colorName = colors[0];
+    var colorValue = colors[1];
 
     return files
       .pipe(clone())
-      .pipe(cheerio(($) => {
-        const svg = $('svg');
-        const svgStyle = svg.attr('style');
-        svg.attr('style', `${svgStyle} fill: ${colorValue};`);
+      .pipe(cheerio(function($) {
+        var svg = $('svg');
+        var svgStyle = svg.attr('style');
+        svg.attr('style', svgStyle + 'fill: ' + colorValue);
       }))
       .pipe(svg2png())
-      .pipe(rename({ suffix: `-${colorName}` }));
+      .pipe(rename({ suffix: '-' + colorName }));
   });
 
   return es.merge.apply(this, streams).pipe(gulp.dest(config.outputIconsDir));

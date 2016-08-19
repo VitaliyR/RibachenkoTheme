@@ -1,3 +1,6 @@
+$cover-icons-delays: (.75s, 1s, 1.25s, 1.5s, 1.75s, 2s);
+$cover-content-delay: 2s;
+
 @keyframes appear {
   0% {
     opacity: 0;
@@ -8,23 +11,27 @@
   }
 }
 
-@keyframes cover {
+@keyframes appear-top {
   0% {
-    justify-content: center;
+    top: -25px;
+    opacity: 0;
   }
 
   100% {
-    justify-content: flex-start;
+    top: 0;
+    opacity: 1;
   }
 }
 
-@keyframes cover-support {
+@keyframes appear-bottom {
   0% {
-    display: none;
+    top: 25px;
+    opacity: 0;
   }
 
   100% {
-    display: block;
+    top: 0;
+    opacity: 1;
   }
 }
 

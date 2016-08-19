@@ -119,20 +119,6 @@ var vendorJS = function() {
       .pipe(gulp.dest(config.outputJSDir));
 };
 
-var bundler;
-var getBundler = function() {
-  if (!bundler) {
-    bundler = watchify(browserify({
-      entries: config.entryJS,
-      extensions: ['.js'],
-      debug: !args.production,
-      cache: {},
-      packageCache: {}
-    }));
-  }
-  return bundler;
-};
-
 var lintJS = function() {
   return gulp
     .src(config.filesJS)
@@ -155,7 +141,7 @@ var buildJS = function() {
     .pipe(source(config.outputJS))
     .pipe(buffer())
     .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(uglify())
+    // .pipe(uglify())
     .on('error', log)
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.outputJSDir));
@@ -220,11 +206,8 @@ var watchTask = function() {
   gulp.watch(config.filesCSS, ['CSS']);
   gulp.watch(config.vendorCSS, ['vendorCSS']);
   gulp.watch(config.vendorJS, ['vendorJS']);
+  gulp.watch(config.filesJS, ['JS']);
   gulp.watch(config.filesIcons, ['fallbackIcons']);
-
-  getBundler().on('update', function() {
-    runSequence('lintJS', 'buildJS');
-  });
 };
 
 /**
@@ -235,7 +218,7 @@ gulp.task('vendorJS', vendorJS);
 gulp.task('CSS', CSS);
 gulp.task('lintJS', lintJS);
 gulp.task('buildJS', buildJS);
-gulp.task('JS', ['lintJS', 'buildJS'], terminate);
+gulp.task('JS', ['lintJS', 'buildJS']);
 gulp.task('fallbackIcons', fallbackIcons);
 
 gulp.task('clean', clean);

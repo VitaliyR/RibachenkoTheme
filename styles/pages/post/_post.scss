@@ -139,6 +139,7 @@ $header-margin-padding-mobile: 30px 0;
 
     .content {
       width: auto;
+      padding: 0 2rem;
 
       img {
         max-width: 100%;
@@ -152,6 +153,10 @@ $header-margin-padding-mobile: 30px 0;
 
     .post-head {
       padding: $header-margin-padding-mobile;
+    }
+
+    .content {
+      padding: 0 1rem;
     }
 
     .blog-logo {

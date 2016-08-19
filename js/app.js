@@ -1,6 +1,8 @@
 var Page = require('./core/page');
 var Cover = require('./pages/cover');
 
+var utils = require('./lib/utils');
+
 var App = Page.extend({
   controllers: [
     {
@@ -19,6 +21,7 @@ var App = Page.extend({
    */
   constructor: function() {
     this.constructor.__super__.constructor.apply(this, arguments);
+    this.checkIntegrity();
 
     var Controller = this.getController();
 
@@ -31,7 +34,9 @@ var App = Page.extend({
    * Returns controller for the current page of application
    */
   getController: function() {
-    var documentClassList = Array.prototype.slice.call(document.body.classList);
+    var body = document.body;
+    var classList = body.classList || body.className.split(' ');
+    var documentClassList = Array.prototype.slice.call(classList);
     var controller;
 
     for (var controllerIndex in this.controllers) {
@@ -47,10 +52,17 @@ var App = Page.extend({
     }
 
     return controller;
+  },
+
+  checkIntegrity: function() {
+    if (navigator.appVersion.match(/MSIE/)) {
+      utils.eventsPolyfill();
+    }
   }
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+  // eslint-disable-next-line no-new
   new App(document.body);
 });
 

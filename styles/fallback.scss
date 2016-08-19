@@ -5,6 +5,47 @@
   height: auto;
   min-height: 100%;
 
+  > header {
+    .social {
+      display: table;
+      margin: 0 auto;
+      table-layout: fixed;
+
+      a {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        width: $icon-social-size-hover + 1rem;
+        height: $icon-social-size-hover + 1rem;
+
+        &:before {
+          margin: 0 auto;
+        }
+      }
+    }
+
+    @media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
+      .social {
+        display: block;
+
+        a {
+          display: inline-block;
+          width: $icon-social-size-hover;
+          height: $icon-social-size-hover;
+          margin: .2rem;
+
+          &:before {
+            margin-top: ($icon-social-size-hover - $icon-social-size) / 2;
+          }
+
+          &:hover:before {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+
   > .section-container {
     display: table;
     table-layout: fixed;
@@ -13,19 +54,9 @@
     margin: 0 auto;
 
     section {
-      //display: block;
-      //width: 50%;
       height: 100%;
       display: table-cell;
       width: 50%;
-
-      &:first-child {
-        //float: left;
-      }
-
-      &:last-child {
-        //float: right;
-      }
 
       > article {
         display: block;
@@ -116,6 +147,12 @@
     &.icon-black {
       background-image: url(../res/email-black.png);
     }
+  }
+}
+
+@media (max-width: $cover-mobile-width) {
+  .cover-container {
+    min-height: 100vh;
   }
 }
 

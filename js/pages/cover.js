@@ -35,19 +35,19 @@ module.exports = Page.extend({
    */
   handleResize: function() {
     if (navigator.appVersion.match(/MSIE/)) {
-      this.matchSectionsHeight();
+      setTimeout(this.matchSectionsHeight.bind(this), 100);
     }
-
-    // var container = this.elements.container;
-    // var containerHeight = container.getBoundingClientRect().height;
-
-    // todo
-    // container.style.height = window.innerHeight > containerHeight ? (window.innerHeight + 'px') : 'auto';
   },
 
+  /**
+   * IE support
+   * @returns {*}
+   */
   matchSectionsHeight: function() {
+    this.clearSectionsHeight();
+
     if (innerWidth < config.mobile_width || innerHeight < config.mobile_height) {
-      return this.clearSectionsHeight();
+      return;
     }
 
     var maxHeight = Array.prototype.reduce.apply(this.elements.sections, [
@@ -73,10 +73,11 @@ module.exports = Page.extend({
 
   /**
    * @uses jQuery
-   * @todo remove?
+   * @todo
    */
   enableScrolls: function() {
     var barsSelector = '.jspHorizontalBar, .jspVerticalBar';
+    return;
     var $scrollContent = $(this.elements.scrollContent);
 
     this._timeouts = {};

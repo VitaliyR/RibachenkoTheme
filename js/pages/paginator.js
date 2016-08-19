@@ -52,19 +52,16 @@ module.exports = Page.extend({
       ctx: this,
       url: url,
       success: function(html) {
-        var dom = document.createElement('html');
-        dom.innerHTML = html;
-
-        var pageCountSpan = dom.querySelector('span.page-number');
-        var articlesNode = dom.getElementsByTagName('main')[1];
+        var pageCount = /<span class="page-number">(.+)<\/span>/.exec(html);
+        var articlesNode = /<main id="content".+>([\S\s]+)<\/main>/.exec(html);
 
         if (articlesNode) {
-          this.elements.pageCountSpan.innerHTML = pageCountSpan.innerHTML;
-          this.elements.contentNode.innerHTML = articlesNode.innerHTML;
+          this.elements.pageCountSpan.innerHTML = pageCount[1].trim();
+          this.elements.contentNode.innerHTML = articlesNode[1].trim();
 
           this.parsePage();
 
-          if (history && url !== this.getPageUrl()) {
+          if (history && history.pushState && url !== this.getPageUrl()) {
             history.pushState({}, '', url);
           }
 

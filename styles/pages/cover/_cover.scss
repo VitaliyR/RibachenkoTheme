@@ -33,6 +33,12 @@ body.tag-template {
   }
 }
 
+@media (max-width: $cover-mobile-width) {
+  .cover-container {
+    min-height: 100vh;
+  }
+}
+
 @media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
 
   body.home-template,
@@ -43,7 +49,6 @@ body.tag-template {
 
   .cover-container {
     background-position: 0 0;
-    min-height: 100vh;
   }
 
 }

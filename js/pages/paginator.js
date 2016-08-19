@@ -33,7 +33,7 @@ module.exports = Page.extend({
     var direction = parseInt(target.getAttribute('data-direction'), 10);
 
     if (!isNaN(direction)) {
-      this.getPage(this.page + direction || 1);
+      this.request = this.getPage(this.page + direction || 1);
     }
   },
 
@@ -41,14 +41,15 @@ module.exports = Page.extend({
    * Gets provided page html via ajax and parse using shadow DOM for new
    * paginator data and articles
    * @param {number} page
+   * @return {XMLHttpRequest}
    */
   getPage: function(page) {
-    if (!page || this.page === page) {
-      return;
+    if (!page || this.page === page || this.request) {
+      return this.request;
     }
 
     var url = this.getPageUrl(page);
-    utils.request({
+    return utils.request({
       ctx: this,
       url: url,
       success: function(html) {
@@ -67,6 +68,8 @@ module.exports = Page.extend({
 
           this.triggerOn(window, 'articles:update');
         }
+
+        delete this.request;
       }
     });
   },

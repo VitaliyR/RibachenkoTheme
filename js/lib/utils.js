@@ -23,6 +23,7 @@ module.exports = {
    *  @param {string} opts.url
    *  @param {Function} [opts.success=Function.prototype]
    *  @param {Function} [opts.error=Function.prototype]
+   *  @return {XMLHttpRequest}
    */
   request: function(opts) {
     var request = new XMLHttpRequest();
@@ -47,6 +48,8 @@ module.exports = {
     request.onerror = opts.error || Function.prototype;
 
     request.send();
+
+    return request;
   },
 
   /**

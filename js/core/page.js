@@ -7,7 +7,7 @@ module.exports = Base.extend({
 
     for (var selectorName in this.selectors) {
       var elements = this.container.querySelectorAll(this.selectors[selectorName]);
-      this.elements[selectorName] = elements.length === 1 ? elements[0] : elements;
+      this.elements[selectorName] = elements.length === 1 ? elements[0] : Array.prototype.slice.call(elements);
     }
 
     this._handlers = {};

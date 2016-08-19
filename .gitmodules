@@ -1,0 +1,3 @@
+[submodule "vendor/simple-scrollbar"]
+	path = vendor/simple-scrollbar
+	url = https://github.com/buzinas/simple-scrollbar

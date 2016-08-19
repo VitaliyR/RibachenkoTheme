@@ -52,8 +52,7 @@ _.extend(config,
     outputJS: 'app.js',
     outputJSDir: config.outputDir + 'js',
     vendorJS: [
-      // 'vendor/jquery.mousewheel.js',
-      // 'vendor/jquery.jscrollpane.min.js',
+      'vendor/simple-scrollbar/simple-scrollbar.min.js',
       'vendor/prism.js'
     ],
     outputVendorJS: 'vendor.js'
@@ -63,6 +62,7 @@ _.extend(config,
     outputCSSDir: config.outputDir + 'css',
     vendorCSS: [
       'node_modules/normalize.css/normalize.css',
+      'vendor/simple-scrollbar/simple-scrollbar.css',
       'vendor/prism.css'
     ],
     outputVendorCSS: 'vendor.css'

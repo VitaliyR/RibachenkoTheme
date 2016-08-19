@@ -7,16 +7,12 @@ $pagination-arrow-size: 22px;
     border: 1px solid $pagination-color;
     display: inline-block;
     height: $pagination-arrow-size;
-    line-height: 100%;
+    line-height: 18px;
     text-align: center;
     width: $pagination-arrow-size;
 
     &:hover {
       background-color: rgba(255, 255, 255, .175);
-    }
-
-    @media screen and (-webkit-min-device-pixel-ratio: 0) {
-      line-height: $pagination-arrow-size;
     }
   }
 

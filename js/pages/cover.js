@@ -14,8 +14,7 @@ module.exports = Page.extend({
 
   events: {
     'init': 'handleResize',
-    'resize window': 'handleResize',
-    'articles:update window': 'articlesUpdate'
+    'resize window': 'handleResize'
   },
 
   constructor: function() {
@@ -72,46 +71,11 @@ module.exports = Page.extend({
   },
 
   /**
-   * @uses jQuery
-   * @todo
+   * Scrolls for not OS X systems
    */
   enableScrolls: function() {
-    var barsSelector = '.jspHorizontalBar, .jspVerticalBar';
-    return;
-    var $scrollContent = $(this.elements.scrollContent);
-
-    this._timeouts = {};
-
-    $scrollContent
-      .css('overflow', 'initial')
-      .bind('jsp-initialised', function () {
-        $(this).find(barsSelector).hide();
-      })
-      .jScrollPane({
-        contentWidth: '0px'
-      })
-      .scroll(
-        function() {
-          var $self = $(this);
-          $self.find(barsSelector).stop().show().css('opacity', 0.9);
-
-          clearTimeout(this._timeouts[this]);
-          // fixme this unclear
-          this._timeouts[this] = setTimeout(function () {
-            $self.find(barsSelector).stop().fadeTo('fast', 0);
-          }, 1000);
-        }
-      );
-
-    $scrollContent.each(function() {
-      var jsp = $(this).data('jsp');
-      jsp && jsp.reinitialise();
+    this.elements.scrollContent.forEach(function(element) {
+      SimpleScrollbar.initEl(element);
     });
-  },
-
-  articlesUpdate: function() {
-    // $scrollContent.each(function() {
-    //     $(this).data('jsp').reinitialise();
-    //   });
   }
 });

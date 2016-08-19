@@ -16,7 +16,12 @@ module.exports = Page.extend({
     'popstate window': 'handleHistory'
   },
 
+  classNames: {
+    loading: 'icon icon-loader'
+  },
+
   pageRegexp: /page\/(\d+)/,
+  delayToLoader: 100,
 
   constructor: function() {
     this.constructor.__super__.constructor.apply(this, arguments);
@@ -32,9 +37,26 @@ module.exports = Page.extend({
     var target = event.target.tagName.toLowerCase() === 'span' ? event.target.parentElement : event.target;
     var direction = parseInt(target.getAttribute('data-direction'), 10);
 
-    if (!isNaN(direction)) {
+    if (!isNaN(direction) && !this.request) {
+      setTimeout(function() {
+        if (this.request) {
+          this.toggleLoading(target, true);
+        }
+      }.bind(this), this.delayToLoader);
       this.request = this.getPage(this.page + direction || 1);
     }
+  },
+
+  toggleLoading: function(element, state) {
+    var elements = element ? [element] : utils.arr(this.elements.paginationNav.querySelectorAll('a'));
+
+    elements.forEach(function(el) {
+      if (state) {
+        el.className += ' ' + this.classNames.loading;
+      } else {
+        el.className = el.className.replace(' ' + this.classNames.loading, '');
+      }
+    }, this);
   },
 
   /**
@@ -66,6 +88,7 @@ module.exports = Page.extend({
             history.pushState({}, '', url);
           }
 
+          this.toggleLoading();
           this.triggerOn(window, 'articles:update');
         }
 

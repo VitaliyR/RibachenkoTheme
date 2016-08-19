@@ -13,4 +13,9 @@
       }
     }
   }
+
+  &.icon-loader {
+    background-image: svg-load('res/loader.svg');
+    animation: rotate 1s linear infinite;
+  }
 }

@@ -65,5 +65,14 @@ module.exports = {
 
     CustomEvent.prototype = window.Event.prototype;
     window.CustomEvent = CustomEvent;
+  },
+
+  /**
+   * Makes array from array-like objects
+   * @param {Object} a
+   * @returns {Array}
+   */
+  arr: function(a) {
+    return Array.prototype.slice.call(a);
   }
 };

@@ -80,7 +80,7 @@ module.exports = Page.extend({
 
         if (articlesNode) {
           this.elements.pageCountSpan.innerHTML = pageCount[1].trim();
-          this.elements.contentNode.innerHTML = articlesNode[1].trim();
+          this.animateContentNode(articlesNode[1].trim());
 
           this.parsePage();
 
@@ -95,6 +95,25 @@ module.exports = Page.extend({
         delete this.request;
       }
     });
+  },
+
+  animateContentNode: function(newContent) {
+    var node = this.elements.contentNode;
+    var isMobile = utils.isMobile();
+
+    if (isMobile) {
+      var nodeHeight = node.getBoundingClientRect().height;
+      node.style.height = nodeHeight + 'px';
+    }
+
+    node.innerHTML = newContent;
+
+    if (isMobile) {
+      var height = utils.arr(node.children).reduce(function(r, node) {
+        return r + node.getBoundingClientRect().height;
+      }, 0);
+      node.style.height = height + 'px';
+    }
   },
 
   /**

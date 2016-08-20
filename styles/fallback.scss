@@ -95,57 +95,15 @@
 }
 
 .icon {
-  &.icon-twitter {
-    &.icon-white {
-      background-image: url(../res/twitter-white.png);
-    }
-    &.icon-black {
-      background-image: url(../res/twitter-black.png);
-    }
-  }
+  @for $i from 1 through length($icons) {
+    $icon: nth($icons, $i);
 
-  &.icon-facebook {
-    &.icon-white {
-      background-image: url(../res/facebook-white.png);
-    }
-    &.icon-black {
-      background-image: url(../res/facebook-black.png);
-    }
-  }
+    @for $j from 1 through length($icons-colors) {
+      $color: nth($icons-colors, $j);
 
-  &.icon-vk {
-    &.icon-white {
-      background-image: url(../res/vk-white.png);
-    }
-    &.icon-black {
-      background-image: url(../res/vk-black.png);
-    }
-  }
-
-  &.icon-github {
-    &.icon-white {
-      background-image: url(../res/github-white.png);
-    }
-    &.icon-black {
-      background-image: url(../res/github-black.png);
-    }
-  }
-
-  &.icon-linkedin {
-    &.icon-white {
-      background-image: url(../res/linkedin-white.png);
-    }
-    &.icon-black {
-      background-image: url(../res/linkedin-black.png);
-    }
-  }
-
-  &.icon-email {
-    &.icon-white {
-      background-image: url(../res/email-white.png);
-    }
-    &.icon-black {
-      background-image: url(../res/email-black.png);
+      &.icon-#{$icon}.icon-#{$color} {
+        background-image: url('../res/#{$icon}-#{$color}.png');
+      }
     }
   }
 }

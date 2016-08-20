@@ -5,6 +5,10 @@ body.tag-template {
   background: $cover-background;
 }
 
+body.animation {
+  @include ios-overflow-hidden();
+}
+
 .cover-container {
   display: flex;
   align-content: space-between;

@@ -74,5 +74,24 @@ module.exports = {
    */
   arr: function(a) {
     return Array.prototype.slice.call(a);
+  },
+
+  /**
+   * Toggles provided class on element
+   * @param {HTMLElement} el
+   * @param {string} className
+   * @param {Boolean} state
+   */
+  toggleClass: function(el, className, state) {
+    var classList = el.className.split(' ');
+    var classPos = classList.indexOf(className);
+
+    if (state) {
+      classList.push(className)
+    } else {
+      classList.splice(classPos, 1);
+    }
+
+    el.className = classList.join(' ');
   }
 };

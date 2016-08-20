@@ -8,20 +8,28 @@ module.exports = Page.extend({
 
   selectors: {
     container: '.cover-container',
+    footer: 'footer.site-footer',
     scrollContent: '.content, .description',
     sections: '.section-container > section'
   },
 
+  classNames: {
+    animation: 'animation'
+  },
+
   events: {
     'init': 'handleResize',
-    'resize window': 'handleResize'
+    'resize window': 'handleResize',
+    'animationend window': 'handleAnimationEnd'
   },
 
   constructor: function() {
     this.constructor.__super__.constructor.apply(this, arguments);
     this.checkAnimation();
 
-    scrollTo(0, 0);
+    setTimeout(function() {
+      scrollTo(0, 0);
+    }, 150);
 
     this.paginator = new Paginator(this.container);
 
@@ -42,11 +50,21 @@ module.exports = Page.extend({
   checkAnimation: function() {
     var animation = this.store.get('cover_animation');
     var now = Date.now();
-    var shouldPlay = !animation || ((now - animation) > config.cover_animation_freq);
+    var shouldPlay = this.animated = !animation || ((now - animation) > config.cover_animation_freq);
 
     if (shouldPlay) {
-      document.body.className += ' animation';
+      utils.toggleClass(document.body, this.classNames.animation, true);
       this.store.set('cover_animation', now);
+    }
+  },
+
+  /**
+   * AnimationEnd handler
+   * @param {Event} e
+   */
+  handleAnimationEnd: function(e) {
+    if (this.animated && e.target === this.elements.footer) {
+      utils.toggleClass(document.body, this.classNames.animation, false);
     }
   },
 

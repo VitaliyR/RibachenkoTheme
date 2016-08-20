@@ -1,8 +1,9 @@
 var Base = require('./base');
 
 module.exports = Base.extend({
-  constructor: function(container) {
+  constructor: function(container, store) {
     this.container = container;
+    this.store = store;
     this.elements = {};
 
     for (var selectorName in this.selectors) {

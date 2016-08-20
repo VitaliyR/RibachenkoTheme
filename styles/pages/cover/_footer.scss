@@ -1,6 +1,9 @@
 & {
   text-align: center;
   font-size: .75rem;
+  position: relative;
+
+  @include animation(1s appear-bottom $cover-content-delay ease-in-out both);
 }
 
 .copyright {

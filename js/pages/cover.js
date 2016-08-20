@@ -19,6 +19,7 @@ module.exports = Page.extend({
 
   constructor: function() {
     this.constructor.__super__.constructor.apply(this, arguments);
+    this.checkAnimation();
 
     scrollTo(0, 0);
 
@@ -35,6 +36,17 @@ module.exports = Page.extend({
   handleResize: function() {
     if (navigator.appVersion.match(/MSIE/)) {
       setTimeout(this.matchSectionsHeight.bind(this), 100);
+    }
+  },
+
+  checkAnimation: function() {
+    var animation = this.store.get('cover_animation');
+    var now = Date.now();
+    var shouldPlay = !animation || ((now - animation) > config.cover_animation_freq);
+
+    if (shouldPlay) {
+      document.body.className += ' animation';
+      this.store.set('cover_animation', now);
     }
   },
 

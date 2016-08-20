@@ -4,10 +4,9 @@
   justify-content: center;
   padding: 0 1rem;
   min-height: 0; /* firefox */
-
   position: relative;
-  animation: appear-bottom 1s ease-in-out;
-  animation-delay: $cover-content-delay;
+
+  @include animation(1s appear-bottom $cover-content-delay ease-in-out both);
 }
 
 section {

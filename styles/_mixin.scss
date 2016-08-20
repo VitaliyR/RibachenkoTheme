@@ -1,18 +1,6 @@
-@mixin animation($params, $delay:false) {
-  @if $params {
+@mixin animation($params) {
+  body.animation & {
     animation: $params;
-  }
-
-  @if $delay {
-    animation-delay: $delay;
-
-    @include animation-delay($delay);
-  }
-
-  // disable animations at all for tag-template
-  body.tag-template & {
-    animation-duration: .01s;
-    animation-delay: 0s;
   }
 }
 

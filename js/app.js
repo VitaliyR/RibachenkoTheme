@@ -1,9 +1,11 @@
-var Page = require('./core/page');
+var Base = require('./core/base');
+var Store = require('./core/store');
+var utils = require('./lib/utils');
+var config = require('./config');
+
 var Cover = require('./pages/cover');
 
-var utils = require('./lib/utils');
-
-var App = Page.extend({
+var App = Base.extend({
   controllers: [
     {
       controller: Cover,
@@ -19,14 +21,16 @@ var App = Page.extend({
    * @constructor
    * @override
    */
-  constructor: function() {
-    this.constructor.__super__.constructor.apply(this, arguments);
+  constructor: function(container) {
+    this.container = container;
     this.checkIntegrity();
+
+    this.store = Store.register(config.app_name);
 
     var Controller = this.getController();
 
     if (Controller) {
-      this.currentController = new Controller(this.container);
+      this.currentController = new Controller(this.container, this.store);
     }
   },
 

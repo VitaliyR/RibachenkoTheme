@@ -4,11 +4,11 @@
     height: auto;
   }
 
-  .cover {
+  .cover-container {
     height: auto;
-    color: #000;
+    background-image: none !important;
 
-    header {
+    > header {
       display: inline-block;
       vert-align: top;
       height: 250px;
@@ -94,15 +94,10 @@
       }
     }
 
-  }
 
-  .cover-container {
-    height: auto;
-    background-image: none !important;
-
-    & + .site-footer {
+    > footer {
       color: #000;
-      margin: 30px 0;
+      margin: 0;
 
       a {
         color: #000;

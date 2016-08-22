@@ -87,7 +87,7 @@ module.exports = {
     var classPos = classList.indexOf(className);
 
     if (state) {
-      classList.push(className)
+      classList.push(className);
     } else {
       classList.splice(classPos, 1);
     }

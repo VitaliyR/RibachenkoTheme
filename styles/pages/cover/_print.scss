@@ -4,19 +4,86 @@
     height: auto;
   }
 
+  .icon {
+    -webkit-print-color-adjust: exact;
+
+    @for $i from 1 through length($icons) {
+      $icon: nth($icons, $i);
+
+      &.icon-#{$icon} {
+        background-image: url('../res/#{$icon}-black.png') !important;
+      }
+    }
+  }
+
   .cover-container {
     height: auto;
     background-image: none !important;
 
     > header {
       display: inline-block;
-      vert-align: top;
-      height: 250px;
+      height: 300px;
+      text-align: left;
+
+      .social {
+        display: inline-block;
+        position: absolute;
+        left: 10rem;
+        top: 1rem;
+        right: 0;
+        margin-top: 1.5rem;
+        height: auto;
+
+        a {
+          color: #000;
+          display: block;
+          width: 100%;
+          height: 2rem;
+          text-align: left;
+          background-position: 0;
+
+          &:before {
+            display: inline;
+            border: 0;
+            line-height: inherit;
+          }
+
+          &:after {
+            content: "\000A0 \000A0 " attr(href);
+            display: inline;
+            vertical-align: middle;
+            margin-left: 2.5rem;
+          }
+
+          &:hover {
+            background-size: 2rem;
+          }
+        }
+      }
     }
 
-    .header {
-      text-align: left;
-      display: block;
+    > .section-container {
+
+      section {
+        display: block;
+        width: 100%;
+        max-width: none;
+        color: #000;
+        padding: 0 1rem;
+
+        article {
+          border: 0;
+        }
+      }
+
+      nav:before {
+        content: 'Pages: ';
+        display: inline-block;
+      }
+
+      .pagination a {
+        display: none !important;
+      }
     }
 
     h1 {
@@ -24,76 +91,8 @@
       vertical-align: top;
       margin-top: 15px;
       margin-left: 15px;
+      color: #000;
     }
-
-    .social {
-      display: inline-block;
-      position: absolute;
-      left: 10rem;
-      top: 4rem;
-      right: 0;
-
-      ul {
-        display: inline-block;
-        text-align: left;
-        margin: 0;
-        width: 100%;
-      }
-
-      li {
-        // because of n-th child
-        display: block !important;
-        width: auto !important;
-        height: auto !important;
-        line-height: inherit !important;
-      }
-      a {
-        color: #000;
-
-        &:before {
-          display: inline;
-          border: 0;
-          line-height: inherit;
-        }
-
-        &:after {
-          content: "\000A0 \000A0 " attr(href);
-          display: inline;
-        }
-      }
-    }
-
-    .container {
-      display: block;
-    }
-
-    .container-wrapper {
-      display: block;
-      padding: 0;
-    }
-
-    .blog-description,
-    .blog-stories {
-      display: block;
-      width: auto;
-    }
-
-    .blog-description-wrapper,
-    .blog-stories-wrapper {
-      border: 0;
-      text-align: left;
-    }
-
-    .blog-stories {
-      .date {
-        color: #000;
-      }
-
-      a {
-        color: #000;
-      }
-    }
-
 
     > footer {
       color: #000;

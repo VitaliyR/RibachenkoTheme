@@ -33,6 +33,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var clone = require('gulp-clone');
 var cheerio = require('gulp-cheerio');
 var rename = require('gulp-rename');
+var plumber = require('gulp-plumber');
 var globby = require('globby');
 var gutil = require('gulp-util');
 var del = require('del');
@@ -74,6 +75,23 @@ _.extend(config,
   }
 );
 
+// ERROR HANDLERS
+
+var Error = {
+  css: function(err) {
+    console.log(err);
+    this.emit('end');
+  },
+  js: function(err) {
+    gutil.log(
+      gutil.colors.red('Browserify compile error:'),
+      err.message,
+      gutil.colors.cyan('Line number:'),
+      err.lineNumber
+    );
+  }
+};
+
 // TASKS
 
 var vendorCSS = function() {
@@ -103,7 +121,7 @@ var CSS = function() {
     .src(config.filesCSS)
     .pipe(postcss([stylelint()], { syntax: postcss_scss }))
     .pipe(gulpif(!args.production, sourcemaps.init()))
-    .pipe(sass(sassOpts))
+    .pipe(sass(sassOpts).on('error', Error.css))
     .pipe(gulpif(!args.production, sourcemaps.write()))
     .pipe(postcss(processors))
     .pipe(gulp.dest(config.outputCSSDir));
@@ -128,22 +146,14 @@ var lintJS = function() {
 
 var buildJS = function() {
   var bundledStream = through();
-  var log = function(err) {
-    gutil.log(
-      gutil.colors.red('Browserify compile error:'),
-      err.message,
-      gutil.colors.cyan('Line number:'),
-      err.lineNumber
-    );
-  };
 
   bundledStream
     .pipe(source(config.outputJS))
     .pipe(buffer())
-    .pipe(sourcemaps.init({ loadMaps: true }))
-    // .pipe(uglify())
-    .on('error', log)
-    .pipe(sourcemaps.write('./'))
+    .pipe(gulpif(!args.production, sourcemaps.init({ loadMaps: true })))
+    .pipe(gulpif(args.production, uglify()))
+    .on('error', Error.js)
+    .pipe(gulpif(!args.production, sourcemaps.write('./')))
     .pipe(gulp.dest(config.outputJSDir));
 
   globby([config.entryJS]).then(function(entries) {

@@ -5,8 +5,6 @@ var gulp = require('gulp');
 // JS
 var eslint = require('gulp-eslint');
 var browserify = require('browserify');
-var watchify = require('watchify');
-var babelify = require('babelify');
 
 // CSS
 var postcss = require('gulp-postcss');

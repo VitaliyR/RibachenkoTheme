@@ -53,6 +53,12 @@
     max-width: $container-max-width;
     margin: 0 auto;
 
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
     section {
       height: 100%;
       display: table-cell;
@@ -63,11 +69,6 @@
       }
     }
 
-    &:after {
-      clear: both;
-      content: " ";
-      display: table;
-    }
   }
 }
 

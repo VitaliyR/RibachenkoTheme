@@ -117,11 +117,11 @@ var CSS = function() {
 
   return gulp
     .src(config.filesCSS)
-    .pipe(postcss([stylelint()], { syntax: postcss_scss }))
     .pipe(gulpif(!args.production, sourcemaps.init()))
+    .pipe(postcss([stylelint()], { syntax: postcss_scss }))
     .pipe(sass(sassOpts).on('error', Error.css))
-    .pipe(gulpif(!args.production, sourcemaps.write()))
     .pipe(postcss(processors))
+    .pipe(gulpif(!args.production, sourcemaps.write('./')))
     .pipe(gulp.dest(config.outputCSSDir));
 };
 

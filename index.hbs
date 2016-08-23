@@ -44,7 +44,10 @@
                 <main id="content" class="content" role="main">
                     {{#foreach posts}}
                         <article class="{{post_class}}">
-                            <h4 class="post-title"><span class="date">{{date format="DD MMM YY"}}</span> - <a href="{{url}}">{{{title}}}</a></h4>
+                            <h4 class="post-title">
+                                <span class="date">{{date format="DD MMM YY"}} - </span>
+                                <a href="{{url}}">{{{title}}}</a>
+                            </h4>
                         </article>
                     {{/foreach}}
                 </main>

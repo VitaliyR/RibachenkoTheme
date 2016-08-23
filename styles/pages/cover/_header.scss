@@ -3,7 +3,7 @@
   padding-top: .5rem;
   position: relative;
 
-  @include animation(appear 1s ease-in-out);
+  @include animation(appear 1s ease-in-out both);
 }
 
 img {

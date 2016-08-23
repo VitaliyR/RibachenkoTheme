@@ -90,8 +90,42 @@ h1 {
     line-height: 2rem;
   }
 
+}
+
+@media (max-height: $cover-tablet-height) {
+  img {
+    width: $header-tablet-size;
+    height: $header-tablet-size;
+  }
+
+  .social {
+    height: 4.3rem;
+    margin-top: .5rem;
+
+    a {
+      width: $icon-tablet-social-size-hover;
+      height: $icon-tablet-social-size-hover;
+      background-size: $icon-tablet-social-font-size;
+
+      &:hover {
+        background-size: $icon-tablet-social-font-size-hover;
+
+        &:before {
+          width: $icon-tablet-social-size-hover;
+          height: $icon-tablet-social-size-hover;
+        }
+      }
+
+      &:before {
+        width: $icon-tablet-social-size;
+        height: $icon-tablet-social-size;
+      }
+    }
+  }
+}
+
+@media (max-width: $cover-tablet-width), (max-height: $cover-tablet-height) {
   .social {
     height: auto;
   }
-
 }

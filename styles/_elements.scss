@@ -30,6 +30,10 @@ pre {
   border-radius: 3px;
 }
 
+pre[class*=language-].line-numbers code {
+  padding-right: 3.8rem;
+}
+
 pre code,
 pre tt {
   background: transparent;

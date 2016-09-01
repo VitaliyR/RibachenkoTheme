@@ -127,5 +127,9 @@ h1 {
 @media (max-width: $cover-tablet-width), (max-height: $cover-tablet-height) {
   .social {
     height: auto;
+
+    a {
+      margin: 5px 10px;
+    }
   }
 }

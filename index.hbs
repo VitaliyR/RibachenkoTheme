@@ -16,7 +16,7 @@
     <div class="section-container">
         <section class="blog-description">
             <article class="blog-description-wrapper">
-                <header class="blog-description-header">
+                <header class="blog-description-header-about">
                     <h2>About</h2>
                 </header>
                 <main class="description">
@@ -31,6 +31,35 @@
                         Living in <a href="https://www.google.com/maps/@49.2302034,28.4627243,14z" target="_blank">Vinnitsya, Ukraine</a>.
                         Last time I was spotted at {{#last_checkin}}<a href="https://foursquare.com/user/{{userId}}/checkin/{{id}}" target="_blank">{{venue.name}}</a>{{/last_checkin}}.
                     </p>
+                </main>
+                <header class="blog-description-header-projects">
+                    <h2>Projects</h2>
+                    <div class="changer">↑</div>
+                </header>
+                <main class="projects">
+                    <ul>
+                        <li>
+                            <a href="https://github.com/vitaliyr/darcula-syntax">Darcula Syntax Theme</a>
+                            — An Atom syntax highlighting scheme based on IntelliJ Darcula
+                        </li>
+                        <li>
+                            <a href="https://github.com/vitaliyr/postcss-esplit">PostCSS eSplit</a>
+                            — PostCSS plugin for splitting css into multiple css files with sourcemaps support for
+                            preventing limitation of shinny ie9
+                        </li>
+                        <li>
+                            <a href="https://github.com/vitaliyr/telegram-fspls-bot">Telegram FSpls Bot</a>
+                            — Telegram Bot for watching FS.to and it remembers your watched episodes
+                        </li>
+                        <li>
+                            <a href="https://github.com/vitaliyr/js-wrap-brunch">js-wrap-brunch</a>
+                            — Brunch plugin which adds possibility to wrap js output and not break source map
+                        </li>
+                        <li class="line-break">
+                            <a href="https://github.com/vitaliyr/telegram-fspls-bot">Dotfiles</a>
+                            — Personal OS X dotfiles and utilities
+                        </li>
+                    </ul>
                 </main>
             </article>
         </section>

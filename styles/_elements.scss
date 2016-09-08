@@ -46,3 +46,14 @@ pre tt {
 p img {
   max-width: 100%;
 }
+
+ul {
+  margin: 0;
+  padding: 0 0 0 1.1rem;
+
+  li.line-break {
+    margin-top: 9px;
+    padding-top: 9px;
+    border-top: 1px dashed #fff;
+  }
+}

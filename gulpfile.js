@@ -180,7 +180,7 @@ var fallbackIcons = function() {
       .pipe(cheerio(function($) {
         var svg = $('svg');
         var svgStyle = svg.attr('style');
-        svg.attr('style', svgStyle + 'fill: ' + colorValue);
+        svg.attr('style', svgStyle + 'fill: ' + colorValue + ';color: ' + colorValue + ';');
       }))
       .pipe(svg2png())
       .pipe(rename({ suffix: '-' + colorName }));

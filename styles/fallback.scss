@@ -69,6 +69,20 @@
       }
     }
 
+    .pagination a {
+      background: none;
+
+      &.newer-posts:after {
+        display: block;
+        content: '←';
+      }
+
+      &.older-posts:after {
+        display: block;
+        content: '→';
+      }
+    }
+
   }
 }
 

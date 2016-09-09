@@ -5,10 +5,10 @@
     $icon: nth($icons, $i);
 
     &.icon-#{$icon} {
-      background-image: svg-load('res/#{$icon}.svg', fill=#fff, stroke=#fff);
+      background-image: svg-load('res/#{$icon}.svg', fill=#fff, stroke=#fff, color=#fff);
 
       &.icon-black {
-        background-image: svg-load('res/#{$icon}.svg', fill=#000, stroke=#000);
+        background-image: svg-load('res/#{$icon}.svg', fill=#000, stroke=#000, color=#000);
       }
     }
   }

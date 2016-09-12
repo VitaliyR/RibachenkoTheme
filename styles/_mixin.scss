@@ -1,5 +1,6 @@
-@mixin animation($params) {
+@mixin animation($animName, $params) {
   body.animation & {
+    will-change: getAnimationChangeProps($animName);
     animation: $params;
   }
 }

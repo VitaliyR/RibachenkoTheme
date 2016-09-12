@@ -1,6 +1,22 @@
 $cover-icons-delays: (.75s, 1s, 1.25s, 1.5s, 1.75s, 2s);
 $cover-content-delay: 2.1s;
 
+@function getAnimationChangeProps($animationName) {
+  $opacityTopAnims: (appear-top, appear-bottom);
+
+  @if $animationName == appear {
+    @return opacity;
+  }
+
+  @else if index($opacityTopAnims, $animationName) {
+    @return opacity, top;
+  }
+
+  @else if $animationName == rotate {
+    @return transform;
+  }
+}
+
 @keyframes appear {
   0% {
     opacity: 0;

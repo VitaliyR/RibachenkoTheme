@@ -3,7 +3,7 @@
   padding-top: .5rem;
   position: relative;
 
-  @include animation(appear 1s ease-in-out both);
+  @include animation(appear, appear 1s ease-in-out both);
 }
 
 img {
@@ -34,7 +34,7 @@ h1 {
     a:nth-child(#{$i}) {
       position: relative;
 
-      @include animation(1s appear-top nth($cover-icons-delays, $i) ease-in-out both);
+      @include animation(appear-top, 1s appear-top nth($cover-icons-delays, $i) ease-in-out both);
     }
   }
 

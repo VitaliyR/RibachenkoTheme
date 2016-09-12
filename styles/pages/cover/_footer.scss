@@ -3,7 +3,7 @@
   font-size: .75rem;
   position: relative;
 
-  @include animation(1s appear-bottom $cover-content-delay ease-in-out both);
+  @include animation(appear-bottom, 1s appear-bottom $cover-content-delay ease-in-out both);
 }
 
 .copyright {

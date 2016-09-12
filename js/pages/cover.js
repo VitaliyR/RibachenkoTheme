@@ -14,7 +14,8 @@ module.exports = Page.extend({
     aboutArticle: '.blog-description-about',
     projectsArticle: '.blog-description-projects',
     aboutArticleHeader: '.blog-description-header-about',
-    projectsArticleHeader: '.blog-description-header-projects'
+    projectsArticleHeader: '.blog-description-header-projects',
+    checkinDate: '.last-checkin-date'
   },
 
   classNames: {
@@ -43,6 +44,8 @@ module.exports = Page.extend({
     if (!utils.isMobile() && !utils.isMac()) {
       this.enableScrolls();
     }
+
+    this.parseCheckinDate();
   },
 
   /**
@@ -133,7 +136,21 @@ module.exports = Page.extend({
     utils.toggleClass(projectsArticle, toggledClassName, projectsState);
   },
 
+  /**
+   * Click on sections folding buttons
+   * @param {Event} e
+   */
   handleToggleSections: function(e) {
     this.toggleSections(1 * e.currentTarget.getAttribute('data-toggle-section'));
+  },
+
+  /**
+   * Reads and parses checkin date, transforming it into human readable relative datetime string
+   */
+  parseCheckinDate: function() {
+    var checkinEl = this.elements.checkinDate;
+    var checkinDate = parseInt(checkinEl.textContent + '000', 10);
+    checkinEl.textContent = utils.getRelativeDate(checkinDate);
+    checkinEl.style.display = '';
   }
 });

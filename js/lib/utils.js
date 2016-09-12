@@ -1,4 +1,11 @@
 module.exports = {
+  i18n: {
+    today: 'at %d',
+    yesterday: 'yesterday',
+    fewdays: 'a few days ago',
+    longtime: 'a long time ago'
+  },
+
   isMobile: function() {
     var isMobile = false;
     // device detection
@@ -93,5 +100,49 @@ module.exports = {
     }
 
     el.className = classList.join(' ');
+  },
+
+  /**
+   * Returns normalized time string
+   * @param {Date} date
+   * @returns {string}
+   */
+  getTime: function(date) {
+    var hours = '' + date.getHours();
+    var minutes = '' + date.getMinutes();
+
+    hours = hours.length === 1 ? '0' + hours : hours;
+    minutes = minutes.length === 1 ? '0' + minutes : minutes;
+
+    return hours + ':' + minutes;
+  },
+
+  /**
+   * Accepts timestamp and returns relative date string from i18n
+   * @param {Number} timestamp
+   * @returns {String}
+   */
+  getRelativeDate: function(timestamp) {
+    var date = new Date(timestamp);
+    var now = new Date();
+    var isCurrentYear = now.getFullYear() === date.getFullYear();
+    var isCurrentMonth = isCurrentYear && (now.getMonth() === date.getMonth());
+    var isCurrentDay = isCurrentMonth && (now.getDate() === date.getDate());
+    var isYesterday = isCurrentMonth && (now.getDate() - 1 === date.getDate());
+    var fewDaysLength = 1000 * 60 * 60 * 24 * 14; // 2 weeks
+    var isFewDays = (now.getTime() - date.getTime()) <= fewDaysLength;
+    var resultStr;
+
+    if (isCurrentDay) {
+      resultStr = this.i18n.today.replace(/%d/, this.getTime(date));
+    } else if (isYesterday) {
+      resultStr = this.i18n.yesterday;
+    } else if (isFewDays) {
+      resultStr = this.i18n.fewdays;
+    } else {
+      resultStr = this.i18n.longtime;
+    }
+
+    return resultStr;
   }
 };

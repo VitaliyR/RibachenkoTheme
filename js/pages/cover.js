@@ -10,17 +10,24 @@ module.exports = Page.extend({
     container: '.cover-container',
     footer: 'footer.site-footer',
     scrollContent: '.content, .description',
-    sections: '.section-container > section'
+    sections: '.section-container > section',
+    aboutArticle: '.blog-description-about',
+    projectsArticle: '.blog-description-projects',
+    aboutArticleHeader: '.blog-description-header-about',
+    projectsArticleHeader: '.blog-description-header-projects'
   },
 
   classNames: {
-    animation: 'animation'
+    animation: 'animation',
+    toggled: 'toggled'
   },
 
   events: {
     'init': 'handleResize',
     'resize window': 'handleResize',
-    'animationend window': 'handleAnimationEnd'
+    'animationend window': 'handleAnimationEnd',
+    'click aboutArticleHeader': 'handleToggleSections',
+    'click projectsArticleHeader': 'handleToggleSections'
   },
 
   constructor: function() {
@@ -107,5 +114,26 @@ module.exports = Page.extend({
     this.elements.scrollContent.forEach(function(element) {
       SimpleScrollbar.initEl(element);
     });
+  },
+
+  /**
+   * @param state
+   * @example state 0 means show everything
+   * @example state 1 means show about
+   * @example state 2 means show projects
+   */
+  toggleSections: function(state) {
+    var projectsArticle = this.elements.projectsArticle;
+    var aboutArticle = this.elements.aboutArticle;
+    var toggledClassName = this.classNames.toggled;
+    var aboutState = !state ? false : (state !== 1);
+    var projectsState = !state ? false : (state !== 2);
+
+    utils.toggleClass(aboutArticle, toggledClassName, aboutState);
+    utils.toggleClass(projectsArticle, toggledClassName, projectsState);
+  },
+
+  handleToggleSections: function(e) {
+    this.toggleSections(1 * e.currentTarget.getAttribute('data-toggle-section'));
   }
 });

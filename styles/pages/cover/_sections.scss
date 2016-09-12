@@ -8,6 +8,30 @@
   @include animation(1s appear-bottom $cover-content-delay ease-in-out both);
 }
 
+@mixin enable-sections-folding {
+  section > article.toggled {
+    flex: 0;
+
+    .toggler {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin disable-sections-folding {
+  section > article.toggled {
+    flex: 1;
+
+    &:hover {
+      cursor: default;
+    }
+
+    .toggler {
+      opacity: 0;
+    }
+  }
+}
+
 section {
   flex: 1 50%;
   display: flex;
@@ -23,20 +47,37 @@ section {
     border-radius: 5px;
     height: 100%;
     padding: 0 1.5rem 1.5rem;
-    min-height: 0; /* firefox */
     position: relative;
+    margin-bottom: 2rem;
+    transition: all .5s ease-in-out;
+    min-height: 0; /* firefox */
+    min-height: 4.25rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.toggled:hover {
+      cursor: pointer;
+
+      & .button-circle {
+        @extend .button-circle:hover;
+      }
+    }
+
+    .toggler {
+      opacity: 0;
+      transition: opacity .5s ease-in-out;
+    }
   }
 }
 
-.changer {
-  position: absolute;
-  right: 1.5rem;
-  top: 1.5rem;
-  z-index: 10;
-}
-
 header {
-  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
 }
 
 main {
@@ -80,6 +121,11 @@ h3 {
   color: rgba(255, 255, 255, .6);
 }
 
+// projects folders
+@media (max-height: $cover-mobile-height-projects) {
+  @include enable-sections-folding;
+}
+
 @media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
 
   & {
@@ -93,12 +139,16 @@ h3 {
     max-width: 100%;
   }
 
+  @include disable-sections-folding;
+
 }
 
 @media (max-width: $cover-mobile-width) {
   .changer {
     display: none;
   }
+
+  @include disable-sections-folding;
 }
 
 @import "pagination";

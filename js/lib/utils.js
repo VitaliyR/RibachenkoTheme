@@ -20,7 +20,7 @@ module.exports = {
    * @param {Object} opts
    *  @param {Object} [opts.ctx=this]
    *  @param {string} [opts.method=GET]
-   *  @param {string} opts.url
+   *  @param {string}isMobile opts.url
    *  @param {Function} [opts.success=Function.prototype]
    *  @param {Function} [opts.error=Function.prototype]
    *  @return {XMLHttpRequest}
@@ -87,9 +87,9 @@ module.exports = {
     var classPos = classList.indexOf(className);
 
     if (state) {
-      classList.push(className);
+      classPos === -1 && classList.push(className);
     } else {
-      classList.splice(classPos, 1);
+      classPos !== -1 && classList.splice(classPos, 1);
     }
 
     el.className = classList.join(' ');

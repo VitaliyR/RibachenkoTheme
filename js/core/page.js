@@ -4,6 +4,10 @@ module.exports = Base.extend({
   constructor: function(container, store) {
     this.container = container;
     this.store = store;
+
+    /**
+     * @type {Object.<HTMLElement>}
+     */
     this.elements = {};
 
     for (var selectorName in this.selectors) {

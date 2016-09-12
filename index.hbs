@@ -15,10 +15,10 @@
     </header>
     <div class="section-container">
         <section class="blog-description">
-            <article class="blog-description-wrapper">
-                <div class="button-circle icon icon-arrow direction-bottom changer"></div>
-                <header class="blog-description-header-about">
+            <article class="blog-description-about">
+                <header class="blog-description-header-about" data-toggle-section="1">
                     <h2>About</h2>
+                    <div class="button-circle icon icon-arrow direction-bottom toggler"></div>
                 </header>
                 <main class="description">
                     <p>
@@ -33,8 +33,11 @@
                         Last time I was spotted at {{#last_checkin}}<a href="https://foursquare.com/user/{{userId}}/checkin/{{id}}" target="_blank">{{venue.name}}</a>{{/last_checkin}}.
                     </p>
                 </main>
-                <header class="blog-description-header-projects">
+            </article>
+            <article class="blog-description-projects toggled">
+                <header class="blog-description-header-projects" data-toggle-section="2">
                     <h2>Projects</h2>
+                    <div class="button-circle icon icon-arrow direction-top toggler"></div>
                 </header>
                 <main class="projects">
                     <ul>

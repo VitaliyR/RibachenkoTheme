@@ -17,7 +17,8 @@ module.exports = Page.extend({
   },
 
   classNames: {
-    loading: 'icon icon-loader'
+    loading: 'icon-loader',
+    arrow: 'icon-arrow'
   },
 
   pageRegexp: /page\/(\d+)/,
@@ -51,11 +52,8 @@ module.exports = Page.extend({
     var elements = element ? [element] : utils.arr(this.elements.paginationNav.querySelectorAll('a'));
 
     elements.forEach(function(el) {
-      if (state) {
-        el.className += ' ' + this.classNames.loading;
-      } else {
-        el.className = el.className.replace(' ' + this.classNames.loading, '');
-      }
+      utils.toggleClass(el, this.classNames.arrow, !state);
+      utils.toggleClass(el, this.classNames.loading, state);
     }, this);
   },
 

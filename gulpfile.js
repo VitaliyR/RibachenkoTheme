@@ -69,7 +69,8 @@ _.extend(config,
   {
     filesIcons: 'res/*.svg',
     outputIconsDir: config.outputDir + 'res',
-    iconColors: [['white', '#ffffff'], ['black', '#000000']]
+    iconColors: [['white', '#ffffff'], ['black', '#000000']],
+    concurrentIcons: 3
   }
 );
 
@@ -182,7 +183,7 @@ var fallbackIcons = function() {
         var svgStyle = svg.attr('style');
         svg.attr('style', svgStyle + 'fill: ' + colorValue + ';color: ' + colorValue + ';');
       }))
-      .pipe(svg2png())
+      .pipe(svg2png({}, false, config.concurrentIcons))
       .pipe(rename({ suffix: '-' + colorName }));
   });
 

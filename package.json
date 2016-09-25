@@ -26,7 +26,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.5.2",
-    "gulp-svg2png": "github:vitaliyr/gulp-svg2png",
+    "gulp-svg2png": "^2.0.2",
     "gulp-uglify": "^1.4.1",
     "gulp-util": "^3.0.7",
     "postcss-inline-svg": "^2.0.1",
@@ -46,7 +46,7 @@
     "normalize.css": "^3.0.3"
   },
   "scripts": {
-    "postinstall": "npm explore gulp-svg2png -- npm run build;gulp --production",
+    "postinstall": "gulp --production",
     "firstinstall": "ln -s $(pwd)/helpers/last_checkin.js ../../../last_checkin.js;\necho 'require(\"./last_checkin\")();\\n' \"$(cat ../../../config.js)\" > ../../../config.js;"
   },
   "private": true

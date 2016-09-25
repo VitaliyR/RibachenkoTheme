@@ -9,7 +9,7 @@ module.exports = Page.extend({
   selectors: {
     container: '.cover-container',
     footer: 'footer.site-footer',
-    scrollContent: '.content, .description',
+    scrollContent: '.content, .description, .projects',
     sections: '.section-container > section',
     aboutArticle: '.blog-description-about',
     projectsArticle: '.blog-description-projects',

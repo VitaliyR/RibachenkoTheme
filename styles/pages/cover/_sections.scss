@@ -38,6 +38,7 @@ section {
   flex-flow: column nowrap;
   padding: 1rem;
   max-width: $container-max-width / 2;
+  max-height: 100vh;
 
   > article {
     flex: 1;
@@ -132,6 +133,7 @@ h3 {
   section {
     padding: .5rem;
     max-width: 100%;
+    max-height: initial;
   }
 
   @include disable-sections-folding;

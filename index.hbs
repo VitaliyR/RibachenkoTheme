@@ -30,7 +30,7 @@
                     </p>
                     <p>
                         Living in <a href="https://www.google.com/maps/@49.2302034,28.4627243,14z" target="_blank">Vinnitsya, Ukraine</a>.
-                        Last time I was spotted in {{#last_checkin}}<a href="https://foursquare.com/v/{{venue.id}}" target="_blank">{{venue.name}} ({{venue.location.city}}, {{venue.location.country}})</a> <span class="last-checkin-date" style="display: none;">{{createdAt}}</span>{{/last_checkin}}.
+                        Last time I was spotted in {{#last_checkin}}<a href="https://foursquare.com/v/{{venue.id}}" target="_blank">{{venue.name}} ({{#if venue.location.city}}{{venue.location.city}}, {{/if}}{{venue.location.country}})</a> <span class="last-checkin-date" style="display: none;">{{createdAt}}</span>{{/last_checkin}}.
                     </p>
                 </main>
             </article>

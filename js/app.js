@@ -60,7 +60,7 @@ var App = Base.extend({
 
   checkIntegrity: function() {
     if (navigator.appVersion.match(/MSIE/)) {
-      utils.eventsPolyfill();
+      utils.eventsPolyfill(); // todo: move to fallback.js
     }
   }
 });

@@ -57,6 +57,9 @@ _.extend(config,
     outputVendorJS: 'vendor.js'
   },
   {
+    // todo fallback js
+  },
+  {
     filesCSS: 'styles/**/*.scss',
     outputCSSDir: config.outputDir + 'css',
     vendorCSS: [

@@ -12,9 +12,8 @@ var autoprefixer = require('autoprefixer');
 var stylelint = require('stylelint');
 var csswring = require('csswring');
 
-var postcss_scss = require('postcss-scss');
-var postcss_inline_svg = require('postcss-inline-svg');
-var postcss_svgo = require('postcss-svgo');
+var postcssInlineSvg = require('postcss-inline-svg');
+var postcssSvgo = require('postcss-svgo');
 
 var sass = require('gulp-sass');
 var svg2png = require('gulp-svg2png');
@@ -31,7 +30,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var clone = require('gulp-clone');
 var cheerio = require('gulp-cheerio');
 var rename = require('gulp-rename');
-var plumber = require('gulp-plumber');
 var globby = require('globby');
 var gutil = require('gulp-util');
 var del = require('del');
@@ -54,10 +52,12 @@ _.extend(config,
       'vendor/simple-scrollbar/simple-scrollbar.min.js',
       'vendor/prism.js'
     ],
-    outputVendorJS: 'vendor.js'
-  },
-  {
-    // todo fallback js
+    fallbackJS: [
+      'node_modules/classlist-polyfill/src/index.js',
+      'node_modules/custom-event-polyfill/custom-event-polyfill.js'
+    ],
+    outputVendorJS: 'vendor.js',
+    outputFallbackJS: 'fallback.js'
   },
   {
     filesCSS: 'styles/**/*.scss',
@@ -114,15 +114,15 @@ var CSS = function() {
   };
   var processors = [
     autoprefixer({ browsers: 'last 1 version' }),
-    postcss_inline_svg({ path: './' }),
-    postcss_svgo(),
+    postcssInlineSvg({ path: './' }),
+    postcssSvgo(),
     csswring()
   ];
 
   return gulp
     .src(config.filesCSS)
     .pipe(gulpif(!args.production, sourcemaps.init()))
-    .pipe(postcss([stylelint()], { syntax: postcss_scss }))
+    .pipe(postcss([stylelint()], { syntax: require('postcss-scss') }))
     .pipe(sass(sassOpts).on('error', Error.css))
     .pipe(postcss(processors))
     .pipe(gulpif(!args.production, sourcemaps.write('./')))
@@ -172,6 +172,16 @@ var buildJS = function() {
   return bundledStream;
 };
 
+var fallbackJS = function() {
+  return gulp
+    .src(config.fallbackJS, { base: 'node_modules/' })
+    .pipe(gulpif(!args.production, sourcemaps.init()))
+    .pipe(concat(config.outputFallbackJS))
+    .pipe(gulpif(args.production, uglify()))
+    .pipe(gulpif(!args.production, sourcemaps.write()))
+    .pipe(gulp.dest(config.outputJSDir));
+};
+
 var fallbackIcons = function() {
   var files = gulp.src(config.filesIcons);
 
@@ -209,7 +219,7 @@ var defaultTask = function(cb) {
     'clean',
     ['vendorCSS', 'vendorJS'],
     ['CSS', 'lintJS'],
-    ['buildJS', 'fallbackIcons'],
+    ['buildJS', 'fallbackJS', 'fallbackIcons'],
     cb
   );
 };
@@ -219,6 +229,7 @@ var watchTask = function() {
   gulp.watch(config.vendorCSS, ['vendorCSS']);
   gulp.watch(config.vendorJS, ['vendorJS']);
   gulp.watch(config.filesJS, ['JS']);
+  gulp.watch(config.fallbackJS, ['fallbackJS']);
   gulp.watch(config.filesIcons, ['fallbackIcons']);
 };
 
@@ -230,7 +241,8 @@ gulp.task('vendorJS', vendorJS);
 gulp.task('CSS', CSS);
 gulp.task('lintJS', lintJS);
 gulp.task('buildJS', buildJS);
-gulp.task('JS', ['lintJS', 'buildJS']);
+gulp.task('fallbackJS', fallbackJS);
+gulp.task('JS', ['lintJS', 'buildJS', 'fallbackJS']);
 gulp.task('fallbackIcons', fallbackIcons);
 
 gulp.task('clean', clean);

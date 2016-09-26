@@ -1,6 +1,5 @@
 var Base = require('./core/base');
 var Store = require('./core/store');
-var utils = require('./lib/utils');
 var config = require('./config');
 
 var Cover = require('./pages/cover');
@@ -23,7 +22,6 @@ var App = Base.extend({
    */
   constructor: function(container) {
     this.container = container;
-    this.checkIntegrity();
 
     this.store = Store.register(config.app_name);
 
@@ -56,12 +54,6 @@ var App = Base.extend({
     }
 
     return controller;
-  },
-
-  checkIntegrity: function() {
-    if (navigator.appVersion.match(/MSIE/)) {
-      utils.eventsPolyfill(); // todo: move to fallback.js
-    }
   }
 });
 

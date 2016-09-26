@@ -24,7 +24,7 @@
       }
     }
 
-    @media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
+    @media (max-width: $cover-mobile-width), (max-height: $cover-tablet-height) {
       .social {
         display: block;
 
@@ -33,7 +33,12 @@
           width: $icon-social-size-hover;
           height: $icon-social-size-hover;
           background-position: 50% 35%;
+          background-size: 25px;
           margin: .2rem;
+
+          &:hover {
+            background-size: 28px;
+          }
 
           &:before {
             margin-top: ($icon-social-size-hover - $icon-social-size) / 2;
@@ -45,6 +50,22 @@
         }
       }
     }
+
+    @media (max-height: $cover-tablet-height) {
+      .social {
+        a {
+          // background-position: 50%;
+          // background-size: 30px;
+          width: $icon-social-size-hover;
+          height: $icon-social-size-hover;
+
+          &:hover {
+            // background-size: 35px;
+          }
+        }
+      }
+    }
+
   }
 
   > .section-container {
@@ -67,6 +88,10 @@
 
       > article {
         display: block;
+
+        &.toggled:hover {
+          cursor: default;
+        }
       }
     }
 
@@ -143,7 +168,12 @@
         float: none;
         width: 100%;
         height: auto;
-        margin-bottom: 30px;
+        max-height: none;
+        margin-bottom: 15px;
+
+        > article {
+          height: auto;
+        }
       }
 
       section:last-child {

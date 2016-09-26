@@ -11,6 +11,8 @@ module.exports = Page.extend({
     footer: 'footer.site-footer',
     scrollContent: '.content, .description, .projects',
     sections: '.section-container > section',
+    sectionDescription: '.blog-description',
+    sectionStories: '.blog-stories',
     aboutArticle: '.blog-description-about',
     projectsArticle: '.blog-description-projects',
     aboutArticleHeader: '.blog-description-header-about',
@@ -41,23 +43,33 @@ module.exports = Page.extend({
 
     this.paginator = new Paginator(this.container);
 
-    if (!utils.isMobile() && !utils.isMac()) {
+    if (!utils.isMobile() && !utils.isMac() && !this.isIE()) {
       this.enableScrolls();
     }
 
     this.parseCheckinDate();
   },
 
+  isIE: function() {
+    return navigator.appVersion.match(/MSIE/);
+  },
+
   /**
    * Resize handler, called on window resize
    */
   handleResize: function() {
-    if (navigator.appVersion.match(/MSIE/)) {
+    if (this.isIE()) {
       setTimeout(this.matchSectionsHeight.bind(this), 100);
     }
   },
 
+  /**
+   * Checks if animation should run
+   * Disabled in IE
+   */
   checkAnimation: function() {
+    if (this.isIE()) return;
+
     var animation = this.store.get('cover_animation');
     var now = Date.now();
     var shouldPlay = this.animated = !animation || ((now - animation) > config.cover_animation_freq);
@@ -83,31 +95,13 @@ module.exports = Page.extend({
    * @returns {*}
    */
   matchSectionsHeight: function() {
-    this.clearSectionsHeight();
+    var sectionHeight = this.elements.sectionDescription.getBoundingClientRect().height + 'px';
 
     if (innerWidth < config.mobile_width || innerHeight < config.mobile_height) {
-      return;
+      sectionHeight = '';
     }
 
-    var maxHeight = Array.prototype.reduce.apply(this.elements.sections, [
-      function(max, section) {
-        var height = section.getBoundingClientRect().height;
-        return height > max ? height : max;
-      },
-      0
-    ]);
-
-    for (var i = 0; i < this.elements.sections.length; i++) {
-      var section = this.elements.sections[i];
-      section.style.height = maxHeight + 'px';
-    }
-  },
-
-  clearSectionsHeight: function() {
-    for (var i = 0; i < this.elements.sections.length; i++) {
-      var section = this.elements.sections[i];
-      section.style.height = '';
-    }
+    this.elements.sectionStories.style.height = sectionHeight;
   },
 
   /**

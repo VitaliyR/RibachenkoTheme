@@ -4,6 +4,10 @@
   position: relative;
 
   @include animation(appear, appear 1s ease-in-out both);
+
+  @include respond(desktop) {
+    padding-top: 0;
+  }
 }
 
 img {
@@ -11,12 +15,26 @@ img {
   height: 150px;
   border-radius: 100%;
   margin-top: 10px;
+
+  @include respond(desktop) {
+    height: $header-tablet-size;
+    width: $header-tablet-size;
+  }
+
+  @include respond(mobile) {
+    height: $header-mobile-size;
+    width: $header-mobile-size;
+  }
 }
 
 h1 {
   text-align: center;
   text-transform: uppercase;
   margin: 0;
+
+  @include respond(mobile) {
+    line-height: 2rem;
+  }
 }
 
 .social {
@@ -29,6 +47,15 @@ h1 {
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
+
+  @include respond(desktop) {
+    height: 4.3rem;
+    margin-top: .25rem;
+  }
+
+  @include respond(mobile) {
+    height: auto;
+  }
 
   @for $i from 1 through length($cover-icons-delays) {
     a:nth-child(#{$i}) {
@@ -60,59 +87,18 @@ h1 {
         background-color: rgba(255, 255, 255, .175);
       }
     }
-  }
 
-  a:before {
-    border: 1px solid #fff;
-    border-radius: 100%;
-    display: block;
-    width: $icon-social-size;
-    height: $icon-social-size;
-    content: '';
-    transition: $transition;
-  }
-}
-
-
-@media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
-
-  & {
-    padding-top: 0;
-  }
-
-  img {
-    height: $header-mobile-size;
-    width: $header-mobile-size;
-  }
-
-  h1 {
-    padding: 0 .5rem;
-    line-height: 2rem;
-  }
-
-}
-
-@media (max-width: $cover-tablet-width), (max-height: $cover-tablet-height) {
-  .social {
-    height: auto;
-
-    a {
-      margin: 5px 10px;
+    &:before {
+      border: 1px solid #fff;
+      border-radius: 100%;
+      display: block;
+      width: $icon-social-size;
+      height: $icon-social-size;
+      content: '';
+      transition: $transition;
     }
-  }
-}
 
-@media (max-height: $cover-tablet-height) {
-  img {
-    width: $header-tablet-size;
-    height: $header-tablet-size;
-  }
-
-  .social {
-    height: 4.3rem;
-    margin-top: .5rem;
-
-    a {
+    @include respond(desktop) {
       width: $icon-tablet-social-size-hover;
       height: $icon-tablet-social-size-hover;
       background-size: $icon-tablet-social-font-size;

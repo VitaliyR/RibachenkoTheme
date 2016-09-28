@@ -15,3 +15,26 @@
     height: 100%;
   }
 }
+
+// Large Desktop
+// Desktop - height lower than 1000
+// Mobile - size lower than 600 one of it
+@mixin respond($selector) {
+  $query: '';
+
+  @if $selector == desktop {
+    $query: '(max-height: #{$screen-desktop-height})';
+  }
+
+  @else if $selector == tablet {
+    $query: '(max-width: #{$screen-tablet-width}), (max-height: #{$screen-tablet-height})';
+  }
+
+  @else if $selector == mobile {
+    $query: '(max-width: #{$screen-mobile-width}), (max-height: #{$screen-mobile-height})';
+  }
+
+  @media #{$query} {
+    @content;
+  }
+}

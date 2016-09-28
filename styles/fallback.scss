@@ -89,8 +89,14 @@
       > article {
         display: block;
 
-        &.toggled:hover {
-          cursor: default;
+        &.toggled {
+          .toggler {
+            opacity: 0;
+          }
+
+          &:hover {
+            cursor: default;
+          }
         }
       }
     }

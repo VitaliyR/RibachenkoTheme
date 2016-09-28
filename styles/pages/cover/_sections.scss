@@ -6,29 +6,11 @@
   min-height: 0; /* firefox */
 
   @include animation(appear-bottom, 1s appear-bottom $cover-content-delay ease-in-out both);
-}
 
-@mixin enable-sections-folding {
-  section > article.toggled {
-    flex: 0;
-
-    .toggler {
-      opacity: 1;
-    }
-  }
-}
-
-@mixin disable-sections-folding {
-  section > article.toggled {
-    flex: 1;
-
-    &:hover {
-      cursor: default;
-    }
-
-    .toggler {
-      opacity: 0;
-    }
+  @include respond(mobile) {
+    display: block;
+    padding: .5rem;
+    flex-grow: 0;
   }
 }
 
@@ -39,6 +21,12 @@ section {
   padding: 1rem;
   max-width: $container-max-width / 2;
   max-height: 100vh;
+
+  @include respond(mobile) {
+    padding: .5rem;
+    max-width: 100%;
+    max-height: initial;
+  }
 
   > article {
     flex: 1;
@@ -58,17 +46,45 @@ section {
       margin-bottom: 0;
     }
 
-    &.toggled:hover {
-      cursor: pointer;
+    .toggler {
+      opacity: 0;
+      transition: opacity .5s ease-in-out;
+    }
+
+    &.toggled {
+      flex: 1;
 
       & .button-circle {
         @extend .button-circle:hover;
       }
-    }
 
-    .toggler {
-      opacity: 0;
-      transition: opacity .5s ease-in-out;
+      @include respond(desktop) {
+        flex: 0;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      @include respond(mobile) {
+        flex: 1;
+
+        &:hover {
+          cursor: default;
+        }
+      }
+
+      .toggler {
+        opacity: 0;
+
+        @include respond(desktop) {
+          opacity: 1;
+        }
+
+        @include respond(mobile) {
+          opacity: 0;
+        }
+      }
     }
   }
 }
@@ -115,37 +131,6 @@ h3 {
 
 .date {
   color: rgba(255, 255, 255, .6);
-}
-
-// projects folders
-@media (max-height: $cover-mobile-height-projects) {
-  @include enable-sections-folding;
-}
-
-@media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
-
-  & {
-    display: block;
-    padding: .5rem;
-    flex-grow: 0;
-  }
-
-  section {
-    padding: .5rem;
-    max-width: 100%;
-    max-height: initial;
-  }
-
-  @include disable-sections-folding;
-
-}
-
-@media (max-width: $cover-mobile-width) {
-  .changer {
-    display: none;
-  }
-
-  @include disable-sections-folding;
 }
 
 @import "pagination";

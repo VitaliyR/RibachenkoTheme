@@ -3,6 +3,10 @@ body.archive-template,
 body.tag-template {
   height: 100%;
   background: $cover-background;
+
+  @include respond(mobile) {
+    height: auto;
+  }
 }
 
 body.animation {
@@ -22,6 +26,11 @@ body.animation {
     background: $cover-color;
   }
 
+  @include respond(mobile) {
+    background-position: 0 0;
+    min-height: 100vh;
+  }
+
   > header {
     @import "header";
   }
@@ -35,26 +44,6 @@ body.animation {
   > footer {
     @import "footer";
   }
-}
-
-@media (max-width: $cover-mobile-width) {
-  .cover-container {
-    min-height: 100vh;
-  }
-}
-
-@media (max-width: $cover-mobile-width), (max-height: $cover-mobile-height) {
-
-  body.home-template,
-  body.archive-template {
-    width: 100%;
-    height: auto;
-  }
-
-  .cover-container {
-    background-position: 0 0;
-  }
-
 }
 
 @import "_print";

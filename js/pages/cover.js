@@ -44,7 +44,12 @@ module.exports = Page.extend({
     this.paginator = new Paginator(this.container);
 
     if (!utils.isMobile() && !utils.isMac() && !this.isIE()) {
-      this.enableScrolls();
+      if (utils.isChrome()) {
+        utils.toggleClass(document.body, 'scrolls', true);
+        utils.reloadScrolls(this.elements.sectionDescription.querySelectorAll('main'));
+      } else {
+        this.enableScrolls();
+      }
     }
 
     this.parseCheckinDate();

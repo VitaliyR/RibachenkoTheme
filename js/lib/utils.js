@@ -23,6 +23,30 @@ module.exports = {
   },
 
   /**
+   * Detects if UA is Chrome
+   * @return {Boolean}
+   */
+  isChrome: function() {
+    return /Chrome/.test(navigator.userAgent);
+  },
+
+/**
+ * Reload scrolls via changing overflow of the element
+ * @param {Array.<HTMLElement>} elements
+ */
+  reloadScrolls: function(elements) {
+    elements = this.arr(elements);
+    elements.forEach(function(el) {
+      var overflow = el.style.overflow;
+      el.style.overflow = 'hidden';
+
+      setTimeout(function() {
+        el.style.overflow = overflow;
+      });
+    });
+  },
+
+  /**
    * Make ajax request
    * @param {Object} opts
    *  @param {Object} [opts.ctx=this]

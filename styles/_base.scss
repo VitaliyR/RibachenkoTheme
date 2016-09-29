@@ -76,3 +76,29 @@ p {
     content: '';
   }
 }
+
+body.scrolls {
+  &::-webkit-scrollbar,
+  ::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  &::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-track {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb,
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, .2);
+  }
+
+  &::-webkit-scrollbar-thumb:hover,
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, .4);
+  }
+}

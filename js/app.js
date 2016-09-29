@@ -3,6 +3,7 @@ var Store = require('./core/store');
 var config = require('./config');
 
 var Cover = require('./pages/cover');
+var Post = require('./pages/post');
 
 var App = Base.extend({
   controllers: [
@@ -12,6 +13,12 @@ var App = Base.extend({
         'home-template',
         'tag-template',
         'archive-template'
+      ]
+    },
+    {
+      controller: Post,
+      classList: [
+        'post-template'
       ]
     }
   ],

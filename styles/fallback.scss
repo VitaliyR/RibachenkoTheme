@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixin";
 
 .cover-container {
   display: block;
@@ -11,6 +12,10 @@
       margin: 0 auto;
       table-layout: fixed;
 
+      @include respond(mobile) {
+        display: block;
+      }
+
       a {
         display: table-cell;
         vertical-align: middle;
@@ -21,18 +26,18 @@
         &:before {
           margin: 0 auto;
         }
-      }
-    }
 
-    @media (max-width: $cover-mobile-width), (max-height: $cover-tablet-height) {
-      .social {
-        display: block;
+        @include respond(desktop) {
+          width: $icon-social-size-hover;
+          height: $icon-social-size-hover;
+        }
 
-        a {
+        @include respond(mobile) {
           display: inline-block;
           width: $icon-social-size-hover;
           height: $icon-social-size-hover;
-          background-position: 50% 35%;
+          height: 50px;
+          background-position: 50% 65%;
           background-size: 25px;
           margin: .2rem;
 
@@ -46,21 +51,6 @@
 
           &:hover:before {
             margin-top: 0;
-          }
-        }
-      }
-    }
-
-    @media (max-height: $cover-tablet-height) {
-      .social {
-        a {
-          // background-position: 50%;
-          // background-size: 30px;
-          width: $icon-social-size-hover;
-          height: $icon-social-size-hover;
-
-          &:hover {
-            // background-size: 35px;
           }
         }
       }

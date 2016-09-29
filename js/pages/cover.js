@@ -95,13 +95,17 @@ module.exports = Page.extend({
    * @returns {*}
    */
   matchSectionsHeight: function() {
-    var sectionHeight = this.elements.sectionDescription.getBoundingClientRect().height + 'px';
+    if (!window.getComputedStyle) return;
 
-    if (innerWidth < config.mobile_width || innerHeight < config.mobile_height) {
-      sectionHeight = '';
+    var sectionHeight = '';
+
+    if (innerWidth > config.mobile_width && innerHeight > config.mobile_height) {
+      var sectionStyle = getComputedStyle(this.elements.sectionDescription);
+
+      sectionHeight = parseInt(sectionStyle['height'], 10) + 'px';
     }
 
-    this.elements.sectionStories.style.height = sectionHeight;
+    this.elements.sectionStories.children[0].style.height = sectionHeight;
   },
 
   /**

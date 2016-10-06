@@ -74,6 +74,10 @@ _.extend(config,
     outputIconsDir: config.outputDir + 'res',
     iconColors: [['white', '#ffffff'], ['black', '#000000']],
     concurrentIcons: 3
+  },
+  {
+    fonts: 'fonts/*',
+    outputFonts: 'assets/fonts/'
   }
 );
 
@@ -203,6 +207,11 @@ var fallbackIcons = function() {
   return es.merge.apply(this, streams).pipe(gulp.dest(config.outputIconsDir));
 };
 
+var fonts = function() {
+  return gulp.src(config.fonts)
+    .pipe(gulp.dest(config.outputFonts));
+};
+
 var clean = function() {
   return del(config.outputDir);
 };
@@ -219,7 +228,7 @@ var defaultTask = function(cb) {
     'clean',
     ['vendorCSS', 'vendorJS'],
     ['CSS', 'lintJS'],
-    ['buildJS', 'fallbackJS', 'fallbackIcons'],
+    ['buildJS', 'fallbackJS', 'fallbackIcons', 'fonts'],
     cb
   );
 };
@@ -229,6 +238,7 @@ var watchTask = function() {
   gulp.watch(config.vendorCSS, ['vendorCSS']);
   gulp.watch(config.vendorJS, ['vendorJS']);
   gulp.watch(config.filesJS, ['JS']);
+  gulp.watch(config.fonts, ['fonts']);
   gulp.watch(config.fallbackJS, ['fallbackJS']);
   gulp.watch(config.filesIcons, ['fallbackIcons']);
 };
@@ -244,6 +254,7 @@ gulp.task('buildJS', buildJS);
 gulp.task('fallbackJS', fallbackJS);
 gulp.task('JS', ['lintJS', 'buildJS', 'fallbackJS']);
 gulp.task('fallbackIcons', fallbackIcons);
+gulp.task('fonts', fonts);
 
 gulp.task('clean', clean);
 gulp.task('terminate', terminate);

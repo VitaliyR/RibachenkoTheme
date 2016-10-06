@@ -6,6 +6,11 @@
   flex-flow: row nowrap;
   justify-content: center;
 
+  @include respond(tablet) {
+    margin: 0;
+    padding-bottom: 0;
+  }
+
   .read-next-story {
     flex: 1 50%;
     max-width: 50%;
@@ -39,6 +44,7 @@
     &.no-cover:hover:before {
       background-color: rgba(0, 0, 0, .15);
     }
+
   }
 
   h2,
@@ -46,28 +52,30 @@
     text-align: center;
     position: relative;
     padding: 0 1.25rem;
+    margin-top: 0;
+  }
+
+  h2 {
+    flex: 1;
+  }
+
+  p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: 0;
+    flex: 2;
   }
 
   .notice,
   .date {
-    position: absolute;
-    color: #373737;
+    margin: .5rem 1rem;
   }
 
-  .notice {
-    left: 20px;
-    top: 10px;
-  }
-
-  .date {
-    bottom: 10px;
-    left: 20px;
-  }
-
-  .next .notice,
-  .next .date {
-    left: initial;
-    right: 20px;
+  .next {
+    .notice,
+    .date {
+      align-self: flex-end;
+    }
   }
 
 }
@@ -89,7 +97,7 @@
   .read-next {
     .read-next-story {
       max-width: 100%;
-      height: 220px;
+      height: 230px;
     }
   }
 }

@@ -117,7 +117,7 @@ var CSS = function() {
     style: 'compressed'
   };
   var processors = [
-    autoprefixer({ browsers: 'last 1 version' }),
+    autoprefixer({browsers: [ 'last 1 version', 'ios >= 8' ]}),
     postcssInlineSvg({ path: './' }),
     postcssSvgo(),
     csswring()

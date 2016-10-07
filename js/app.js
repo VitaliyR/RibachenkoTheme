@@ -1,3 +1,5 @@
+var utils = require('./lib/utils');
+
 var Base = require('./core/base');
 var Store = require('./core/store');
 var config = require('./config');
@@ -67,6 +69,10 @@ var App = Base.extend({
 document.addEventListener('DOMContentLoaded', function() {
   // eslint-disable-next-line no-new
   new App(document.body);
+});
+
+window.addEventListener('load', function() {
+  utils.toggleClass(document.body, 'loading', false);
 });
 
 /**

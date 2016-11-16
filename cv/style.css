@@ -1,0 +1,14 @@
+@page {
+  size: auto;
+  margin: 0mm;
+}
+
+html,
+head {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 10mm 15mm 10mm 15mm;
+}

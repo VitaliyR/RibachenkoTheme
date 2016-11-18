@@ -1,5 +1,6 @@
 .icon {
   background-repeat: no-repeat;
+  background-position: 50%;
 
   @for $i from 1 through length($icons) {
     $icon: nth($icons, $i);

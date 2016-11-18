@@ -1,0 +1,77 @@
+aside {
+  background: #29292e;
+  color: #fff;
+
+  .icon {
+    width: 32px;
+    height: 32px;
+    background-size: 32px;
+  }
+
+  img,
+  svg {
+    width: 32px;
+    height: 32px;
+    fill: #fff;
+  }
+}
+
+
+aside header {
+  height: 265px;
+  background-color: silver;
+}
+
+aside header figure {
+  height: 100%;
+  margin: 0;
+  position: relative;
+}
+
+aside .cell {
+  display: flex;
+  margin: 10px 0;
+}
+
+aside .cell.social {
+  flex-flow: column nowrap;
+  text-align: center;
+
+  a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    background-size: 18px;
+    border: 1px solid #fff;
+    margin: 0 5px;
+
+    &:hover {
+      color: red;
+    }
+  }
+}
+
+aside .cell .left-column {
+  flex: 1 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+aside .cell .right-column {
+  flex: 3 100;
+}
+
+aside .cell .social,
+aside .cell .copyright {
+  flex: 1 100;
+}
+
+aside .cell .title {
+  opacity: .7;
+}
+
+aside .cell .value {
+  font-size: 1.2rem;
+}

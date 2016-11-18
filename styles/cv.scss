@@ -18,7 +18,7 @@ body {
 }
 
 body {
-  background-color: #EBEBEB;
+  background-color: #ebebeb;
   font-family: 'Museo Sans', 'Helvetica Neue', Segoe UI, Tahoma, sans-serif;
   font-weight: 400;
   line-height: 1.75rem;
@@ -29,6 +29,12 @@ body {
   -moz-font-feature-settings: 'kern' 1;
   -o-font-feature-settings: 'kern' 1;
 }
+
+$icons: ('twitter', 'facebook', 'vk', 'github', 'linkedin', 'email', 'phone', 'work', 'education', 'skype', 'home');
+$icons-colors: ('black', 'white');
+
+@import "icons";
+
 
 .container {
   display: flex;
@@ -42,19 +48,7 @@ section {
   flex: 1 100;
 }
 
-aside {
-}
-
-aside header {
-  height: 265px;
-  background-color: silver;
-}
-
-aside header figure {
-  height: 100%;
-  margin: 0;
-  position: relative;
-}
+@import "pages/cv/side";
 
 .title-badge {
   transform: rotate(-90deg);
@@ -67,11 +61,11 @@ aside header figure {
 }
 
 .box {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
 }
 
 .copyright {
-  font-size: 0.75rem;
+  font-size: .75rem;
   color: #c0c0c0;
 }
 
@@ -91,8 +85,9 @@ aside header figure {
 
 .title-block h3 {
   font-size: 1.5rem;
-  color: #777777;
+  color: #777;
   font-weight: normal;
+  border: 1px solid #fff;
 }
 
 .history {
@@ -100,37 +95,6 @@ aside header figure {
   height: 100%;
   background: linear-gradient(#c0c0c0 50%, #fff);
   margin: 0 auto;
-}
-
-aside .cell {
-  display: flex;
-  margin: 10px 0;
-}
-
-aside .cell.social {
-  flex-flow: column nowrap;
-  text-align: center;
-}
-
-aside .cell .left-column {
-  flex: 1 100;
-}
-
-aside .cell .right-column {
-  flex: 3 100;
-}
-
-aside .cell .social,
-aside .cell .copyright {
-  flex: 1 100;
-}
-
-aside .cell .title {
-  opacity: .7;
-}
-
-aside .cell .value {
-  font-size: 1.2rem;
 }
 
 section {
@@ -159,9 +123,6 @@ section .cell header {
   font-weight: bold;
 }
 
-section .cell h1 {
-
-}
 
 /* RESPONSIVE */
 
@@ -176,7 +137,7 @@ section .cell h1 {
 
 @media print {
   body {
-    margin: 10mm 15mm 10mm 15mm;
+    margin: 10mm 15mm;
   }
 
   .title-badge {

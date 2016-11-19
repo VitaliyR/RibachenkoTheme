@@ -9,6 +9,7 @@ aside {
   }
 
   img,
+  object,
   svg {
     width: 32px;
     height: 32px;
@@ -38,16 +39,33 @@ aside .cell.social {
   text-align: center;
 
   a {
-    display: inline-block;
     width: 35px;
     height: 35px;
     border-radius: 100%;
     background-size: 18px;
     border: 1px solid #fff;
     margin: 0 5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       color: red;
+
+      svg {
+        fill: red;
+      }
+
+      img {
+        opacity: .8;
+      }
+    }
+
+    svg,
+    img {
+      width: 18px;
+      height: 18px;
+      transition: fill .5s, opacity .5s;
     }
   }
 }

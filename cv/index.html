@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="../assets/css/cv.css"/>
 </head>
 <body>
-<div class="container">
-  <aside class="box">
+<div class="site-wrapper">
+  <aside class="site-sidebar box">
     <header>
       <figure>
         <img src=""/>
@@ -92,52 +92,51 @@
         </a>
       </div>
       <div class="copyright">
-        © 2016
+        © 2017
       </div>
     </div>
   </aside>
-  <section>
-    <article class="cell box">
-      <div class="left-column"></div>
-      <div class="right-column">
-        <div class="title-block">
-          <h1>Vitaliy Ribachenko</h1>
-          <h3>Web Developer</h3>
+  <div class="site-container">
+    <header class="site-header box box-bg">
+        <h1>Vitaliy Ribachenko</h1>
+        <h2 class="subtitle">Web Developer</h2>
+        <p>
+          Some very important info
+        </p>
+    </header>
+    <section class="site-content box box-bg">
+      <article class="cell">
+        <div class="left-column">
+          <div class="history">
+            <object data="../res/work.svg">
+              <img src="../assets/res/work-black.png"/>
+            </object>
+          </div>
         </div>
-        <p>Some very important info</p>
-      </div>
-    </article>
-    <article class="cell box">
-      <div class="left-column">
-        <div class="history">
-          <object data="../res/work.svg">
-            <img src="../assets/res/work-black.png"/>
-          </object>
+        <div class="right-column">
+          <header>Work Experience</header>
+          <div>
+            First
+          </div>
+          <div>
+            Second
+          </div>
+          <div>
+            Third
+          </div>
+          <div>
+            Fourth
+          </div>
         </div>
-      </div>
-      <div class="right-column">
-        <header>Work Experience</header>
-        <div>
-          First
+      </article>
+      <article class="cell">
+        <div class="left-column"></div>
+        <div class="right-column">
+          <header>Education</header>
         </div>
-        <div>
-          Second
-        </div>
-        <div>
-          Third
-        </div>
-        <div>
-          Fourth
-        </div>
-      </div>
-    </article>
-    <article class="cell box">
-      <div class="left-column"></div>
-      <div class="right-column">
-        <header>Education</header>
-      </div>
-    </article>
-  </section>
+      </article>
+    </section>
+  </div>
 </div>
 <script type="text/javascript" src="../js/cv.js"></script>
 </body>

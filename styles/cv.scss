@@ -75,14 +75,33 @@ $icons-colors: ('black', 'white');
   }
 }
 
-.site-content {
-  article {
-    border-bottom: 1px solid #efefef;
+.block {
+  border-bottom: 1px solid #efefef;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  background-color: #fff;
+  // display: flex;
 
-    &:last-child {
-      border-bottom: 0;
-    }
+  &:last-child {
+    border-bottom: 0;
   }
+}
+
+.block-header {
+  margin: 20px 0;
+
+  object,
+  svg,
+  img {
+    width: 22px;
+    height: 22px;
+    margin: 0 20px;
+    float: left;
+  }
+}
+
+.block-title {
+  margin: 0;
 }
 
 aside,
@@ -144,7 +163,7 @@ section {
 .history {
   width: 40px;
   height: 40px;
-  border: 3px solid #c0c0c0;
+  border: 3px solid #efefef;
   border-radius: 100%;
   background-color: #fff;
   position: relative;
@@ -157,7 +176,7 @@ section {
     content: '';
     width: 5px;
     height: 100%;
-    background: linear-gradient(#c0c0c0 50%, #fff);
+    background: linear-gradient(#efefef 50%, #fff);
     margin: 0 auto;
     position: absolute;
     top: 100%;
@@ -173,10 +192,6 @@ section {
 
 section {
   .cell {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    background-color: #fff;
-    display: flex;
 
     .left-column {
       flex: 1 100;

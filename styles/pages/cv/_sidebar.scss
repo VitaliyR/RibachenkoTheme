@@ -1,0 +1,131 @@
+.site-sidebar {
+  background: #29292e;
+  color: #fff;
+  height: 100%;
+}
+
+.sidebar-header {
+  height: 265px;
+  background-color: silver;
+
+  figure {
+    height: 100%;
+    margin: 0;
+    position: relative;
+  }
+}
+
+.sidebar-header-badge {
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: 0 0;
+  background: linear-gradient(to left, rgba(51, 55, 61, 1) 0%, rgba(51, 55, 61, 0) 100%);
+  padding: 0 15px 0 30px;
+  text-transform: uppercase;
+  color: #fff;
+  position: absolute;
+  top: 0;
+}
+
+.sidebar-contacts,
+.sidebar-socials {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-contact {
+  margin: 10px 0;
+  cursor: pointer;
+
+  &:hover {
+    
+  }
+
+  a {
+    display: block;
+    display: flex;
+  }
+}
+
+.contact-icon {
+  flex: 1 100;
+  fill: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  object,
+  svg,
+  img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.contact-data {
+  flex: 3 100;
+}
+
+.contact-title {
+  opacity: .7;
+  font-size: .85rem;
+}
+
+.contact-value {
+  font-size: 1.2rem;
+}
+
+.sidebar-socials {
+  flex-flow: column nowrap;
+  text-align: center;
+  cursor: default;
+}
+
+.sidebar-social {
+  display: inline-block;
+
+  a {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    background-size: 18px;
+    border: 1px solid #fff;
+    margin: 0 5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      fill: #fff;
+    }
+
+    &:hover {
+      color: red;
+
+      svg {
+        fill: red;
+      }
+
+      img {
+        opacity: .8;
+      }
+    }
+
+    object,
+    svg,
+    img {
+      width: 18px;
+      height: 18px;
+      transition: fill .5s, opacity .5s;
+      will-change: fill;
+    }
+  }
+}
+
+.sidebar-copyright {
+  font-size: .75rem;
+  color: #c0c0c0;
+  flex: 1 100;
+  text-align: center;
+  margin: .5rem;
+}

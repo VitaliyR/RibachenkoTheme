@@ -34,16 +34,17 @@
 }
 
 .sidebar-contact {
-  margin: 10px 0;
   cursor: pointer;
-
-  &:hover {
-    
-  }
+  margin-bottom: 10 px;
 
   a {
     display: block;
     display: flex;
+    padding: 10px 0;
+
+    &:hover {
+      background: #8d9fad;
+    }
   }
 }
 
@@ -100,10 +101,10 @@
     }
 
     &:hover {
-      color: red;
+      color: #8d9fad;
 
       svg {
-        fill: red;
+        fill: #8d9fad;
       }
 
       img {

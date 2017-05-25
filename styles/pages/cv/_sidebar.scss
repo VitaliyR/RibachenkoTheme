@@ -33,17 +33,22 @@
   list-style: none;
 }
 
+.sidebar-contacts {
+  margin-bottom: 10px;
+}
+
 .sidebar-contact {
   cursor: pointer;
-  margin-bottom: 10 px;
 
   a {
     display: block;
     display: flex;
-    padding: 10px 0;
+    padding: 12px 0;
+    will-change: background;
+    transition: background .5s;
 
     &:hover {
-      background: #8d9fad;
+      background: $theme-color;
     }
   }
 }
@@ -70,10 +75,12 @@
 .contact-title {
   opacity: .7;
   font-size: .85rem;
+  line-height: 1rem;
 }
 
 .contact-value {
   font-size: 1.2rem;
+  line-height: 1.2rem;
 }
 
 .sidebar-socials {
@@ -101,10 +108,10 @@
     }
 
     &:hover {
-      color: #8d9fad;
+      color: $theme-color;
 
       svg {
-        fill: #8d9fad;
+        fill: $theme-color;
       }
 
       img {

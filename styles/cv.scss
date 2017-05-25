@@ -221,11 +221,13 @@ a:visited {
   background: $theme-color;
   color: #fff;
   border-radius: 10px;
+  vertical-align: text-bottom;
 
   &-name {
     border: 1px dashed $text-color;
     color: $text-color;
     text-transform: uppercase;
+    padding: 5px 15px;
     text-align: center;
     font-size: .875rem;
     font-weight: bold;

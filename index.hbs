@@ -1,6 +1,6 @@
 {{!< default}}
 
-<div class="cover-container {{#if @blog.cover}}" style="background-image: url({{@blog.cover}}){{else}}no-cover{{/if}}" >
+<div class="cover-container {{#if @blog.cover_image}}" style="background-image: url({{@blog.cover_image}}){{else}}no-cover{{/if}}" >
     <header>
         {{#if @blog.logo}}<img class="author-thumb" src="{{@blog.logo}}" alt="Author image" nopin="nopin" />{{/if}}
         <h1 class="blog-title">{{@blog.title}}</h1>

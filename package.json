@@ -1,6 +1,6 @@
 {
-  "name": "RibachenkoTheme",
-  "version": "1.0.0",
+  "name": "ribachenko-theme",
+  "version": "2.0.0",
   "repository": "https://github.com/VitaliyR/RibachenkoTheme.git",
   "license": "MIT",
   "devDependencies": {
@@ -50,5 +50,14 @@
     "postinstall": "gulp --production",
     "firstinstall": "ln -s $(pwd)/helpers/last_checkin.js ../../../last_checkin.js;\necho 'require(\"./last_checkin\")();\\n' \"$(cat ../../../config.js)\" > ../../../config.js;"
   },
-  "private": true
+  "private": true,
+  "config": {
+    "posts_per_page": 10
+  },
+  "author": {
+    "email": "vit@ribachenko.com"
+  },
+  "engines": {
+    "ghost": ">=1.0.0"
+  }
 }

@@ -3,7 +3,7 @@
 {{#post}}
 
     <div class="post-page">
-        <header class="main-header post-head {{#if image}}" style="background-image: url({{image}}){{else}}no-cover{{/if}}">
+        <header class="main-header post-head {{#if feature_image}}" style="background-image: url({{img_url feature_image}}){{else}}no-cover{{/if}}">
             {{#if @blog.logo}}
                 <div class="blog-logo">
                     <div class="separator"></div>
@@ -60,7 +60,7 @@
 
         <aside class="read-next{{#next_post}} next{{/next_post}}{{#prev_post}} prev{{/prev_post}}">
             {{#prev_post}}
-                <a href="{{url}}" class="read-next-story prev {{#if image}}" style="background-image: url({{image}}){{else}}no-cover{{/if}}">
+                <a href="{{url}}" class="read-next-story prev {{#if feature_image}}" style="background-image: url({{img_url feature_image}}){{else}}no-cover{{/if}}">
                     <span class="notice">Previous</span>
 
                     <h2>{{title}}</h2>
@@ -70,7 +70,7 @@
                 </a>
             {{/prev_post}}
             {{#next_post}}
-                <a href="{{url}}" class="read-next-story next {{#if image}}" style="background-image: url({{image}}){{else}}no-cover{{/if}}">
+                <a href="{{url}}" class="read-next-story next {{#if feature_image}}" style="background-image: url({{img_url feature_image}}){{else}}no-cover{{/if}}">
                     <span class="notice">Next</span>
 
                     <h2>{{title}}</h2>
